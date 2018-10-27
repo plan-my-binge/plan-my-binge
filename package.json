@@ -68,7 +68,7 @@
   "scripts": {
     "build": "webpack -p --config ./webpack/webpack.dev.config.js",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js --port 8081 --host 0.0.0.0  --content-base dist/",
-    "test": "echo 'no test added yet!'"
+    "test": "jest"
   },
   "version": "1.0.0"
 }

@@ -13,6 +13,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+        use: [
+          {
+            loader: 'url-loader'
+          },
+        ]
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: [
@@ -27,7 +35,7 @@ module.exports = {
           },
         ]
       }, {
-        test: /\.less$/,
+        test: /\.(less|css)$/,
         loaders: ["style-loader", "css-loader", "less-loader"]
       }
     ]

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import {AppContainer} from "./AppContainer.jsx";
 
 class PlanMyBinge extends Component {
   render () {
-    return <p>This is my new react app</p>
+    return <AppContainer/>
   }
 }
 

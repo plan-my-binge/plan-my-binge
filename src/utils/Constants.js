@@ -18,5 +18,6 @@ export const NavOptions = [
 export const Colors = {
   gray: "#F5F5F5",
   darkGray: "#808080",
-  white: "#FFFFFF"
+  white: "#FFFFFF",
+  black: "#000000"
 }

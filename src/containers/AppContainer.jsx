@@ -25,6 +25,7 @@ export class AppContainer extends Component {
 }
 
 const StyledContainer = styled.div`
-  font-family: "Open Sans", "Helvetica Neue",Arial,sans-serif;
-  font-size: 18px;
-`;
+
+
+
+  `;

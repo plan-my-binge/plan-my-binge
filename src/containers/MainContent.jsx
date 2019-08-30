@@ -1,22 +1,15 @@
 import React from 'react';
 import {Col, Row} from "react-bootstrap";
 import styled from 'styled-components';
+import logo from "../images/logo.png";
+import {BingePlanner} from "./BingePlanner.jsx";
 
 export function MainContent(props: Props) {
   return (
       <div>
+        <Logo src={logo} className={"d-block d-lg-none"}/>
         <Container xs={12} lg={9}>
-          <p>
-            Sed semper, metus non fringilla euismod, tortor elit dignissim dui, in lobortis nibh lorem ut mauris. Cras
-            hendrerit quam pharetra nibh feugiat, ac sollicitudin augue porta. Vestibulum mollis sem urna, convallis
-            vulputate ipsum tempor sed. Pellentesque volutpat id purus eget mattis. Etiam scelerisque risus ut erat
-          </p>
-
-          <h1>Heading 1</h1>
-          <h2>Heading 2</h2>
-          <h3>Heading 3</h3>
-          <h4>Heading 4</h4>
-          <h5>Heading 5</h5>
+          <BingePlanner/>
         </Container>
       </div>
   )
@@ -25,6 +18,17 @@ export function MainContent(props: Props) {
 const Container = styled(Col)`
   float: right;
 `;
+
+
+const Logo = styled.img`
+  max-width: 400px;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: auto;
+  
+`;
+
 
 type Props = {
   onNavChange: (navOption: string) => void,

@@ -23,27 +23,27 @@ const BottomBar = styled(Col)`
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: ${Colors.gray};
-  padding: 10px;
   z-index: 999;
-  font-size: calc(2vw + 1vh + .5vmin);
+  padding: 0px;
+  font-size: calc(2.5vw + 1vh + .5vmin);
+  max-height: 100px
 `;
 
 const BarContainer = styled.div`
-  border: solid 3px black;
-  width: fit-content;
+  border-top: solid 3px black;
+  width: 100%;
   display: flex;
   margin: auto;
 `;
 
 const NavItem = styled.div`
   border-right: solid 3px black;
-  padding: 10px;
-  
   display: flex;
   justify-content: center;
   flex-direction: column;
-  
+  text-align: center;
+  flex: 1;
+  padding-bottom: 10px;
   &.selection {
     background-color: ${Colors.black};
     color: ${Colors.white};

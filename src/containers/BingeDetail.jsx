@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {Colors} from "../utils/Constants";
-import {trim} from "ramda";
 import {TimeSlider} from "./TimeSlider.jsx";
+import {BingeDetailHeader} from "./BingeDetailHeader.jsx";
+import {BingeTime} from "./BingeTime.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -15,63 +15,71 @@ export class BingeDetail extends Component<{ detail: any }> {
     }
   }
 
-  render() {
-    const {numberOfHours} = this.state;
-    let {detail} = this.props;
-    let year = detail.startYear + (detail.endYear ? `-${detail.endYear}` : "");
-    let genre = detail.genre.split(',').map(trim).map(capitalizeFirstLetter).join(", ");
-    let hint = <>{year} • imdb {detail.averageRating} • {genre}</>;
 
+
+  getSlider() {
     let handleSlide = (slidedBy) => this.setState({numberOfHours: slidedBy});
+    const {numberOfHours} = this.state;
+
+    return <>
+      <Row ><TimeSliderHint> When you watch</TimeSliderHint> </Row>
+      <Row><TimeSlider selection={numberOfHours} slide={handleSlide}/> </Row>
+      <Row><TimeSliderHint>hours a day,</TimeSliderHint> </Row>
+      <Row><TimeSliderHint>it would take</TimeSliderHint> </Row>
+    </>;
+  }
+
+  render() {
+    let {detail} = this.props;
+
+    const {numberOfHours} = this.state;
+    let runtime = detail.runtime * (24 / numberOfHours);
     return <Container>
-      <Row>
-        <Col>
-          <HeaderContainer>
-            <Header>{detail.title}</Header>
-            <HintContainer>
-              <span>{hint}</span>
-            </HintContainer>
-          </HeaderContainer>
+      <BingeDetailHeader detail={detail}/>
 
-        </Col>
-      </Row>
-      <PosterAndStatContainer>
-        <Col>
+      <BingeDetailContent>
+        <PosterContainer>
           <Poster src={detail.posterPortrait}/>
-        </Col>
-        <Col>
+        </PosterContainer>
 
-          <TimeSlider selection={numberOfHours} slide={handleSlide}/>
+        <BingeTimeContainer>
+          {this.getSlider()}
+          <BingeTime runtime={runtime}/>
+          <Row><TimeSliderHint>to watch all the episodes of {detail.title}</TimeSliderHint> </Row>
+          <Row>
 
-        </Col>
+          </Row>
+        </BingeTimeContainer>
+
         <Col></Col>
-      </PosterAndStatContainer>
+      </BingeDetailContent>
     </Container>
   }
+
 }
 
-const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
 const Container = styled.div`
 `;
 
-const Header = styled.h3`
-  margin-bottom: 0;
-`
-const HintContainer = styled.div`
-  color: ${Colors.darkGray};
-  font-size: 1rem;
-`
-
 const Poster = styled.img`
   height: 400px;
-`
+`;
 
-const HeaderContainer = styled.div`
-`
-
-const PosterAndStatContainer = styled(Row)`
+const BingeDetailContent = styled(Row)`
   display: flex;
   flex-direction: row;
-`
+`;
+
+const TimeSliderHint = styled.div`
+  margin: auto;
+  font-size: 0.9rem;
+`;
+
+const PosterContainer = styled(Col)`
+  flex-grow: 0;
+`;
+
+const BingeTimeContainer = styled(Col)`
+`;
 

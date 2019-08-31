@@ -16,7 +16,7 @@ export const TimeSlider = (props) => {
     <Row>
       <LeftArrow onClick={() => slide(previous)}/>
       <Option onClick={() => slide(previous)}>{previous}</Option>
-      <SelectedOption>{selection}</SelectedOption>
+        <SelectedOption>{selection}</SelectedOption>
       <Option onClick={() => slide(next)}>{next}</Option>
       <RightArrow onClick={() => slide(next)}/>
     </Row>
@@ -25,6 +25,7 @@ export const TimeSlider = (props) => {
 
 const Container = styled.div`
   float: left;
+  margin: auto;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none;    /* Firefox all             */
   -ms-user-select: none;     /* IE 10+                  */
@@ -33,18 +34,25 @@ const Container = styled.div`
 
 const Option = styled.span`
   padding: 8px;
-  width: 2rem;
+  width: 2.6rem;
   font-size: 1.3rem;
   margin: auto;
   color:${Colors.darkGray};
   cursor: pointer;
+  margin: auto;
 `;
 
+
 const SelectedOption = styled.span`
-  width: 3rem;
+  width: 4.4rem;
   font-size: 2.2rem;
-  padding: 10px;
+  padding: 0 10px 0 10px;
   font-weight: 500;
+  margin: auto;
+  line-height: 1.2;
+`;
+
+const Units = styled.span`
 `;
 
 const LeftArrow = styled(MdKeyboardArrowLeft)`

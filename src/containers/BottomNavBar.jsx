@@ -44,18 +44,19 @@ const NavItem = styled.div`
   text-align: center;
   flex: 1;
   padding-bottom: 10px;
+  cursor: pointer;
+  background-color: ${Colors.white};
+  color: ${Colors.black};
+  
   &.selection {
     background-color: ${Colors.black};
     color: ${Colors.white};
   }
-  cursor: pointer;
   
   :last-of-type {
     border-right: none;
   }
   
-  background-color: ${Colors.white};
-  color: ${Colors.black};
 `;
 
 

@@ -7,7 +7,7 @@ import {BingePlanner} from "./BingePlanner.jsx";
 export function MainContent(props: Props) {
   return (
       <div>
-        <Logo src={logo} className={"d-block d-lg-none"}/>
+        <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
         <Container xs={12} lg={9}>
           <BingePlanner/>
         </Container>
@@ -22,8 +22,9 @@ const Container = styled(Col)`
 
 const Logo = styled.img`
   max-width: 400px;
-  padding-right: 40px;
-  padding-left: 40px;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
   padding-top: 20px;
   margin: auto;
   

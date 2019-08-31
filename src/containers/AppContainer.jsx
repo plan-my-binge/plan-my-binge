@@ -28,5 +28,4 @@ const StyledContainer = styled.div`
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
   font-size: 18px;
-  background-color: ${Colors.gray};
 `;

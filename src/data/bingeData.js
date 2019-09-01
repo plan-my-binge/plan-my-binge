@@ -3,7 +3,7 @@ export const recommendations = [
     title: "Gilmore Girls",
     startYear: 2011,
     endYear: 2017,
-    runtime: 1501,
+    runtime: 1801,
     genre: "comedy, drama",
     averageRating: 7.5,
     numberOfSeasons: 7,

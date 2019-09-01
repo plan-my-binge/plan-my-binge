@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 const toDaysHoursAndMinutes = (totalMinutes) => {
   let minutesPerHours = 60;
   let hoursPerDay = 24;
-  let days = Math.floor(totalMinutes / (minutesPerHours * hoursPerDay)); //
+  let days = Math.floor(totalMinutes / (minutesPerHours * hoursPerDay));
   let hours = Math.floor((totalMinutes - (days * (minutesPerHours * hoursPerDay))) / minutesPerHours);
   let minutes = Math.round(totalMinutes % minutesPerHours);
 
@@ -48,7 +48,6 @@ const BingeTimeUnit = styled.div`
 
 const BingeTimeBox = styled(Col)`
   text-align: center;
-  padding: 20px;
 `;
 
 

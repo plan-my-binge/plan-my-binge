@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {recommendations} from "../data/bingeDetails";
+import {recommendations} from "../data/bingeData";
 import {BingeDetail} from "./BingeDetail.jsx";
 
 export class BingePlanner extends Component<Props> {

@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import {TimeSlider} from "./TimeSlider.jsx";
 import {BingeDetailHeader} from "./BingeDetailHeader.jsx";
 import {BingeTime} from "./BingeTime.jsx";
+import {BingeCalendar} from "./BingeCalendar.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -14,8 +15,6 @@ export class BingeDetail extends Component<{ detail: any }> {
       numberOfHours: 24
     }
   }
-
-
 
   getSlider() {
     let handleSlide = (slidedBy) => this.setState({numberOfHours: slidedBy});
@@ -28,6 +27,12 @@ export class BingeDetail extends Component<{ detail: any }> {
       <Row><TimeSliderHint>it would take</TimeSliderHint> </Row>
     </>;
   }
+
+  minutesToDays = totalMinutes => {
+    let minutesPerHours = 60;
+    const {numberOfHours} = this.state;
+    return Math.floor(totalMinutes / (minutesPerHours * numberOfHours));
+  };
 
   render() {
     let {detail} = this.props;
@@ -46,9 +51,7 @@ export class BingeDetail extends Component<{ detail: any }> {
           {this.getSlider()}
           <BingeTime runtime={runtime}/>
           <Row><TimeSliderHint>to watch all the episodes of {detail.title}</TimeSliderHint> </Row>
-          <Row>
-
-          </Row>
+          <BingeCalendar days={this.minutesToDays(detail.runtime)}/>
         </BingeTimeContainer>
 
         <Col></Col>

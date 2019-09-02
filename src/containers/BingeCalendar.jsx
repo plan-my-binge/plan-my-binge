@@ -3,6 +3,7 @@ import {toUpper} from "ramda";
 import styled from 'styled-components';
 import moment from "moment";
 import {Colors} from "../utils/Constants";
+import Col from "react-bootstrap/Col";
 
 
 export const BingeCalendar = ({days}) => {
@@ -73,14 +74,15 @@ const Month = styled.div`
 `;
 
 const Container = styled.div`
-  padding: 20px;
   display: flex;
   flex-direction: column;
 `;
 
-const Week = styled.div`
+const Week = styled(Col)`
     display: flex;
     flex-direction: row;
+    width: fit-content;
+    margin: auto;
 `;
 
 const Date = styled.div`

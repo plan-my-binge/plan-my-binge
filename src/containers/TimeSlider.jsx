@@ -6,6 +6,7 @@ import {Colors} from "../utils/Constants";
 
 export const TimeSlider = (props) => {
   const {selection, slide} = props;
+
   let previous = selection - 1;
   previous = previous === 0 ? 24 : previous;
 
@@ -13,23 +14,26 @@ export const TimeSlider = (props) => {
   next = next === 25 ? 1 : next;
 
   return <Container>
-    <Row>
-      <LeftArrow onClick={() => slide(previous)}/>
-      <Option onClick={() => slide(previous)}>{previous}</Option>
+    <Hint> When you watch</Hint>
+      <Row>
+        <LeftArrow onClick={() => slide(previous)}/>
+        <Option onClick={() => slide(previous)}>{previous}</Option>
         <SelectedOption>{selection}</SelectedOption>
-      <Option onClick={() => slide(next)}>{next}</Option>
-      <RightArrow onClick={() => slide(next)}/>
-    </Row>
+        <Option onClick={() => slide(next)}>{next}</Option>
+        <RightArrow onClick={() => slide(next)}/>
+      </Row>
+    <Hint>hours a day,</Hint>
+    <Hint>it would take</Hint>
   </Container>
 };
 
 const Container = styled.div`
-  float: left;
   margin: auto;
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none;    /* Firefox all             */
-  -ms-user-select: none;     /* IE 10+                  */
-  user-select: none;  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: fit-content;
 `;
 
 const Option = styled.span`
@@ -39,9 +43,7 @@ const Option = styled.span`
   margin: auto;
   color:${Colors.darkGray};
   cursor: pointer;
-  margin: auto;
-`;
-
+  `;
 
 const SelectedOption = styled.span`
   width: 4.4rem;
@@ -50,9 +52,6 @@ const SelectedOption = styled.span`
   font-weight: 500;
   margin: auto;
   line-height: 1.2;
-`;
-
-const Units = styled.span`
 `;
 
 const LeftArrow = styled(MdKeyboardArrowLeft)`
@@ -67,4 +66,10 @@ const RightArrow = styled(MdKeyboardArrowRight)`
   width: 1.7rem;
   font-size: 1.7rem;
   cursor: pointer;
+`;
+
+const Hint = styled.div`
+  margin: auto;
+  font-size: 0.9rem;
+  width: fit-content;
 `;

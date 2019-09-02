@@ -8,15 +8,16 @@ export function MainContent(props: Props) {
   return (
       <div>
         <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
-        <Container xs={12} lg={9}>
+        <Content xs={12} lg={9}>
           <BingePlanner/>
-        </Container>
+        </Content>
       </div>
   )
 }
 
-const Container = styled(Col)`
+const Content = styled(Col)`
   float: right;
+  margin-bottom: 50px;
 `;
 
 

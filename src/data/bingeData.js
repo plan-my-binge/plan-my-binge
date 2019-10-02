@@ -12,57 +12,7 @@ export const recommendations = [
     minutesPerEpisode: [45, 47, 46],
     posterPortrait: "https://m.media-amazon.com/images/M/MV5BMTQ3NDA1ZWYtYjBmMC00NmJjLWI1NjgtYjg2NDhmMTY2YWQ4XkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_QL50_.jpg",
     posterLandscape: "https://images.justwatch.com/backdrop/8613648/s1920/gilmore-girls",
-    seasons: [
-      {
-        season: 1,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 2,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 3,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 4,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 5,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 6,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 7,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 8,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 9,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      },
-      {
-        season: 10,
-        numberOfEpisodes: 10,
-        runtime: "42:57"
-      }
-    ]
+    seasonWiseEpisodes: [10, 9, 8, 10, 10, 11, 9, 8, 10, 10, 11, 10, 9, 8, 10, 10, 11, 9, 8, 10, 10, 11, 10, 9, 8, 10, 10, 11, 9, 8, 10, 10, 11, 10, 9, 8, 10, 10, 11, 9, 8, 10, 10, 11],
+    seasonWiseRuntime: [420, 421, 422, 423, 424, 425, 426, 427, 4228, 42, 421, 420, 421, 422, 423, 424, 425, 426, 427, 4228, 42, 421, 420, 421, 422, 423, 424, 425, 426, 427, 4228, 42, 421, 420, 421, 422, 423, 424, 425, 426, 427, 4228, 42, 421],
   }
 ];

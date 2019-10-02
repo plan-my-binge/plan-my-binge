@@ -6,9 +6,9 @@ import {TimeSlider} from "./TimeSlider.jsx";
 import {BingeDetailHeader} from "./BingeDetailHeader.jsx";
 import {BingeTime} from "./BingeTime.jsx";
 import {BingeCalendar} from "./BingeCalendar.jsx";
-import {Colors} from "../utils/Constants";
 import {minutesToDays} from "../utils/TimeUtils";
 import {BingeStat} from "./BingeStats.jsx";
+import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -20,8 +20,6 @@ export class BingeDetail extends Component<{ detail: any }> {
   }
 
   handleSlide = (slidedBy) => this.setState({numberOfHours: slidedBy});
-
-
 
   render() {
     let {detail} = this.props;
@@ -39,7 +37,7 @@ export class BingeDetail extends Component<{ detail: any }> {
 
         <BingeTimeContainerCol>
           <TimeSlider selection={numberOfHours} slide={this.handleSlide}/>
-          <BingeTime runtime={runtime}/>
+          <BingeTime runtime={runtime} title={detail.title}/>
           <BingeCalendar days={minutesToDays(detail.runtime, numberOfHours)} title={detail.title}/>
         </BingeTimeContainerCol>
 
@@ -47,6 +45,7 @@ export class BingeDetail extends Component<{ detail: any }> {
           <BingeStat detail={detail}/>
         </Col>
       </BingeDetailContent>
+        <SeasonWiseStat detail={detail}/>
     </Container>
   }
 

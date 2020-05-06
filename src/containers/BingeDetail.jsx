@@ -7,7 +7,7 @@ import {BingeTime} from "./BingeTime.jsx";
 import {BingeCalendar} from "./BingeCalendar.jsx";
 import {minutesToDays} from "../utils/TimeUtils";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
-import {BingeStat2} from "./BingeStat2.jsx";
+import {BingeStats} from "./BingeStats.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -35,7 +35,7 @@ export class BingeDetail extends Component<{ detail: any }> {
           </PosterContainerCol>
 
           <BingeTimeContainerCol>
-            <BingeStat2 detail={detail}/>
+            <BingeStats detail={detail}/>
 
             <BingeTimeAndCalenderContainer>
 

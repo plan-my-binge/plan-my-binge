@@ -76,6 +76,7 @@ const Month = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: ${Colors.gray};
 `;
 
 const Week = styled(Col)`

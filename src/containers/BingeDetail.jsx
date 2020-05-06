@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import React, {Component} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {TimeSlider} from "./TimeSlider.jsx";
 import {BingeDetailHeader} from "./BingeDetailHeader.jsx";
 import {BingeTime} from "./BingeTime.jsx";
 import {BingeCalendar} from "./BingeCalendar.jsx";
 import {minutesToDays} from "../utils/TimeUtils";
-import {BingeStat} from "./BingeStats.jsx";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
+import {BingeStat2} from "./BingeStat2.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -29,23 +28,26 @@ export class BingeDetail extends Component<{ detail: any }> {
     return <Container>
       <BingeDetailHeader detail={detail}/>
 
-      <BingeDetailContent>
-        <PosterContainer>
-          <PosterPortrait src={detail.posterLandscape} className={"d-block d-md-none"}/>
-          <Poster src={detail.posterPortrait} className={"d-none d-md-block"}/>
-        </PosterContainer>
+        <BingeDetailContentRow>
+          <PosterContainerCol className={"col-sm-auto"}>
+            <PosterPortrait src={detail.posterLandscape} className={"d-block d-md-none"}/>
+            <Poster src={detail.posterPortrait} className={"d-none d-md-block"}/>
+          </PosterContainerCol>
 
-        <BingeTimeContainerCol>
-          <TimeSlider selection={numberOfHours} slide={this.handleSlide}/>
-          <BingeTime runtime={runtime} title={detail.title}/>
-          <BingeCalendar days={minutesToDays(detail.runtime, numberOfHours)} title={detail.title}/>
-        </BingeTimeContainerCol>
+          <BingeTimeContainerCol>
+            <BingeStat2 detail={detail}/>
 
-        <Col>
-          <BingeStat detail={detail}/>
-        </Col>
-      </BingeDetailContent>
-        <SeasonWiseStat detail={detail}/>
+            <BingeTimeAndCalenderContainer>
+
+            <BingeTime runtime={runtime} title={detail.title}/>
+            <BingeCalendar days={minutesToDays(detail.runtime, numberOfHours)} title={detail.title}/>
+            </BingeTimeAndCalenderContainer>
+          </BingeTimeContainerCol>
+
+          <Col>
+            <SeasonWiseStat detail={detail}/>
+          </Col>
+        </BingeDetailContentRow>
     </Container>
   }
 
@@ -67,21 +69,23 @@ const PosterPortrait = styled.img`
     margin: auto
 `;
 
-const BingeDetailContent = styled(Row)`
+const BingeDetailContentRow = styled(Row)`
   display: flex;
   flex-direction: row;
 `;
 
 
-const PosterContainer = styled(Col)`
-  flex-grow: 0;
+const PosterContainerCol = styled(Col)`
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-top: 15px;
 `;
 
 const BingeTimeContainerCol = styled(Col)`
+  padding-right: 15px;
+  padding-left: 15px;
 `;
 
-
-const CenterDiv = styled.div`
-  margin: auto;
-  width: fit-content;
-`;
+const BingeTimeAndCalenderContainer = styled.div`
+  padding: 5px;
+`

@@ -17,7 +17,7 @@ export function MainContent(props: Props) {
 
 const Content = styled(Col)`
   float: right;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 `;
 
 

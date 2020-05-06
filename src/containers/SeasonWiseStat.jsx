@@ -16,7 +16,7 @@ export class SeasonWiseStat extends Component<{}> {
     super(props, context);
     this.state = {
       page: 1,
-      pageSize: 6
+      pageSize: 5
     }
   }
 
@@ -55,7 +55,7 @@ export class SeasonWiseStat extends Component<{}> {
           </StatBlock>
         })}
       </Container>
-      <PaginationHint>Showing Seasons {offset + 1} - {Math.min(limit, detail.seasonWiseEpisodes.length)} of total {detail.seasonWiseEpisodes.length} seasons</PaginationHint>
+      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasonWiseEpisodes.length)} of total {detail.seasonWiseEpisodes.length} seasons</PaginationHint>
       <Pagination>
         <LeftArrow isactive={leftArrowActive} onClick={() => paginate(-1)}/>
 
@@ -87,7 +87,7 @@ const Container = styled(Row)`
 const StatBlock = styled(Col)`
   margin: 5px;
   background-color: ${Colors.gray};
-  min-width: 260px;
+  min-width: 230px;
   padding: 10px;
 `;
 
@@ -156,5 +156,7 @@ const Pagination = styled(Row)`
 const PaginationHint = styled.div`
   width: fit-content;
   margin: auto;
+  font-size: 0.9rem;
   text-align: center;
+  color: ${Colors.darkGray}
 `

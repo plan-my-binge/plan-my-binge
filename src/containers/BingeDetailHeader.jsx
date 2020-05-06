@@ -28,13 +28,14 @@ export const BingeDetailHeader = (props) => {
 
 
 const Header = styled.h3`
+  margin-top: 15px;
   margin-bottom: 0;
-`
+`;
 const HintContainer = styled.div`
   color: ${Colors.darkGray};
   font-size: 1rem;
-`
+`;
 
 
 const HeaderContainer = styled.div`
-`
+`;

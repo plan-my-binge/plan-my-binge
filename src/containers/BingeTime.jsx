@@ -2,16 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import {toDaysHoursAndMinutes} from "../utils/TimeUtils";
 import Row from "react-bootstrap/Row";
-
+import Col from "react-bootstrap/Col";
+import {Colors} from "../utils/Constants";
 
 export const BingeTime = (props) => {
   let bingeTime = toDaysHoursAndMinutes(props.runtime);
 
   let showHours = bingeTime.hours !== null /*&& bingeTime.hours !== 0*/;
   let showDays = bingeTime.days !== null && bingeTime.days !== 0;
-  return <>
-    <Container>
-
+  return <Container>
+    <Row>
+      <TimeSliderHint>It will take</TimeSliderHint>
+    </Row>
+    <ValueContainer>
       {showDays && <BingeTimeBox>
         <BingeTimeValue>{bingeTime.days}</BingeTimeValue>
         <BingeTimeUnit>days</BingeTimeUnit>
@@ -24,12 +27,12 @@ export const BingeTime = (props) => {
         <BingeTimeValue>{bingeTime.minutes}</BingeTimeValue>
         <BingeTimeUnit>minutes</BingeTimeUnit>
       </BingeTimeBox>
-    </Container>
+    </ValueContainer>
     <Row><TimeSliderHint>to watch all the episodes of {props.title}</TimeSliderHint> </Row>
-  </>
+  </Container>
 };
 
-const Container = styled.div`
+const ValueContainer = styled(Row)`
   width: fit-content;
   margin: auto;
   display: flex;
@@ -45,9 +48,17 @@ const BingeTimeValue = styled.div`
 const BingeTimeUnit = styled.div`
 `;
 
-const BingeTimeBox = styled.div`
+const BingeTimeBox = styled(Col)`
   text-align: center;
-  padding: .7rem;
+  
+  padding-right: .7rem;
+  padding-left: .7rem;
+  padding-bottom: .7rem;
+  
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 100px;
 `;
 
 
@@ -56,4 +67,8 @@ const TimeSliderHint = styled.div`
   font-size: 0.9rem;
 `;
 
+const Container = styled.div`
+  padding: 5px;
+  background-color: ${Colors.gray};
+`;
 

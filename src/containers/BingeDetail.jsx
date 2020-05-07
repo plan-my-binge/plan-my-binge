@@ -41,7 +41,10 @@ export class BingeDetail extends Component<{ detail: any }> {
     const {numberOfBingingHoursPerDay, numberOfEpisodesPerDay} = this.state;
     let runtimeInMinutes = this.state.dailyBingeSetting.unit === "hours" ?
       detail.runtime * (24 / (numberOfBingingHoursPerDay)) :
-      (24 / numberOfEpisodesPerDay) * 60 * detail.totalEpisodes;
+      this.numberOfEpisodesPerDayToMinutes(numberOfEpisodesPerDay);
+
+    let numberOfDays = minutesToDays(detail.runtime, this.state.dailyBingeSetting.unit === "hours" ?
+      numberOfBingingHoursPerDay : this.numberOfEpisodesPerDayToHours(numberOfEpisodesPerDay));
     return <Container>
       <BingeDetailHeader detail={detail}/>
 
@@ -56,7 +59,7 @@ export class BingeDetail extends Component<{ detail: any }> {
           <BingeTimeAndCalenderContainer>
             <BingeTime runtime={runtimeInMinutes} title={detail.title}/>
             {this.getDailyBingeTime()}
-            <BingeCalendar days={minutesToDays(detail.runtime, numberOfBingingHoursPerDay)} title={detail.title}/>
+            <BingeCalendar days={numberOfDays} title={detail.title}/>
           </BingeTimeAndCalenderContainer>
         </BingeTimeContainerCol>
         <Col>
@@ -64,6 +67,14 @@ export class BingeDetail extends Component<{ detail: any }> {
         </Col>
       </BingeDetailContentRow>
     </Container>
+  }
+
+  numberOfEpisodesPerDayToMinutes(numberOfEpisodesPerDay) {
+    return (24 / numberOfEpisodesPerDay) * 60 * this.props.detail.totalEpisodes;
+  }
+
+  numberOfEpisodesPerDayToHours(numberOfEpisodesPerDay) {
+    return (24 / numberOfEpisodesPerDay) * this.props.detail.totalEpisodes;
   }
 
   getDailyBingeTime() {

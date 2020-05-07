@@ -1,5 +1,5 @@
 import React from "react";
-import {toUpper} from "ramda";
+import {range, toUpper} from "ramda";
 import styled from 'styled-components';
 import moment from "moment";
 import {Colors} from "../utils/Constants";
@@ -13,13 +13,14 @@ export const BingeCalendar = ({days}) => {
   let completionDate = moment().add(days, 'day');
 
   let currentWeek = moment().startOf('week');
-  let nextWeek = moment().add(1, 'week');
+  let nextWeek = moment().add(1, 'week').startOf('week');
 
   let completionWeek = moment().add(days, 'day').startOf('week');
   let penultimateWeek = moment(completionWeek).add(-1, 'week');
 
   let totalWeeks = completionWeek.week() - currentWeek.week() + 1;
 
+  console.log(today, completionDate, currentWeek, nextWeek)
   return <Container>
     <Month>
       {toUpper(today.format("MMMM"))}
@@ -28,7 +29,7 @@ export const BingeCalendar = ({days}) => {
     {daysOfWeek()}
     {getWeekCalendar(currentWeek, completionDate)}
     {getWeekCalendar(nextWeek, completionDate)}
-    {totalWeeks > 4 && <Middots> + {totalWeeks - 4} weeks + </Middots>}
+    {totalWeeks > 4 && <Hint> ••• {totalWeeks - 4} weeks hidden ••• </Hint>}
 
     {moment().month() !== completionDate.month() &&
     <Month>{toUpper(completionDate.format('MMMM'))}</Month>}
@@ -53,18 +54,26 @@ const daysOfWeek = () => {
 
 const getWeekCalendar = (startOfWeek, completionDate) => {
 
-  const addDays = n => (moment(startOfWeek).add(n, 'day'));
+  const dateOfWeek = n => (moment(startOfWeek).add(n, 'day'));
+
   const isActive = date => date.isSameOrAfter(moment(), 'day') &&
-      date.isSameOrBefore(completionDate, 'day');
+    date.isSameOrBefore(completionDate, 'day');
 
   return <Week>
-    <Date active={isActive(addDays(0))} >{addDays(0).date()}</Date>
-    <Date active={isActive(addDays(1))} >{addDays(1).date()}</Date>
-    <Date active={isActive(addDays(2))} >{addDays(2).date()}</Date>
-    <Date active={isActive(addDays(3))} >{addDays(3).date()}</Date>
-    <Date active={isActive(addDays(4))} >{addDays(4).date()}</Date>
-    <Date active={isActive(addDays(5))} >{addDays(5).date()}</Date>
-    <Date active={isActive(addDays(6))} >{addDays(6).date()}</Date>
+    {
+      range(0, 7).map(i => {
+        let date = dateOfWeek(i).date();
+
+        let isToday = moment().isSame(dateOfWeek(i), 'day');
+        let isCompletionDate = moment(completionDate).isSame(dateOfWeek(i), 'day');
+
+        return isToday ?
+          <StartOrEndDate key={i} active={isActive(dateOfWeek(i))}>TODAY</StartOrEndDate> :
+          isCompletionDate ?
+            <StartOrEndDate key={i} active={isActive(dateOfWeek(i))}>END</StartOrEndDate> :
+            <Date key={i} active={isActive(dateOfWeek(i))}>{date}</Date>
+      })
+    }
   </Week>
 };
 
@@ -89,6 +98,19 @@ const Week = styled(Col)`
     margin: auto;
 `;
 
+const StartOrEndDate = styled.div`
+  border: 1px solid black;
+  width: 2.5rem;
+  margin: 5px;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  color: ${Colors.white};
+  background-color: ${Colors.darkGray};
+
+`;
 const Date = styled.div`
   border: 1px solid black;
   width: 2.5rem;
@@ -113,6 +135,9 @@ const Day = styled.div`
   background-color: ${Colors.black};
 `;
 
-const Middots = styled.div`
+const Hint = styled.div`
   margin: auto;
+  color: ${Colors.darkGray};
+  font-weight: 300;
+  font-size: 0.9rem;
 `;

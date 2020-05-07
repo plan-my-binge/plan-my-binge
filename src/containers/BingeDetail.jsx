@@ -43,8 +43,8 @@ export class BingeDetail extends Component<{ detail: any }> {
       detail.runtime * (24 / (numberOfBingingHoursPerDay)) :
       this.numberOfEpisodesPerDayToMinutes(numberOfEpisodesPerDay);
 
-    let numberOfDays = minutesToDays(detail.runtime, this.state.dailyBingeSetting.unit === "hours" ?
-      numberOfBingingHoursPerDay : this.numberOfEpisodesPerDayToHours(numberOfEpisodesPerDay));
+    let numberOfDays = minutesToDays(runtimeInMinutes);
+
     return <Container>
       <BingeDetailHeader detail={detail}/>
 

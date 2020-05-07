@@ -3,7 +3,7 @@ import {NavigationMenus} from "./NavigationMenus.jsx";
 import React from "react";
 import styled from 'styled-components';
 import {MainContent} from "./MainContent.jsx";
-import {Colors, NavOptions} from "../utils/Constants";
+import {NavOptions} from "../utils/Constants";
 
 export class AppContainer extends Component {
 
@@ -28,4 +28,10 @@ const StyledContainer = styled.div`
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  
+  margin-top: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;

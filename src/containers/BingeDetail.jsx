@@ -8,49 +8,121 @@ import {BingeCalendar} from "./BingeCalendar.jsx";
 import {minutesToDays} from "../utils/TimeUtils";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select/Select";
+import {Colors} from "../utils/Constants";
+import {InputStepper} from "./InputStepper.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
   constructor(props: P, context: any) {
     super(props, context);
     this.state = {
-      numberOfHours: 24
+      numberOfBingingHoursPerDay: 2,
+      dailyBingeSetting: {
+        value: 2,
+        unit: "hours"
+      },
+      possibleDailyBinging: {
+        hours: 24,
+        episodes: (24 * 60) / props.detail.minutesPerEpisode[2]
+      }
     }
   }
 
-  handleSlide = (slidedBy) => this.setState({numberOfHours: slidedBy});
+  defaultDailyBinging = {
+    hours: 2,
+    episodes: 1
+  };
 
   render() {
     let {detail} = this.props;
 
-    const {numberOfHours} = this.state;
-    let runtime = detail.runtime * (24 / numberOfHours);
+    const {numberOfBingingHoursPerDay, numberOfEpisodesPerDay} = this.state;
+    let runtimeInMinutes = this.state.dailyBingeSetting.unit === "hours" ?
+      detail.runtime * (24 / (numberOfBingingHoursPerDay)) :
+      (24 / numberOfEpisodesPerDay) * 60 * detail.totalEpisodes;
     return <Container>
       <BingeDetailHeader detail={detail}/>
 
-        <BingeDetailContentRow>
-          <PosterContainerCol className={"col-sm-auto"}>
-            <PosterPortrait src={detail.posterLandscape} className={"d-block d-md-none"}/>
-            <Poster src={detail.posterPortrait} className={"d-none d-md-block"}/>
-          </PosterContainerCol>
+      <BingeDetailContentRow>
+        <PosterContainerCol className={"col-sm-auto"}>
+          <PosterPortrait src={detail.posterLandscape} className={"d-block d-md-none"}/>
+          <Poster src={detail.posterPortrait} className={"d-none d-md-block"}/>
+        </PosterContainerCol>
 
-          <BingeTimeContainerCol>
-            <BingeStats detail={detail}/>
-
-            <BingeTimeAndCalenderContainer>
-
-            <BingeTime runtime={runtime} title={detail.title}/>
-            <BingeCalendar days={minutesToDays(detail.runtime, numberOfHours)} title={detail.title}/>
-            </BingeTimeAndCalenderContainer>
-          </BingeTimeContainerCol>
-
-          <Col>
-            <SeasonWiseStat detail={detail}/>
-          </Col>
-        </BingeDetailContentRow>
+        <BingeTimeContainerCol>
+          <BingeStats detail={detail}/>
+          <BingeTimeAndCalenderContainer>
+            <BingeTime runtime={runtimeInMinutes} title={detail.title}/>
+            {this.getDailyBingeTime()}
+            <BingeCalendar days={minutesToDays(detail.runtime, numberOfBingingHoursPerDay)} title={detail.title}/>
+          </BingeTimeAndCalenderContainer>
+        </BingeTimeContainerCol>
+        <Col>
+          <SeasonWiseStat detail={detail}/>
+        </Col>
+      </BingeDetailContentRow>
     </Container>
   }
 
+  getDailyBingeTime() {
+    let maxLimit = this.state.dailyBingeSetting.unit === "episodes" ?
+      this.state.possibleDailyBinging.episodes : this.state.possibleDailyBinging.hours;
+
+    return <DailyBingTime>
+      <TimeSliderHint>
+
+
+        <InputStepper
+          min={1}
+          max={maxLimit}
+          value={this.state.dailyBingeSetting.value}
+          onChange={this.onDailyBingingSettingValueChanged()}
+        />
+
+        <SelectStyled
+          onChange={this.onDailyBingingSettingUnitChanged()}
+          value={this.state.dailyBingeSetting.unit}>
+          <MenuItem value={"hours"}> hours </MenuItem>
+          <MenuItem value={"episodes"}> episodes </MenuItem>
+        </SelectStyled>
+
+        a day
+      </TimeSliderHint>
+    </DailyBingTime>;
+  }
+
+  onDailyBingingSettingUnitChanged() {
+    return (event) => {
+      let unit = event.target.value;
+      if (unit === "episodes") {
+        this.setState({
+          dailyBingeSetting: {unit: unit, value: this.defaultDailyBinging.episodes},
+          numberOfEpisodesPerDay: this.defaultDailyBinging.episodes,
+          numberOfBingingHoursPerDay: null
+
+        })
+      } else {
+        this.setState({
+          dailyBingeSetting: {unit: unit, value: this.defaultDailyBinging.hours},
+          numberOfBingingHoursPerDay: this.defaultDailyBinging.hours,
+          numberOfEpisodesPerDay: null
+        })
+      }
+    };
+  }
+
+  onDailyBingingSettingValueChanged() {
+    return (value) => this.setState(
+      {
+        dailyBingeSetting: {...this.state.dailyBingeSetting, value: value},
+        numberOfBingingHoursPerDay:
+          this.state.dailyBingeSetting.unit === "hours" ? value : null,
+        numberOfEpisodesPerDay:
+          this.state.dailyBingeSetting.unit === "episodes" ? value : null
+      });
+  }
 }
 
 
@@ -88,4 +160,20 @@ const BingeTimeContainerCol = styled(Col)`
 
 const BingeTimeAndCalenderContainer = styled.div`
   padding: 5px;
-`
+`;
+
+const SelectStyled = styled(Select)`
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+`;
+
+const TimeSliderHint = styled.div`
+  margin: auto;
+  font-size: 0.9rem;
+`;
+
+const DailyBingTime = styled.div`
+  background-color: ${Colors.gray};
+  text-align: center;
+`;

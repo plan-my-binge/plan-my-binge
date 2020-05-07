@@ -28,12 +28,13 @@ export const BingeCalendar = ({days}) => {
     {daysOfWeek()}
     {getWeekCalendar(currentWeek, completionDate)}
     {getWeekCalendar(nextWeek, completionDate)}
-    {totalWeeks > 4 && <Middots>•••</Middots>}
-    {totalWeeks >= 3 && getWeekCalendar(penultimateWeek, completionDate)}
-    {totalWeeks >= 4 && getWeekCalendar(completionWeek, completionDate)}
+    {totalWeeks > 4 && <Middots> + {totalWeeks - 4} weeks + </Middots>}
 
     {moment().month() !== completionDate.month() &&
-      <Month>{toUpper(completionDate.format('MMMM'))}</Month>}
+    <Month>{toUpper(completionDate.format('MMMM'))}</Month>}
+
+    {totalWeeks >= 3 && getWeekCalendar(penultimateWeek, completionDate)}
+    {totalWeeks >= 4 && getWeekCalendar(completionWeek, completionDate)}
   </Container>
 };
 
@@ -74,6 +75,8 @@ const Month = styled.div`
 `;
 
 const Container = styled.div`
+  padding: 5px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   background-color: ${Colors.gray};

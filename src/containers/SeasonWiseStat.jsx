@@ -6,10 +6,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/all";
 
-const getNumberOfElementsToDisplay = () => {
-  return 0;
-};
-
 export class SeasonWiseStat extends Component<{}> {
 
   constructor(props: P, context: any) {
@@ -26,16 +22,12 @@ export class SeasonWiseStat extends Component<{}> {
     let totalNumberOfPages = Math.floor(detail.seasonWiseEpisodes.length / 6) + 1;
 
     let leftArrowActive = (page !== 1) * 1;
-    let rightArrowActive = (page !== totalNumberOfPages) * 1;
+    let rightArrowActive = (page <= totalNumberOfPages) * 1;
 
     let paginate = (paginateBy) => {
       let isPaginationDisabled = paginateBy === -1 ? !leftArrowActive : !rightArrowActive;
       if (isPaginationDisabled) return;
       this.setState({page: page + paginateBy})
-    };
-
-    let paginateTo = (paginateTo) => {
-      this.setState({page: paginateTo})
     };
 
     let offset = (page - 1) * pageSize;
@@ -55,23 +47,18 @@ export class SeasonWiseStat extends Component<{}> {
           </StatBlock>
         })}
       </Container>
-      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasonWiseEpisodes.length)} of total {detail.seasonWiseEpisodes.length} seasons</PaginationHint>
+      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasonWiseEpisodes.length)} of
+        total {detail.seasonWiseEpisodes.length} seasons</PaginationHint>
       <Pagination>
-        <LeftArrow isactive={leftArrowActive} onClick={() => paginate(-1)}/>
+        <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
+          <LeftArrow isactive={leftArrowActive}/>
+          Prev
+        </ButtonStyled>
 
-        {page > 2 ?
-          <Option onClick={() => paginateTo(1)}>• •</Option> : <Option/>}
-        {page > 1 ?
-          <Option onClick={() => paginate(-1)}>{page - 1}</Option> : <Option/>}
-
-        <SelectedOption>{page}</SelectedOption>
-
-        {page < totalNumberOfPages ?
-          <Option onClick={() => paginate(1)}>{page + 1}</Option> : <Option/>}
-        {page < (totalNumberOfPages - 1) ?
-          <Option onClick={() => paginateTo(totalNumberOfPages)}>• •</Option> : <Option/>}
-
-        <RightArrow isactive={rightArrowActive} onClick={() => paginate(1)}/>
+        <ButtonStyled disabled={!rightArrowActive} onClick={() => paginate(1)}>
+          Next
+          <RightArrow isactive={rightArrowActive}/>
+        </ButtonStyled>
       </Pagination>
     </>
   }
@@ -105,29 +92,6 @@ const Runtime = styled.div`
   float: right;
 `;
 
-const RuntimeNumber = styled.span`
-  color: black;
-  font-size: 0.9rem;
-`;
-
-const Option = styled.span`
-  padding: 8px;
-  width: 2.6rem;
-  font-size: 1.3rem;
-  margin: auto;
-  color:${Colors.darkGray};
-  cursor: pointer;
-  `;
-
-const SelectedOption = styled.span`
-  width: 4.4rem;
-  font-size: 2.2rem;
-  padding: 0 10px 0 10px;
-  font-weight: 500;
-  margin: auto;
-  line-height: 1.2;
-`;
-
 const LeftArrow = styled(MdKeyboardArrowLeft)`
   margin: auto;
   width: 1.7rem;
@@ -146,6 +110,10 @@ const RightArrow = styled(MdKeyboardArrowRight)`
 
 const Pagination = styled(Row)`
   width: fit-content;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: auto;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -160,3 +128,12 @@ const PaginationHint = styled.div`
   text-align: center;
   color: ${Colors.darkGray}
 `
+
+const ButtonStyled = styled.button`
+  border: 0;
+  outline:none;
+  all: unset;
+  margin: 10px;
+  cursor: ${({disabled}) => disabled ? "not-allowed" : "pointer"};
+  color: ${({disabled}) => disabled ? Colors.darkGray : Colors.black};
+`;

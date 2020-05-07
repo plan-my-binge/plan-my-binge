@@ -10,6 +10,7 @@ export const BingeTime = (props) => {
 
   let showHours = bingeTime.hours !== null /*&& bingeTime.hours !== 0*/;
   let showDays = bingeTime.days !== null && bingeTime.days !== 0;
+
   return <Container>
     <Row>
       <TimeSliderHint>It will take</TimeSliderHint>
@@ -28,7 +29,7 @@ export const BingeTime = (props) => {
         <BingeTimeUnit>minutes</BingeTimeUnit>
       </BingeTimeBox>
     </ValueContainer>
-    <Row><TimeSliderHint>to watch all the episodes of {props.title}</TimeSliderHint> </Row>
+    <Row><TimeSliderHint>to watch all the episodes, when you watch</TimeSliderHint> </Row>
   </Container>
 };
 
@@ -51,12 +52,12 @@ const BingeTimeUnit = styled.div`
 const BingeTimeBox = styled(Col)`
   text-align: center;
   
-  padding-right: .7rem;
-  padding-left: .7rem;
-  padding-bottom: .7rem;
+  padding-right: .3rem;
+  padding-left: .3rem;
+  padding-bottom: .3rem;
   
-  margin-right: 10px;
-  margin-left: 10px;
+  //margin-right: 10px;
+  //margin-left: 10px;
   margin-bottom: 10px;
   width: 100px;
 `;

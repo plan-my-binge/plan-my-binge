@@ -44,7 +44,7 @@ export class BingePlanner extends Component<Props> {
 
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 15px;
 `;
 
 const SearchContainer = styled.div`

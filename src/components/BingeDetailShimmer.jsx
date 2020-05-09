@@ -6,10 +6,18 @@ import Col from "react-bootstrap/Col";
 export const BingeDetailShimmer = () => {
   return <div className="shimmercard br">
     <div className="wrapper">
-      <div className="title animate"/>
-      <div className="subtitle animate"/>
+      <div className={"d-none d-md-block"}>
+        <div className="title animate"/>
+        <div className="subtitle animate"/>
+      </div>
+      <Row className={"animate moblie-title d-block d-md-none"}>
+      </Row>
+
+      <Row className={"d-block d-md-none"}>
+        <Col className={"animate landscape"}/>
+      </Row>
       <Row>
-        <Col className={"animate column"}/>
+        <Col className={"animate portrait d-none d-md-block"}/>
         <Col>
           <Row className={"animate row_s"}/>
           <Row className={"animate row_s"}/>

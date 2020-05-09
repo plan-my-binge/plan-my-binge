@@ -19,10 +19,10 @@ export class SeasonWiseStat extends Component<{}> {
   render() {
     let {detail} = this.props;
     let {page, pageSize} = this.state;
-    let totalNumberOfPages = Math.floor(detail.seasonWiseEpisodes.length / 6) + 1;
+    let totalNumberOfPages = Math.floor(detail.seasons.length / 6) + 1;
 
     let leftArrowActive = (page !== 1) * 1;
-    let rightArrowActive = (page <= totalNumberOfPages) * 1;
+    let rightArrowActive = (page < totalNumberOfPages) * 1;
 
     let paginate = (paginateBy) => {
       let isPaginationDisabled = paginateBy === -1 ? !leftArrowActive : !rightArrowActive;
@@ -34,8 +34,9 @@ export class SeasonWiseStat extends Component<{}> {
     let limit = page * pageSize;
     return <>
       <Container>
-        {detail.seasonWiseEpisodes.slice(offset, limit).map((numberOfEpisodes, index) => {
-          let runtime = toDaysHoursAndMinutes(detail.seasonWiseRuntime[index]);
+        {detail.seasons.slice(offset, limit).map((season, index) => {
+          let numberOfEpisodes = season.numberofepisodes;
+          let runtime = toDaysHoursAndMinutes(season.seasonruntime);
           let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
           let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
           let minutesDisplay = `${runtime.minutes}m`;
@@ -47,8 +48,8 @@ export class SeasonWiseStat extends Component<{}> {
           </StatBlock>
         })}
       </Container>
-      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasonWiseEpisodes.length)} of
-        total {detail.seasonWiseEpisodes.length} seasons</PaginationHint>
+      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasons.length)} of
+        total {detail.seasons.length} seasons</PaginationHint>
       <Pagination>
         <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
           <LeftArrow isactive={leftArrowActive}/>

@@ -11,14 +11,14 @@ export const BingeStats = (props) => {
       <StatCol>
       <Line>
         <div>
-          <Number>{detail.numberOfSeasons}</Number>
+          <Number>{detail.seasons.length}</Number>
           <Unit>seasons</Unit>
         </div>
       </Line>
 
         <Line>
           <div>
-            <Number>{detail.episodePerSeason[2]}</Number>
+            <Number>{detail.episodesPerSeason}</Number>
             <Unit>episodes per season</Unit>
           </div>
         </Line>
@@ -33,7 +33,7 @@ export const BingeStats = (props) => {
       </Line>
         <Line>
           <div>
-            <Number>{detail.minutesPerEpisode[2]}</Number>
+            <Number>{detail.perEpisodeRuntime}</Number>
             <Unit>minutes per episode</Unit>
           </div>
         </Line>

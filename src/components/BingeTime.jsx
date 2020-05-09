@@ -7,7 +7,6 @@ import {Colors} from "../utils/Constants";
 
 export const BingeTime = (props) => {
   let bingeTime = toDaysHoursAndMinutes(props.runtime);
-
   let showHours = bingeTime.hours !== null /*&& bingeTime.hours !== 0*/;
   let showDays = bingeTime.days !== null && bingeTime.days !== 0;
 

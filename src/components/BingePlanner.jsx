@@ -1,33 +1,29 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {recommendations} from "../data/bingeData";
 import {BingeDetail} from "./BingeDetail.jsx";
 import {getPopularShows} from "../service/api";
 import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
-import {Colors} from "../utils/Constants";
-import {HomePageError} from "./HomePageError";
+import {HomePageError} from "./HomePageError.jsx";
+import {BingeDetailModel} from "../data/BingeDetailModel";
 
 export class BingePlanner extends Component<Props> {
 
-  constructor(props: P, context: any) {
-    super(props, context);
-    this.state = {
-      recommendations: [],
-      popularShows: [],
-      showLoader: true,
-      showError: false
-    }
-  }
+  state = {
+    popularShows: [],
+    showLoader: true,
+    showError: false
+  };
 
   componentDidMount(): void {
-    this.setState({recommendations})
     getPopularShows()
-      .then(data => this.setState({popularShows: data}))
+      .then(response => this.setState({popularShows: response.data}))
       .catch(() => this.setState({showError: true}))
       .finally(() => this.setState({showLoader: false}));
   }
 
   render() {
+    const {showLoader, popularShows, showError} = this.state;
+    console.log(popularShows)
     return (
       <Container>
         <HeaderMessage>
@@ -37,9 +33,10 @@ export class BingePlanner extends Component<Props> {
           <Input type={"text"} placeholder={"Search TV Show Eg. Game of Thrones"}/>
           <span/>
         </SearchContainer>
-        {this.state.popularShows.length !== 0 && <BingeDetail detail={recommendations[0]}/>}
-        {this.state.showError && <HomePageError/>}
-        {this.state.showLoader && <BingeDetailShimmer/>}
+
+        {popularShows.length !== 0 && <BingeDetail detail={new BingeDetailModel(popularShows[0]._source)}/>}
+        {showError && <HomePageError/>}
+        {showLoader && <BingeDetailShimmer/>}
       </Container>
     )
   }

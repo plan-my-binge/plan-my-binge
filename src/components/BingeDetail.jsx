@@ -15,7 +15,7 @@ import {InputStepper} from "./InputStepper.jsx";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
-  constructor(props: P, context: any) {
+  constructor(props, context: any) {
     super(props, context);
     this.state = {
       numberOfBingingHoursPerDay: 2,
@@ -25,7 +25,7 @@ export class BingeDetail extends Component<{ detail: any }> {
       },
       possibleDailyBinging: {
         hours: 24,
-        episodes: (24 * 60) / props.detail.minutesPerEpisode[2]
+        episodes: (24 * 60) / props.detail.perEpisodeRuntime
       }
     }
   }
@@ -45,13 +45,15 @@ export class BingeDetail extends Component<{ detail: any }> {
 
     let numberOfDays = minutesToDays(runtimeInMinutes);
 
+    let portraitPosterUrlPrefix = "https://image.tmdb.org/t/p/w342";
+    let landscapePosterUrlPrefix = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces";
     return <Container>
       <BingeDetailHeader detail={detail}/>
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          <PosterPortrait src={detail.posterLandscape} className={"d-block d-md-none"}/>
-          <Poster src={detail.posterPortrait} className={"d-none d-md-block"}/>
+          <PosterPortrait src={landscapePosterUrlPrefix + detail.landscapePoster} className={"d-block d-md-none"}/>
+          <Poster src={portraitPosterUrlPrefix + detail.portraitPoster} className={"d-none d-md-block"}/>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>

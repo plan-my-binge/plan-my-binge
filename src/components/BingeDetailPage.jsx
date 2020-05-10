@@ -48,11 +48,9 @@ const Header = styled.div`
 const BackLink = styled(Link)`
   color: ${Colors.black};
   font-size: 1.5rem;
-  padding: 8px;
   &:hover {
-    color: ${Colors.black};
+    color: ${Colors.darkGray};
     text-decoration: none;
-    background-color: ${Colors.gray};
     border-radius: 10px;
   }
 `;

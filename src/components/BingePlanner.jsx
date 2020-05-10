@@ -9,6 +9,8 @@ import {PopularShows} from "./PopularShows.jsx";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {BingeDetailPage} from "./BingeDetailPage.jsx";
 import {ScrollToTop} from "./ScrollToTop.jsx";
+import SearchIcon from '@material-ui/icons/Search';
+import logo from "../images/logo.png";
 
 export class BingePlanner extends Component<Props> {
 
@@ -42,11 +44,13 @@ export class BingePlanner extends Component<Props> {
 
             <Route path={"/"}>
               <ScrollToTop/>
+              <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
               <HeaderMessage>
                 How long will it take to watch all episodes of a TV Show?
               </HeaderMessage>
               <SearchContainer>
-                <Input type={"text"} placeholder={"Search TV Show Eg. Game of Thrones"}/>
+                <SearchIconStyled fontSize={"large"}/>
+                <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""}/>
                 <span/>
               </SearchContainer>
 
@@ -68,6 +72,9 @@ const Container = styled.div`
 `;
 
 const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   height: 50px;
   margin-top: 30px;
@@ -94,4 +101,17 @@ const HeaderMessage = styled.h4`
   font-weight: 600;
   text-align: center;
 
+`;
+
+
+const SearchIconStyled = styled(SearchIcon)`
+`;
+
+const Logo = styled.img`
+  max-width: 400px;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  margin: auto;  
 `;

@@ -1,3 +1,5 @@
+import {mode} from "../utils/TimeUtils";
+
 export class BingeDetailModel {
 
   constructor(bingeDetail) {
@@ -8,8 +10,8 @@ export class BingeDetailModel {
 
     this.genres = bingeDetail.genres;
 
-    this.landscapePoster = bingeDetail.landscapePoster;
-    this.portraitPoster = bingeDetail.portraitPoster;
+    this.landscapePoster = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + bingeDetail.landscapePoster;
+    this.portraitPoster = "https://image.tmdb.org/t/p/w342" + bingeDetail.portraitPoster;
 
     this.perEpisodeRuntime = bingeDetail.perEpisodeRuntime;
 
@@ -19,9 +21,7 @@ export class BingeDetailModel {
       return season.numberOfEpisodes + accumulator
     }, 0));
 
-    this.episodesPerSeason = Math.ceil(bingeDetail.seasons.reduce((accumulator, season) => {
-      return season.numberOfEpisodes + accumulator
-    }, 0) / bingeDetail.seasons.length);
+    this.episodesPerSeason = mode(bingeDetail.seasons.map(x => x.numberOfEpisodes))
 
     this.runtime = bingeDetail.seasons.reduce((accumulator, season) => {
       return season.seasonRuntime + accumulator

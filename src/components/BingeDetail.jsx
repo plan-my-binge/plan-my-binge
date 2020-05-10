@@ -45,15 +45,13 @@ export class BingeDetail extends Component<{ detail: any }> {
 
     let numberOfDays = minutesToDays(runtimeInMinutes);
 
-    let portraitPosterUrlPrefix = "https://image.tmdb.org/t/p/w342";
-    let landscapePosterUrlPrefix = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces";
     return <Container>
       <BingeDetailHeader detail={detail}/>
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          <PosterPortrait src={landscapePosterUrlPrefix + detail.landscapePoster} className={"d-block d-md-none"}/>
-          <Poster src={portraitPosterUrlPrefix + detail.portraitPoster} className={"d-none d-md-block"}/>
+          <PosterPortrait src={detail.landscapePoster} className={"d-block d-md-none"}/>
+          <Poster src={detail.portraitPoster} className={"d-none d-md-block"}/>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>

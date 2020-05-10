@@ -35,8 +35,8 @@ export class SeasonWiseStat extends Component<{}> {
     return <>
       <Container>
         {detail.seasons.slice(offset, limit).map((season, index) => {
-          let numberOfEpisodes = season.numberofepisodes;
-          let runtime = toDaysHoursAndMinutes(season.seasonruntime);
+          let numberOfEpisodes = season.numberOfEpisodes;
+          let runtime = toDaysHoursAndMinutes(season.seasonRuntime);
           let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
           let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
           let minutesDisplay = `${runtime.minutes}m`;

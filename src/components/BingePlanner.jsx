@@ -5,6 +5,7 @@ import {getPopularShows} from "../service/api";
 import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
 import {HomePageError} from "./HomePageError.jsx";
 import {BingeDetailModel} from "../data/BingeDetailModel";
+import {PopularShows} from "./PopularShows.jsx";
 
 export class BingePlanner extends Component<Props> {
 
@@ -37,6 +38,7 @@ export class BingePlanner extends Component<Props> {
         {popularShows.length !== 0 && <BingeDetail detail={new BingeDetailModel(popularShows[0]._source)}/>}
         {showError && <HomePageError/>}
         {showLoader && <BingeDetailShimmer/>}
+        {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
       </Container>
     )
   }

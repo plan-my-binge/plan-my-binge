@@ -20,7 +20,6 @@ export const BingeCalendar = ({days}) => {
 
   let totalWeeks = completionWeek.week() - currentWeek.week() + 1;
 
-  console.log(today, completionDate, currentWeek, nextWeek)
   return <Container>
     <Month>
       {toUpper(today.format("MMMM"))}

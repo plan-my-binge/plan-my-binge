@@ -6,6 +6,9 @@ import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
 import {HomePageError} from "./HomePageError.jsx";
 import {BingeDetailModel} from "../data/BingeDetailModel";
 import {PopularShows} from "./PopularShows.jsx";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BingeDetailPage} from "./BingeDetailPage.jsx";
+import {ScrollToTop} from "./ScrollToTop.jsx";
 
 export class BingePlanner extends Component<Props> {
 
@@ -24,21 +27,36 @@ export class BingePlanner extends Component<Props> {
 
   render() {
     const {showLoader, popularShows, showError} = this.state;
-    console.log(popularShows)
     return (
       <Container>
-        <HeaderMessage>
-          How long will it take to watch all episodes of a TV Show?
-        </HeaderMessage>
-        <SearchContainer>
-          <Input type={"text"} placeholder={"Search TV Show Eg. Game of Thrones"}/>
-          <span/>
-        </SearchContainer>
 
-        {popularShows.length !== 0 && <BingeDetail detail={new BingeDetailModel(popularShows[0]._source)}/>}
-        {showError && <HomePageError/>}
-        {showLoader && <BingeDetailShimmer/>}
-        {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+
+        <BrowserRouter>
+          <Switch>
+
+            <Route path={"/binge/:pmbId"}>
+              <ScrollToTop/>
+              <BingeDetailPage/>
+              {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+            </Route>
+
+            <Route path={"/"}>
+              <ScrollToTop/>
+              <HeaderMessage>
+                How long will it take to watch all episodes of a TV Show?
+              </HeaderMessage>
+              <SearchContainer>
+                <Input type={"text"} placeholder={"Search TV Show Eg. Game of Thrones"}/>
+                <span/>
+              </SearchContainer>
+
+              {popularShows.length !== 0 && <BingeDetail detail={new BingeDetailModel(popularShows[0]._source)}/>}
+              {showError && <HomePageError/>}
+              {showLoader && <BingeDetailShimmer/>}
+              {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </Container>
     )
   }

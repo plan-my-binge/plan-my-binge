@@ -3,6 +3,8 @@ import {mode} from "../utils/TimeUtils";
 export class BingeDetailModel {
 
   constructor(bingeDetail) {
+    this.pmbId = bingeDetail.pmb_id;
+
     this.averageRating = bingeDetail.averageRating;
 
     this.startYear = bingeDetail.startYear;

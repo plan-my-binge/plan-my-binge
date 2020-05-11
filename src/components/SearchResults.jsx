@@ -16,4 +16,5 @@ const Heading = styled.h4`
 `;
 const Container = styled.div`
   margin: 10px;
+  clear: both;
 `;

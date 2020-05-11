@@ -5,9 +5,11 @@ import {withRouter} from "react-router-dom";
 import {Colors} from "../utils/Constants";
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {createSearchQuery} from "../utils/apiUtils";
+import {cachingApiRequest, createSearchQuery} from "../utils/apiUtils";
 import axios from "axios";
 import {ShowListShimmer} from "./ShowListShimmer";
+import {Url} from "../service/api";
+import {PopularShows} from "./PopularShows";
 
 class SearchPage extends Component<{}> {
 
@@ -16,7 +18,10 @@ class SearchPage extends Component<{}> {
     showLoader: false,
     searchResults: [],
     searchFailed: false,
+    popularShows: []
   };
+
+  request = cachingApiRequest();
 
   componentDidMount() {
     if (this.props.location.search) {
@@ -25,6 +30,8 @@ class SearchPage extends Component<{}> {
       this.setState({searchQuery: searchQuery});
       this.handleInputChange(searchQuery)
     }
+
+    this.request(Url.getPopularShows).then(data => this.setState({popularShows: data}))
   }
 
   searchShow = createSearchQuery();
@@ -37,12 +44,17 @@ class SearchPage extends Component<{}> {
     });
 
     this.searchShow(value)
-      .then(response => this.setState({searchResults: response}))
-      .catch(error => !axios.isCancel(error) && this.setState({searchFailed: true}))
-      .finally(() => this.setState({showLoader: false}))
+      .then(response => this.setState({searchResults: response, showLoader: false}))
+      .catch(error => {
+        let isCancel = axios.isCancel(error);
+        if (isCancel) this.setState({showLoader: true});
+        else this.setState({searchFailed: true, showLoader: false})
+      })
   };
 
   render() {
+    const {showLoader, searchResults, searchQuery, popularShows} = this.state;
+
     return <div>
       <SearchHeader>
         <IconContainer onClick={this.goBack()}>
@@ -53,13 +65,22 @@ class SearchPage extends Component<{}> {
       <SearchContainer>
         <SearchIconStyled fontSize={"large"}/>
         <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""} autoFocus
-               value={this.state.searchQuery}
+               value={searchQuery}
                onChange={(e) => this.handleInputChange(e.target.value)}
         />
         <span/>
       </SearchContainer>
-      {this.state.showLoader && <ShowListShimmer/>}
-      <SearchResults searchResults={this.state.searchResults}/>
+      {showLoader && <ShowListShimmer/>}
+
+      {(!showLoader) &&
+        searchQuery !== "" &&
+        searchResults.length === 0 &&
+        <NoResultsFound>No results found :(</NoResultsFound>}
+
+      <SearchResults searchResults={searchResults}/>
+      {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+
+
     </div>
   }
 
@@ -117,4 +138,12 @@ const Input = styled.input`
     width: 100%;
     transition: 0.5s;
   }
+`;
+
+const NoResultsFound = styled.div`
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${Colors.darkGray};
 `;

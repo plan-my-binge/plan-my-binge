@@ -49,6 +49,7 @@ const BingeDetailPage = () => {
 };
 
 export const BingDetailPageWithRouter = withRouter(BingeDetailPage);
+
 const Header = styled.div`
   border-bottom: 1px solid ${Colors.gray};
   width: 100%;

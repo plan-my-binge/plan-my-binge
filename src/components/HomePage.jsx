@@ -7,29 +7,16 @@ import {PopularShows} from "./PopularShows";
 import React, {Component} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {Url} from "../service/api";
-import {cachingApiRequest} from "../utils/apiUtils";
 import SearchIcon from '@material-ui/icons/Search';
 
 export class HomePage extends Component<{}> {
 
-  state = {
-    popularShows: [],
-    showLoader: true,
-    showError: false,
-  };
-
-  request = cachingApiRequest();
-
   componentDidMount(): void {
-    this.request(Url.getPopularShows)
-      .then(data => this.setState({popularShows: data}))
-      .catch(() => this.setState({showError: true}))
-      .finally(() => this.setState({showLoader: false}));
+    this.props.getPopularShows()
   }
 
   render() {
-    let {popularShows, showError, showLoader} = this.state;
+    let {popularShows, showError, showLoader} = this.props;
 
     return <>
       <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>

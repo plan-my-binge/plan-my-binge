@@ -4,14 +4,13 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {BingDetailPageWithRouter} from "./BingeDetailPage.jsx";
 import {ScrollToTop} from "./ScrollToTop.jsx";
 import {SearchPageWithRouter} from "./SearchPage.jsx";
-import {HomePage} from "./HomePage.jsx";
+import HomePageContainer from "../containers/HomePageContainer";
 
-export class BingePlanner extends Component<Props> {
+export class BingePlanner extends Component {
 
   render() {
     return (
       <Container>
-
 
         <BrowserRouter>
           <Switch>
@@ -28,7 +27,7 @@ export class BingePlanner extends Component<Props> {
 
             <Route path={"/"}>
               <ScrollToTop/>
-              <HomePage/>
+              <HomePageContainer/>
             </Route>
 
           </Switch>

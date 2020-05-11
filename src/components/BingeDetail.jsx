@@ -73,10 +73,6 @@ export class BingeDetail extends Component<{ detail: any }> {
     return (24 / numberOfEpisodesPerDay) * 60 * this.props.detail.totalEpisodes;
   }
 
-  numberOfEpisodesPerDayToHours(numberOfEpisodesPerDay) {
-    return (24 / numberOfEpisodesPerDay) * this.props.detail.totalEpisodes;
-  }
-
   getDailyBingeTime() {
     let maxLimit = this.state.dailyBingeSetting.unit === "episodes" ?
       this.state.possibleDailyBinging.episodes : this.state.possibleDailyBinging.hours;

@@ -40,5 +40,5 @@ export class BingePlanner extends Component<Props> {
 
 
 const Container = styled.div`
-  padding: 15px;
+  padding: 5px;
 `;

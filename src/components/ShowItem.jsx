@@ -29,7 +29,7 @@ const Poster = styled.img`
 const Item = styled.div`
   color: ${Colors.black};
   cursor: pointer;
-  margin-right: 30px;
+  margin-right: 20px;
   margin-bottom: 30px;
   float: left;
   font-size: 0.9rem;

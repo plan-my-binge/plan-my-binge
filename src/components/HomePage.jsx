@@ -90,7 +90,6 @@ const HeaderMessage = styled.div`
 `;
 
 
-
 const Logo = styled.img`
   max-width: 400px;
   width: 100%;

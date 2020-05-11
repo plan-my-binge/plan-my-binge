@@ -44,7 +44,7 @@ class SearchPage extends Component<{}> {
   render() {
     return <div>
       <SearchHeader>
-        <IconContainer onClick={() => this.props.history.goBack()}>
+        <IconContainer onClick={this.goBack()}>
           <ArrowBackIcon fontSize={"large"}/>
         </IconContainer>
         <h4> Search TV Show to calculate binge time</h4>
@@ -59,6 +59,12 @@ class SearchPage extends Component<{}> {
       </SearchContainer>
       <SearchResults searchResults={this.state.searchResults}/>
     </div>
+  }
+
+  goBack() {
+    return () => this.props.history.length > 1 ?
+      this.props.history.goBack() :
+      this.props.history.push("/");
   }
 }
 

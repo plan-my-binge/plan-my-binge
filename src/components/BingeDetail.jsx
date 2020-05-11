@@ -50,8 +50,8 @@ export class BingeDetail extends Component<{ detail: any }> {
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          <PosterPortrait src={detail.landscapePoster} className={"d-block d-md-none"}/>
-          <Poster src={detail.portraitPoster} className={"d-none d-md-block"}/>
+          <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>
+          <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>
@@ -140,16 +140,18 @@ export class BingeDetail extends Component<{ detail: any }> {
 const Container = styled.div`
 `;
 
-const Poster = styled.img`
+const PosterPortrait = styled.img`
    width: 16rem;
+   margin-left: 15px;
 `;
 
-const PosterPortrait = styled.img`
+const PosterLandscape = styled.img`
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
     width: fill-available;
-    margin: auto
+    margin-right: 15px;
+    margin-left: 15px;
 `;
 
 const BingeDetailContentRow = styled(Row)`
@@ -159,8 +161,8 @@ const BingeDetailContentRow = styled(Row)`
 
 
 const PosterContainerCol = styled(Col)`
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 0;
+  padding-left: 0;
   margin-top: 15px;
 `;
 

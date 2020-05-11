@@ -1,13 +1,15 @@
 import axios from "axios";
 
-export const getPopularShows = () => axios.get("http://localhost:5000/shows/popular");
+const host = "192.168.43.78";
 
-export const getShow = (showId) => axios.get("http://localhost:5000/shows/" + showId);
+export const getPopularShows = () => axios.get(`http://${host}:5000/shows/popular`);
+
+export const getShow = (showId) => axios.get(`http://${host}:5000/shows/${showId}`);
 
 export const searchShow = (query, cancellationToken) =>
-  axios.get("http://localhost:5000/shows?q=" + query, cancellationToken);
+  axios.get(`http://${host}:5000/shows?q=${query}`, cancellationToken);
 
 
 export const Url = {
-  getPopularShows : "http://localhost:5000/shows/popular"
+  getPopularShows : `http://${host}:5000/shows/popular`
 };

@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 export const SearchResults = ({searchResults}) => {
   return <Container>
-    <Heading>Search results</Heading>
+    {searchResults.length !== 0 && <Heading>Search results</Heading>}
     <ShowList shows={searchResults}/>
+
   </Container>
 };
 

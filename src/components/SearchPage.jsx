@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {createSearchQuery} from "../utils/apiUtils";
 import axios from "axios";
+import {ShowListShimmer} from "./ShowListShimmer";
 
 class SearchPage extends Component<{}> {
 
@@ -57,6 +58,7 @@ class SearchPage extends Component<{}> {
         />
         <span/>
       </SearchContainer>
+      {this.state.showLoader && <ShowListShimmer/>}
       <SearchResults searchResults={this.state.searchResults}/>
     </div>
   }

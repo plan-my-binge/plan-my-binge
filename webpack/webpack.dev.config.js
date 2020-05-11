@@ -49,6 +49,9 @@ module.exports = {
     contentBase: parentDir + './dist',
     historyApiFallback: true
   },
+  resolve: {
+    extensions: [".webpack.js", ".web.js", ".js", ".json", ".jsx"]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.ejs',

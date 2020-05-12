@@ -5,10 +5,9 @@ import {withRouter} from "react-router-dom";
 import {Colors} from "../utils/Constants";
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {cachingApiRequest, createSearchQuery} from "../utils/apiUtils";
+import {createSearchQuery} from "../utils/apiUtils";
 import axios from "axios";
 import {ShowListShimmer} from "./ShowListShimmer";
-import {Url} from "../service/api";
 import {PopularShows} from "./PopularShows";
 
 class SearchPage extends Component<{}> {
@@ -27,6 +26,10 @@ class SearchPage extends Component<{}> {
       this.setState({searchQuery: searchQuery});
       this.handleInputChange(searchQuery)
     }
+
+    if (this.props.popularShows.length === 0) {
+      this.props.getPopularShows();
+    }
   }
 
   searchShow = createSearchQuery();
@@ -39,7 +42,10 @@ class SearchPage extends Component<{}> {
     });
 
     this.searchShow(value)
-      .then(response => this.setState({searchResults: response, showLoader: false}))
+      .then(response => {
+        this.props.storeShows(response);
+        return this.setState({searchResults: response, showLoader: false});
+      })
       .catch(error => {
         let isCancel = axios.isCancel(error);
         if (isCancel) this.setState({showLoader: true});

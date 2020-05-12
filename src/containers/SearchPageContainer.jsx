@@ -1,7 +1,8 @@
 import {connect} from 'react-redux'
 import {getPopularShowsFromState} from "./selectors";
-import {getPopularShows} from "./actionCreater";
+import {getPopularShows, storeShows} from "./actionCreater";
 import {SearchPageWithRouter} from "../components/SearchPage";
+import {BingeDetailModel} from "../data/BingeDetailModel";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getPopularShows: () => dispatch(getPopularShows())
+    getPopularShows: () => dispatch(getPopularShows()),
+    storeShows: (shows) => dispatch(storeShows(shows.map(x => BingeDetailModel(x._source))))
   }
 };
 

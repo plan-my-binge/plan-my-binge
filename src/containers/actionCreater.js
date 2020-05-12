@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 
 export const storePopularShows = createAction('STORE_POPULAR_SHOWS');
 
+export const storeShow = createAction('STORE_SHOW');
 export const storeShows = createAction('STORE_SHOWS');
 
 export const getShow = createAction('GET_SHOW');

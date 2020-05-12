@@ -5,7 +5,7 @@ import {
   setShowDetailPageError,
   setShowDetailPageLoader, setShowHomePageError, setShowHomePageLoader,
   storePopularShows,
-  storeShows
+  storeShow
 } from "./actionCreater";
 import {BingeDetailModel} from "../data/BingeDetailModel";
 import {Api} from "../service/api";
@@ -13,7 +13,7 @@ import {Api} from "../service/api";
 const fetchShow = function*(action) {
   try {
     const response = yield call(Api.getShow, action.payload);
-    yield put(storeShows(BingeDetailModel(response.data[0]._source)));
+    yield put(storeShow(BingeDetailModel(response.data[0]._source)));
   } catch (e) {
     yield put(setShowDetailPageError(true));
   }

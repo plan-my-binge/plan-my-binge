@@ -1,5 +1,5 @@
 import {handleActions} from "redux-actions";
-import {storePopularShows, storeShows} from "../containers/actionCreater";
+import {storePopularShows, storeShow, storeShows} from "../containers/actionCreater";
 import {eqBy, prop, unionWith} from "ramda";
 
 const INITIAL_STATE = {popularShowIds: [], allShows: []};
@@ -13,10 +13,16 @@ const shows = handleActions(
         allShows: unionWith(eqBy(prop('pmbId')), state.allShows, popularShows)
       })},
 
-    [storeShows]: (state, {payload: show}) => {
+    [storeShow]: (state, {payload: show}) => {
       return ({
         ...state,
         allShows: unionWith(eqBy(prop('pmbId')), state.allShows, [show])
+      })},
+
+    [storeShows]: (state, {payload: shows}) => {
+      return ({
+        ...state,
+        allShows: unionWith(eqBy(prop('pmbId')), state.allShows, shows)
       })},
   },
   INITIAL_STATE

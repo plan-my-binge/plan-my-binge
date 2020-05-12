@@ -1,14 +1,14 @@
 import React from 'react';
-import {SideNavBar} from "./SideNavBar.jsx";
-import {BottomNavBar} from "./BottomNavBar.jsx";
+import {SideNavBarWithRouter} from "./SideNavBar";
+import BottomNavContainer from "../containers/BottomNavBarContainer";
 
 
 export function NavigationMenus(props: Props) {
 
   return (
       <div>
-        <SideNavBar onNavChange={props.onNavChange} selection={props.selection}/>
-        <BottomNavBar onNavChange={props.onNavChange} selection={props.selection}/>
+        <SideNavBarWithRouter onNavChange={props.onNavChange} selection={props.selection}/>
+        <BottomNavContainer onNavChange={props.onNavChange} selection={props.selection}/>
       </div>
   )
 }

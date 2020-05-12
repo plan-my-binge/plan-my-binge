@@ -18,3 +18,5 @@ export const markShowAsVisited = createAction('MARK_SHOW_AS_VISITED');
 
 export const toggleBookmark = createAction('TOGGLE_BOOKMARK');
 
+export const inputFocused = createAction('INPUT_FOCUSED');
+

@@ -4,25 +4,34 @@ import * as R from "ramda";
 import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
+import {withRouter, useHistory} from "react-router-dom";
 
-export function SideNavBar(props: Props) {
+const SideNavBar = (props: Props) => {
+
+  const history = useHistory();
+
   return <SideBar lg={3} className={"d-none d-lg-block"}>
     <Logo src={logo}/>
 
     {NavOptions.map(option => {
       let selectionClassName = R.ifElse(R.equals, () => "selection", () => "")(option, props.selection);
       return (
-          <NavItem key={option.name}
-                   className={selectionClassName}
-                   onClick={() => props.onNavChange(option)}>
-            <NavHeader>
-              {option.name.toUpperCase()}
-            </NavHeader>
-            <NavHint>{option.hint}</NavHint>
-          </NavItem>);
+        <NavItem key={option.name}
+                 className={selectionClassName}
+                 onClick={() => {
+                   history.push(option.link)
+                   return props.onNavChange(option);
+                 }}>
+          <NavHeader>
+            {option.name.toUpperCase()}
+          </NavHeader>
+          <NavHint>{option.hint}</NavHint>
+        </NavItem>);
     })}
   </SideBar>;
-}
+};
+
+export const SideNavBarWithRouter = withRouter(SideNavBar);
 
 const SideBar = styled(Col)`
   border-right: solid 1px black;

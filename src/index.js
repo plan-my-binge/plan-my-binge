@@ -14,7 +14,7 @@ import showSaga from "./containers/showsSaga";
 
 const appOfflineConfig = {
   ...offlineConfig, persistOptions: {
-    blacklist: ['showDetailPage']
+    blacklist: ['showDetailPage', 'app']
   }
 };
 

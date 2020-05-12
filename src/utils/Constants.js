@@ -1,17 +1,27 @@
+import StarIcon from '@material-ui/icons/Star';
+import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
+
 export const NavOptions = [
   {
     name: "Binge Planner",
     hint: "Find out how long it takes to watch all episodes of any TV Show",
+    link: "/",
+    icon: HomeIcon
   },
-  {
-    name: "Binge Tracker",
-    hint: "Calculate how much time you have spent watching TV Shows in your life",
-  },
+  // {
+  //   name: "Binge Tracker",
+  //   hint: "Calculate how much time you have spent watching TV Shows in your life",
+  // },
   {
     name: "Bookmarks",
+    link: "/bookmarks",
+    icon: StarIcon
   },
   {
     name: "Search",
+    link: "/search",
+    icon: SearchIcon
   }];
 
 

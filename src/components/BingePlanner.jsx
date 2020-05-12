@@ -14,7 +14,6 @@ export class BingePlanner extends Component {
     return (
       <Container>
 
-        <BrowserRouter>
           <Switch>
 
             <Route path={"/binge/:pmbId"}>
@@ -43,7 +42,6 @@ export class BingePlanner extends Component {
             </Route>
 
           </Switch>
-        </BrowserRouter>
       </Container>
     )
   }

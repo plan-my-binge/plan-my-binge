@@ -68,6 +68,8 @@ class SearchPage extends Component<{}> {
         <SearchIconStyled fontSize={"large"}/>
         <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""} autoFocus
                value={searchQuery}
+               onFocus={() => this.props.inputFocused(true)}
+               onBlur={() => this.props.inputFocused(false)}
                onChange={(e) => this.handleInputChange(e.target.value)}
         />
         <span/>

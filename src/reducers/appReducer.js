@@ -1,16 +1,19 @@
-import { REHYDRATE } from 'redux-persist/constants'
+import {REHYDRATE} from 'redux-persist/constants'
+import {handleActions} from "redux-actions";
+import {inputFocused} from "../containers/actionCreater";
 
-const INITIAL_STATE = { ready: false };
+const INITIAL_STATE = {ready: false, inputFocused: false};
 
-const app = (state = INITIAL_STATE, action) => {
-  if (action.type === REHYDRATE) {
-    return {
+const app = handleActions(
+  {
+    [REHYDRATE]: (state) => ({
       ...state,
       ready: true,
-    };
-  } else {
-    return state;
-  }
-};
+    }),
+
+    [inputFocused]: (state, {payload}) => ({...state, inputFocused: payload})
+  },
+  INITIAL_STATE
+);
 
 export default {app};

@@ -23,7 +23,7 @@ const SideNavBar = (props: Props) => {
                    return props.onNavChange(option);
                  }}>
           <NavHeader>
-            {option.name.toUpperCase()}
+            <option.icon style={{color: Colors.darkGray, margin: 5}}/>{option.name.toUpperCase()}
           </NavHeader>
           <NavHint>{option.hint}</NavHint>
         </NavItem>);
@@ -47,6 +47,8 @@ const Logo = styled.img`
 `;
 
 const NavHeader = styled.div`
+  display: flex;
+  align-items: center;
   font-weight: 700;
 `;
 

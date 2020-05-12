@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {ScrollToTop} from "./ScrollToTop.jsx";
 import HomePageContainer from "../containers/HomePageContainer";
-import BingeDetailPageContainer from "../containers/BingeDetailPage";
+import BingeDetailPageContainer from "../containers/BingeDetailPageContainer";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import RecentlyVisitedShowsPageContainer from "../containers/RecentlyVisitedShowsPageContainer";
 

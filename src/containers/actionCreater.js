@@ -16,3 +16,5 @@ export const setShowDetailPageLoader = createAction('SHOW_DETAIL_PAGE_LOADER');
 
 export const markShowAsVisited = createAction('MARK_SHOW_AS_VISITED');
 
+export const toggleBookmark = createAction('TOGGLE_BOOKMARK');
+

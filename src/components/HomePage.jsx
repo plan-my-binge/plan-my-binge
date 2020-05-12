@@ -8,6 +8,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import {RecentlyVisitedShows} from "./RecentlyVisitedShows";
+import BingeDetailContainer from "../containers/BingeDetailContainer";
 
 export class HomePage extends Component<{}> {
 
@@ -32,10 +33,10 @@ export class HomePage extends Component<{}> {
         <span/>
       </SearchContainer>
 
-      {recentlyVisitedShows.length !== 0 && <BingeDetail detail={recentlyVisitedShows[0]}/>}
+      {recentlyVisitedShows.length !== 0 && <BingeDetailContainer detail={recentlyVisitedShows[0]}/>}
 
       {/*if recently view is empty fetch and show popular shows*/}
-      {recentlyVisitedShows.length === 0 && popularShows.length !== 0 && <BingeDetail detail={popularShows[0]}/>}
+      {recentlyVisitedShows.length === 0 && popularShows.length !== 0 && <BingeDetailContainer detail={popularShows[0]}/>}
       {recentlyVisitedShows.length === 0 && showError && <HomePageError/>}
       {recentlyVisitedShows.length === 0 && showLoader && <BingeDetailShimmer/>}
 

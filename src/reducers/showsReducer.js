@@ -1,8 +1,8 @@
 import {handleActions} from "redux-actions";
-import {markShowAsVisited, storePopularShows, storeShow, storeShows} from "../containers/actionCreater";
+import {markShowAsVisited, storePopularShows, storeShow, storeShows, toggleBookmark} from "../containers/actionCreater";
 import {eqBy, prop, reverse, unionWith, uniq} from "ramda";
 
-const INITIAL_STATE = {popularShowIds: [], allShows: [], visited: []};
+const INITIAL_STATE = {popularShowIds: [], allShows: [], visited: [], bookmarkedShowIds: []};
 
 const shows = handleActions(
   {
@@ -27,8 +27,19 @@ const shows = handleActions(
     [markShowAsVisited]: (state, {payload: showId}) => {
       return ({
         ...state,
-        // reversing twice to keep recently view at the bottom
+        // reversing twice to keep recently viewed at the bottom
         visited: reverse(uniq(reverse([...state.visited, showId])))
+      })
+    },
+    [toggleBookmark]: (state, {payload: showId}) => {
+      if (state.bookmarkedShowIds.includes(showId))
+        return ({
+          ...state,
+          bookmarkedShowIds: state.bookmarkedShowIds.filter(x => x !== showId)
+        });
+      return ({
+        ...state,
+        bookmarkedShowIds: reverse(uniq(reverse([...state.bookmarkedShowIds, showId])))
       })
     }
   },

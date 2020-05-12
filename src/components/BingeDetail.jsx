@@ -12,6 +12,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select/Select";
 import {Colors} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -36,7 +38,7 @@ export class BingeDetail extends Component<{ detail: any }> {
   };
 
   render() {
-    let {detail} = this.props;
+    let {detail, bookmark} = this.props;
 
     const {numberOfBingingHoursPerDay, numberOfEpisodesPerDay} = this.state;
     let runtimeInMinutes = this.state.dailyBingeSetting.unit === "hours" ?
@@ -52,6 +54,10 @@ export class BingeDetail extends Component<{ detail: any }> {
         <PosterContainerCol className={"col-sm-auto"}>
           <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>
           <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>
+          <BookmarkDesktop onClick={() => this.props.toggleBookmark(detail.pmbId)}>
+            {bookmark ? <StarIconStyled/> : <StarBorderIconStyled/>}
+            <BookmarkLabel>{bookmark ? "Remove bookmark" : "Bookmark"}</BookmarkLabel>
+          </BookmarkDesktop>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>
@@ -141,6 +147,24 @@ const PosterPortrait = styled.img`
    margin-left: 15px;
 `;
 
+const BookmarkDesktop = styled.div`
+   margin-left: 15px;
+   margin-top: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 3rem;
+   line-height: 3rem;
+   background-color: ${Colors.white};
+   color: ${Colors.darkGray};
+   //border: 2px solid ${Colors.gray};
+   cursor: pointer;
+   
+   &:hover {
+     color: ${Colors.black};   
+   }
+`;
+
 const PosterLandscape = styled.img`
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
@@ -185,4 +209,16 @@ const TimeSliderHint = styled.div`
 const DailyBingTime = styled.div`
   background-color: ${Colors.gray};
   text-align: center;
+`;
+
+const StarBorderIconStyled = styled(StarBorderIcon)`
+  margin: auto 5px;
+`;
+
+const StarIconStyled = styled(StarIcon)`
+  margin: auto 5px;
+`;
+
+const BookmarkLabel = styled.div`
+  
 `;

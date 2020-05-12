@@ -7,6 +7,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styled from 'styled-components';
 import {Colors} from "../utils/Constants";
 import {PopularShows} from "./PopularShows";
+import BingeDetailContainer from "../containers/BingeDetailContainer";
 
 class BingeDetailPage extends Component<{ popularShows: any }> {
 
@@ -44,7 +45,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
         </BackLink>
       </Header>
       <Content>
-        {bingeDetail && <BingeDetail detail={bingeDetail}/>}
+        {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}
         {showError && <HomePageError/>}
         {showLoader && <BingeDetailShimmer/>}
         {bingeDetail && popularShows.length !== 0 && <PopularShows shows={popularShows}/>}

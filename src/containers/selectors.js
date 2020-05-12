@@ -6,6 +6,8 @@ const getAllRecentlyVisitedShowIds = state => (state.shows.visited || []);
 
 const getShows = state => state.shows.allShows || [];
 
+const getBookmarkedShowIds = state => state.shows.bookmarkedShowIds || [];
+
 export const getPopularShowsFromState = createSelector(
   [getPopularShowIds, getShows], (popularShowIds, shows) =>
     shows.filter(x => popularShowIds.includes(x.pmbId))
@@ -26,3 +28,11 @@ export const getAllRecentlyVisitedShowsFromState = createSelector(
     return recentlyVisitedShowIds.map(x => shows.find(show => show.pmbId == x)).reverse();
   }
 );
+
+
+export const getBookmarkStatus = (showId) =>
+  createSelector(
+    [getBookmarkedShowIds], (bookmarkedShowIds) => {
+      return bookmarkedShowIds.includes(showId);
+    }
+  );

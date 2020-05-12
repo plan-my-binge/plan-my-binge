@@ -1,4 +1,4 @@
-import { REHYDRATE } from 'redux-persist'
+import { REHYDRATE } from 'redux-persist/constants'
 
 const INITIAL_STATE = { ready: false };
 

@@ -6,7 +6,7 @@ export const ShowList = ({shows}) => {
   return <>
     {shows.map(show =>
       <ShowItem
-        key={show._source.pmb_id}
-        detail={new BingeDetailModel(show._source)}/>)}
+        key={show.pmbId}
+        detail={show}/>)}
   </>;
 };

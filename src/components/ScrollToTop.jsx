@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 export const ScrollToTop =() => {
   const { pathname } = useLocation();
+  const history = useHistory()
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (history.action === "PUSH")
+      window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;

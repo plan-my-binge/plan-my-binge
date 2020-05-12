@@ -5,6 +5,7 @@ import {BingDetailPageWithRouter} from "./BingeDetailPage.jsx";
 import {ScrollToTop} from "./ScrollToTop.jsx";
 import {SearchPageWithRouter} from "./SearchPage.jsx";
 import HomePageContainer from "../containers/HomePageContainer";
+import BingeDetailPageContainer from "../containers/BingeDetailPage";
 
 export class BingePlanner extends Component {
 
@@ -17,7 +18,7 @@ export class BingePlanner extends Component {
 
             <Route path={"/binge/:pmbId"}>
               <ScrollToTop/>
-              <BingDetailPageWithRouter/>
+              <BingeDetailPageContainer/>
             </Route>
 
             <Route path={"/search"}>

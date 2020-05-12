@@ -12,7 +12,8 @@ import SearchIcon from '@material-ui/icons/Search';
 export class HomePage extends Component<{}> {
 
   componentDidMount(): void {
-    this.props.getPopularShows()
+    if (this.props.popularShows.length === 0)
+      this.props.getPopularShows()
   }
 
   render() {
@@ -31,7 +32,7 @@ export class HomePage extends Component<{}> {
         <span/>
       </SearchContainer>
 
-      {popularShows.length !== 0 && <BingeDetail detail={new BingeDetailModel(popularShows[0]._source)}/>}
+      {popularShows.length !== 0 && <BingeDetail detail={popularShows[0]}/>}
       {showError && <HomePageError/>}
       {showLoader && <BingeDetailShimmer/>}
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}

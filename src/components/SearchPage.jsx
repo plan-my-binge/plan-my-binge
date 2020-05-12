@@ -85,7 +85,7 @@ class SearchPage extends Component<{}> {
   }
 
   goBack() {
-    return () => this.props.history.length > 1 ?
+    return this.props.history.length > 1 ?
       this.props.history.goBack() :
       this.props.history.push("/");
   }

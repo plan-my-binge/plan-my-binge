@@ -1,52 +1,55 @@
-import React, {useEffect, useState} from "react";
-import {useParams, useLocation, useHistory, Link, withRouter} from "react-router-dom";
+import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import {BingeDetail} from "./BingeDetail.jsx";
-import {getShow, Url} from "../service/api";
 import {HomePageError} from "./HomePageError.jsx";
 import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
-import {BingeDetailModel} from "../data/BingeDetailModel";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styled from 'styled-components';
 import {Colors} from "../utils/Constants";
 import {PopularShows} from "./PopularShows";
-import {cachingApiRequest} from "../utils/apiUtils";
 
-const BingeDetailPage = () => {
+class BingeDetailPage extends Component<{ popularShows: any }> {
 
-  let {pmbId} = useParams();
-  let {data} = useLocation();
+  state = {
+    bingeDetail: null,
+    showError: false,
+    showLoader: !(Boolean(this.props.location.data))
+  };
 
-  let history = useHistory();
-
-  let [bingeDetail, setBingeDetail] = useState(null);
-  let [showError, setShowError] = useState(false);
-  let [showLoader, setShowLoader] = useState(!Boolean(data));
-  let request = cachingApiRequest();
-
-  let [popularShows, setPopularShows] = useState([]);
-
-  useEffect(() => {
-    if (!data) {
-      getShow(pmbId)
-        .then(response => setBingeDetail(new BingeDetailModel(response.data[0]._source)))
-        .catch(() => setShowError(true))
-        .finally(() => setShowLoader(false));
+  componentDidMount() {
+    if (!this.props.location.data) {
+      this.props.getShow(this.props.match.params.pmbId);
     }
-    request(Url.getPopularShows).then(data => setPopularShows(data))
-  }, []);
-  return <div>
 
-    <Header>
-    <BackLink onClick={() => history.goBack()}>
-      <ArrowBackIcon fontSize={"large"}/> Back
-    </BackLink>
-    </Header>
-    {(data || bingeDetail) && <BingeDetail detail={data || bingeDetail}/>}
-    {showError && <HomePageError/>}
-    {showLoader && <BingeDetailShimmer/>}
-    {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
-  </div>
-};
+    if (this.props.popularShows.length === 0) {
+      this.props.getPopularShows();
+    }
+  }
+
+  goBack() {
+    if (this.props.location.data) {
+      this.props.history.goBack()
+    } else this.props.history.push("/")
+  }
+
+  render() {
+
+    let {popularShows, showError, showLoader, shows, match, location} = this.props;
+    let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId);
+
+    return <div>
+      <Header>
+        <BackLink onClick={() => this.goBack()}>
+          <ArrowBackIcon fontSize={"large"}/> Back
+        </BackLink>
+      </Header>
+      {bingeDetail && <BingeDetail detail={bingeDetail}/>}
+      {showError && <HomePageError/>}
+      {showLoader && <BingeDetailShimmer/>}
+      {bingeDetail && popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+    </div>
+  }
+}
 
 export const BingDetailPageWithRouter = withRouter(BingeDetailPage);
 

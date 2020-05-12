@@ -8,12 +8,27 @@ import {register} from 'register-service-worker'
 
 import {Provider} from "react-redux";
 import rootReducer from "./reducers/rootReducer";
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import createSagaMiddleware from 'redux-saga'
+import showSaga from "./containers/showsSaga";
+
+const appOfflineConfig = {
+  ...offlineConfig, persistOptions: {
+    blacklist: ['showDetailPage']
+  }
+};
+
+const sagaMiddleware = createSagaMiddleware()
+
+const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 const store = configureStore({
   reducer: rootReducer,
-  enhancers: [offline(offlineConfig)]
+  enhancers: [offline(appOfflineConfig)],
+  middleware
 });
+
+sagaMiddleware.run(showSaga);
 
 ReactDOM.render(
   <Provider store={store}>

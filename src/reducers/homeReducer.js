@@ -1,12 +1,14 @@
 import {handleActions} from "redux-actions";
-import {showHomePageError, storePopularShows} from "../containers/actionCreater";
+import {setShowHomePageError, setShowHomePageLoader} from "../containers/actionCreater";
 
-const INITIAL_STATE = {popularShows: [], showError: false, showLoader: true};
+const INITIAL_STATE = {showError: false, showLoader: true};
 
 const home = handleActions(
   {
-    [storePopularShows] : (state, {payload : popularShows}) => ({...state, popularShows}),
-    [showHomePageError]: state => ({...state, error: true})
+    [setShowHomePageError]: (state, {payload}) => ({...state, showError: payload}),
+
+    [setShowHomePageLoader]: (state, {payload}) => ({...state, showLoader: payload})
+
   },
   INITIAL_STATE
 );

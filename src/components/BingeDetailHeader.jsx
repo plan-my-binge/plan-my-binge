@@ -3,9 +3,10 @@ import Col from "react-bootstrap/Col";
 import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
+import {BookmarkMobile} from "./BookmarkMobile";
 
 export const BingeDetailHeader = (props) => {
-  const {detail} = props;
+  const {detail, bookmark, pmbId, toggleBookmark} = props;
   let year = detail.startYear + (detail.endYear ? `-${detail.endYear}` : "");
   let genre = detail.genres;
   let hint = `${year} • imdb ${detail.averageRating} • ${genre}`;
@@ -13,7 +14,10 @@ export const BingeDetailHeader = (props) => {
   return <Row>
     <Col>
       <HeaderContainer>
-        <Header>{detail.primaryTitle}</Header>
+        <HeaderAndBookmark>
+          <Header>{detail.primaryTitle}</Header>
+          <BookmarkMobile flag={bookmark} pmbId={pmbId} toggleBookmark={toggleBookmark}/>
+        </HeaderAndBookmark>
         <HintContainer>
           <span>{hint}</span>
         </HintContainer>
@@ -25,8 +29,8 @@ export const BingeDetailHeader = (props) => {
 
 
 const Header = styled.h3`
-  margin-top: 15px;
   margin-bottom: 0;
+  text-align: left;
 `;
 const HintContainer = styled.div`
   color: ${Colors.darkGray};
@@ -36,3 +40,10 @@ const HintContainer = styled.div`
 
 const HeaderContainer = styled.div`
 `;
+
+const HeaderAndBookmark = styled.div`
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: space-between;
+`

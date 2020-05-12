@@ -8,7 +8,7 @@ export const NavOptions = [
     hint: "Calculate how much time you have spent watching TV Shows in your life",
   },
   {
-    name: "Favorites",
+    name: "Bookmarks",
   },
   {
     name: "Search",
@@ -22,4 +22,9 @@ export const Colors = {
   darkerGray: "#414041",
   white: "#FFFFFF",
   black: "#000000"
-}
+};
+
+export const Classes = {
+  showOnlyInMobile: "d-block d-md-none",
+  showOnlyInWeb: "d-none d-md-block"
+};

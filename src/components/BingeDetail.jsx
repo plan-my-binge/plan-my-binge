@@ -12,8 +12,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select/Select";
 import {Colors} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
+
+import {BookmarkWeb} from "./BookmarkWeb";
 
 export class BingeDetail extends Component<{ detail: any }> {
 
@@ -48,16 +48,18 @@ export class BingeDetail extends Component<{ detail: any }> {
     let numberOfDays = minutesToDays(runtimeInMinutes);
 
     return <Container>
-      <BingeDetailHeader detail={detail}/>
+      <BingeDetailHeader detail={detail}
+                         pmbId={detail.pmbId}
+                         bookmark={bookmark}
+                         toggleBookmark={() => this.props.toggleBookmark(detail.pmbId)}/>
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
           <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>
           <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>
-          <BookmarkDesktop onClick={() => this.props.toggleBookmark(detail.pmbId)}>
-            {bookmark ? <StarIconStyled/> : <StarBorderIconStyled/>}
-            <BookmarkLabel>{bookmark ? "Remove bookmark" : "Bookmark"}</BookmarkLabel>
-          </BookmarkDesktop>
+          <BookmarkWeb pmbId={detail.pmbId}
+                       flag={bookmark}
+                       toggleBookmark={this.props.toggleBookmark}/>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>
@@ -147,23 +149,6 @@ const PosterPortrait = styled.img`
    margin-left: 15px;
 `;
 
-const BookmarkDesktop = styled.div`
-   margin-left: 15px;
-   margin-top: 15px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 3rem;
-   line-height: 3rem;
-   background-color: ${Colors.white};
-   color: ${Colors.darkGray};
-   //border: 2px solid ${Colors.gray};
-   cursor: pointer;
-   
-   &:hover {
-     color: ${Colors.black};   
-   }
-`;
 
 const PosterLandscape = styled.img`
     width: 100%;
@@ -211,14 +196,3 @@ const DailyBingTime = styled.div`
   text-align: center;
 `;
 
-const StarBorderIconStyled = styled(StarBorderIcon)`
-  margin: auto 5px;
-`;
-
-const StarIconStyled = styled(StarIcon)`
-  margin: auto 5px;
-`;
-
-const BookmarkLabel = styled.div`
-  
-`;

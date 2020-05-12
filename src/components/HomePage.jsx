@@ -9,6 +9,8 @@ import {Link} from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import {RecentlyVisitedShows} from "./RecentlyVisitedShows";
 import BingeDetailContainer from "../containers/BingeDetailContainer";
+import {isEmpty} from "ramda";
+import {BookmarkedShows} from "./BookmarkedShows";
 
 export class HomePage extends Component<{}> {
 
@@ -18,8 +20,14 @@ export class HomePage extends Component<{}> {
   }
 
   render() {
-    let {popularShows, showError, showLoader, recentlyVisitedShows} = this.props;
+    let {popularShows, showError, showLoader, recentlyVisitedShows, bookmarkedShows} = this.props;
 
+    let highlightedShow =
+      !isEmpty(bookmarkedShows) ? bookmarkedShows[0] :
+        (!isEmpty(recentlyVisitedShows) ? recentlyVisitedShows[0] :
+          (!isEmpty(popularShows) ? popularShows[0] : null));
+
+    let recentlyVisitedShowsAvailable = recentlyVisitedShows.length !== 0;
     return <>
       <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
       <HeaderMessage>
@@ -33,14 +41,14 @@ export class HomePage extends Component<{}> {
         <span/>
       </SearchContainer>
 
-      {recentlyVisitedShows.length !== 0 && <BingeDetailContainer detail={recentlyVisitedShows[0]}/>}
+      {highlightedShow && <BingeDetailContainer detail={highlightedShow}/>}
 
       {/*if recently view is empty fetch and show popular shows*/}
-      {recentlyVisitedShows.length === 0 && popularShows.length !== 0 && <BingeDetailContainer detail={popularShows[0]}/>}
-      {recentlyVisitedShows.length === 0 && showError && <HomePageError/>}
-      {recentlyVisitedShows.length === 0 && showLoader && <BingeDetailShimmer/>}
+      {!highlightedShow && showError && <HomePageError/>}
+      {!highlightedShow && showLoader && <BingeDetailShimmer/>}
 
-      {recentlyVisitedShows.length !== 0 && <RecentlyVisitedShows shows={recentlyVisitedShows}/>}
+      {!isEmpty(bookmarkedShows) && <BookmarkedShows shows={bookmarkedShows}/>}
+      {recentlyVisitedShowsAvailable && <RecentlyVisitedShows shows={recentlyVisitedShows}/>}
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
     </>
   }

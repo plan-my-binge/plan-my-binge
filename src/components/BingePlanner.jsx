@@ -6,6 +6,7 @@ import HomePageContainer from "../containers/HomePageContainer";
 import BingeDetailPageContainer from "../containers/BingeDetailPageContainer";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import RecentlyVisitedShowsPageContainer from "../containers/RecentlyVisitedShowsPageContainer";
+import BookmarkedShowsPageContainer from "../containers/BookmarkedShowsPageContainer";
 
 export class BingePlanner extends Component {
 
@@ -29,6 +30,11 @@ export class BingePlanner extends Component {
             <Route path={"/recent"}>
               <ScrollToTop/>
               <RecentlyVisitedShowsPageContainer/>
+            </Route>
+
+            <Route path={"/bookmarks"}>
+              <ScrollToTop/>
+              <BookmarkedShowsPageContainer/>
             </Route>
 
             <Route path={"/"}>

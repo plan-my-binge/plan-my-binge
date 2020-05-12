@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {BingDetailPageWithRouter} from "./BingeDetailPage.jsx";
 import {ScrollToTop} from "./ScrollToTop.jsx";
-import {SearchPageWithRouter} from "./SearchPage.jsx";
 import HomePageContainer from "../containers/HomePageContainer";
 import BingeDetailPageContainer from "../containers/BingeDetailPage";
+import SearchPageContainer from "../containers/SearchPageContainer";
 
 export class BingePlanner extends Component {
 
@@ -23,7 +22,7 @@ export class BingePlanner extends Component {
 
             <Route path={"/search"}>
               <ScrollToTop/>
-              <SearchPageWithRouter/>
+              <SearchPageContainer/>
             </Route>
 
             <Route path={"/"}>

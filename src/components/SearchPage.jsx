@@ -18,10 +18,7 @@ class SearchPage extends Component<{}> {
     showLoader: false,
     searchResults: [],
     searchFailed: false,
-    popularShows: []
   };
-
-  request = cachingApiRequest();
 
   componentDidMount() {
     if (this.props.location.search) {
@@ -30,8 +27,6 @@ class SearchPage extends Component<{}> {
       this.setState({searchQuery: searchQuery});
       this.handleInputChange(searchQuery)
     }
-
-    this.request(Url.getPopularShows).then(data => this.setState({popularShows: data}))
   }
 
   searchShow = createSearchQuery();
@@ -53,14 +48,15 @@ class SearchPage extends Component<{}> {
   };
 
   render() {
-    const {showLoader, searchResults, searchQuery, popularShows} = this.state;
+    const {showLoader, searchResults, searchQuery} = this.state;
+    const {popularShows} = this.props;
 
     return <div>
       <SearchHeader>
-        <IconContainer onClick={this.goBack()}>
+        <IconContainer onClick={() => this.props.history.goBack()}>
           <ArrowBackIcon fontSize={"large"}/>
         </IconContainer>
-        <h4> Search TV Show to calculate binge time</h4>
+        <h4> Search TV Show</h4>
       </SearchHeader>
       <SearchContainer>
         <SearchIconStyled fontSize={"large"}/>
@@ -84,11 +80,6 @@ class SearchPage extends Component<{}> {
     </div>
   }
 
-  goBack() {
-    return this.props.history.length > 1 ?
-      this.props.history.goBack() :
-      this.props.history.push("/");
-  }
 }
 
 export const SearchPageWithRouter = withRouter(SearchPage);

@@ -1,11 +1,12 @@
 import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
+import {BingeDetailModel} from "../data/BingeDetailModel";
 
 export const SearchResults = ({searchResults}) => {
   return <Container>
     {searchResults.length !== 0 && <Heading>Search results</Heading>}
-    <ShowList shows={searchResults}/>
+    <ShowList shows={searchResults.map(show => BingeDetailModel(show._source))}/>
 
   </Container>
 };

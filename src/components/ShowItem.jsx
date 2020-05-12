@@ -4,16 +4,18 @@ import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
 
-export const ShowItem = ({detail}) => {
+export const ShowItem = ({detail, markShowAsVisited}) => {
   let runtime = toDaysHoursAndMinutes(detail.runtime);
   let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
   let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
   let minutesDisplay = `${runtime.minutes}m`;
 
-  return <Link to={{
-    pathname: "/binge/" + detail.pmbId,
-    data: detail
-  }}>
+  return <Link
+    onClick={() => markShowAsVisited(detail.pmbId)}
+    to={{
+      pathname: "/binge/" + detail.pmbId,
+      data: detail
+    }}>
     <Item>
       <Poster src={detail.portraitPoster}/>
       <Title>{detail.primaryTitle}</Title>

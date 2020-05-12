@@ -1,6 +1,5 @@
 import logo from "../images/logo.png";
 import {BingeDetail} from "./BingeDetail";
-import {BingeDetailModel} from "../data/BingeDetailModel";
 import {HomePageError} from "./HomePageError";
 import {BingeDetailShimmer} from "./BingeDetailShimmer";
 import {PopularShows} from "./PopularShows";
@@ -8,6 +7,7 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
+import {RecentlyVisitedShows} from "./RecentlyVisitedShows";
 
 export class HomePage extends Component<{}> {
 
@@ -17,7 +17,7 @@ export class HomePage extends Component<{}> {
   }
 
   render() {
-    let {popularShows, showError, showLoader} = this.props;
+    let {popularShows, showError, showLoader, recentlyVisitedShows} = this.props;
 
     return <>
       <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
@@ -32,9 +32,14 @@ export class HomePage extends Component<{}> {
         <span/>
       </SearchContainer>
 
-      {popularShows.length !== 0 && <BingeDetail detail={popularShows[0]}/>}
-      {showError && <HomePageError/>}
-      {showLoader && <BingeDetailShimmer/>}
+      {recentlyVisitedShows.length !== 0 && <BingeDetail detail={recentlyVisitedShows[0]}/>}
+
+      {/*if recently view is empty fetch and show popular shows*/}
+      {recentlyVisitedShows.length === 0 && popularShows.length !== 0 && <BingeDetail detail={popularShows[0]}/>}
+      {recentlyVisitedShows.length === 0 && showError && <HomePageError/>}
+      {recentlyVisitedShows.length === 0 && showLoader && <BingeDetailShimmer/>}
+
+      {recentlyVisitedShows.length !== 0 && <RecentlyVisitedShows shows={recentlyVisitedShows}/>}
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
     </>
   }

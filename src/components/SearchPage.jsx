@@ -37,8 +37,8 @@ class SearchPage extends Component<{}> {
   handleInputChange = (value) => {
     this.setState({searchQuery: value, showLoader: true});
     this.props.history.replace({
-      pathname : '/search',
-      search   : '?q=' + value
+      pathname: '/search',
+      search: '?q=' + value
     });
 
     this.searchShow(value)
@@ -75,9 +75,9 @@ class SearchPage extends Component<{}> {
       {showLoader && <ShowListShimmer/>}
 
       {(!showLoader) &&
-        searchQuery !== "" &&
-        searchResults.length === 0 &&
-        <NoResultsFound>No results found :(</NoResultsFound>}
+      searchQuery !== "" &&
+      searchResults.length === 0 &&
+      <NoResultsFound>No results found :(</NoResultsFound>}
 
       <SearchResults searchResults={searchResults}/>
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
@@ -90,9 +90,17 @@ class SearchPage extends Component<{}> {
 
 export const SearchPageWithRouter = withRouter(SearchPage);
 const SearchHeader = styled.div`
+  border-bottom: 1px solid ${Colors.gray};
   display: flex;
   flex-direction: row;
+  width: 100%;
   font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background-color: ${Colors.white};
 `;
 
 const IconContainer = styled.a`
@@ -117,7 +125,7 @@ const SearchContainer = styled.div`
   align-items: center;
   
   height: 50px;
-  margin-top: 30px;
+  margin-top: 50px;
 `;
 
 const Input = styled.input`

@@ -1,11 +1,10 @@
-import {ShowItem} from "./ShowItem.jsx";
-import {BingeDetailModel} from "../data/BingeDetailModel";
 import React from "react";
+import ShowItemContainer from "../containers/ShowItemContainer";
 
 export const ShowList = ({shows}) => {
   return <>
     {shows.map(show =>
-      <ShowItem
+      <ShowItemContainer
         key={show.pmbId}
         detail={show}/>)}
   </>;

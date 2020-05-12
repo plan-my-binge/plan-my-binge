@@ -13,3 +13,6 @@ export const setShowHomePageLoader = createAction('SHOW_HOME_PAGE_LOADER');
 
 export const setShowDetailPageError = createAction('SHOW_DETAIL_PAGE_ERROR');
 export const setShowDetailPageLoader = createAction('SHOW_DETAIL_PAGE_LOADER');
+
+export const markShowAsVisited = createAction('MARK_SHOW_AS_VISITED');
+

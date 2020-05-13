@@ -1,7 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {
   getPopularShows,
-  getShow,
+  getShow, markShowAsVisited,
   setShowDetailPageError,
   setShowDetailPageLoader, setShowHomePageError, setShowHomePageLoader,
   storePopularShows,
@@ -15,6 +15,7 @@ const fetchShow = function*(action) {
     yield put(setShowDetailPageLoader(true));
     const response = yield call(Api.getShow, action.payload);
     yield put(storeShow(BingeDetailModel(response.data[0]._source)));
+    yield put(markShowAsVisited(response.data[0]._source.pmb_id));
   } catch (e) {
     yield put(setShowDetailPageError(true));
   }

@@ -4,13 +4,12 @@ import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
 import {BookmarkMobile} from "./BookmarkMobile";
+import ImdbIcon from "../icons/ImdbIcon";
 
 export const BingeDetailHeader = (props) => {
   const {detail, bookmark, pmbId, toggleBookmark} = props;
   let year = detail.startYear + (detail.endYear ? `-${detail.endYear}` : "");
-  let genre = detail.genres;
-  let hint = `${year} • imdb ${detail.averageRating} • ${genre}`;
-
+  let genre = detail.genres.replace(/,/g, ", ");
   return <Row>
     <Col>
       <HeaderContainer>
@@ -19,7 +18,7 @@ export const BingeDetailHeader = (props) => {
           <BookmarkMobile flag={bookmark} pmbId={pmbId} toggleBookmark={toggleBookmark}/>
         </HeaderAndBookmark>
         <HintContainer>
-          <span>{hint}</span>
+          <Hint>{`${year} • `} <ImdbIcon/>{` ${detail.averageRating} • ${genre}`}</Hint>
         </HintContainer>
       </HeaderContainer>
     </Col>
@@ -27,8 +26,11 @@ export const BingeDetailHeader = (props) => {
 
 }
 
-
-const Header = styled.h3`
+const Hint = styled.span`
+  display: flex;
+  align-items: center;
+`;
+const Header = styled.h4`
   margin-bottom: 0;
   text-align: left;
 `;

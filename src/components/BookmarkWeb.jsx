@@ -21,7 +21,7 @@ const StarIconStyled = styled(StarIcon)`
 `;
 
 const BookmarkLabel = styled.div`
-  
+  font-weight: 300;
 `;
 
 const Container = styled.div`

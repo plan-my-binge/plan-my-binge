@@ -31,7 +31,7 @@ export class HomePage extends Component<{}> {
     return <>
       <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
       <HeaderMessage>
-        <h4>Find out How long will it take to watch all episodes of any TV Show</h4>
+        <h4>Find out how long it will take to watch all episodes of any TV Show</h4>
       </HeaderMessage>
       <SearchContainer>
         <SearchIcon fontSize={"large"}/>
@@ -59,7 +59,6 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
   height: 50px;
   margin-top: 30px;
 `;
@@ -104,4 +103,5 @@ const Logo = styled.img`
 const SearchLink = styled(Link)`
   width: 100%;
   height: 50px;
+  
 `;

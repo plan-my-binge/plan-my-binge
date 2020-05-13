@@ -1,13 +1,15 @@
 import StarIcon from '@material-ui/icons/Star';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
 export const NavOptions = [
   {
     name: "Binge Planner",
     hint: "Find out how long it takes to watch all episodes of any TV Show",
     link: "/",
-    icon: HomeIcon
+    icon: HomeOutlinedIcon
   },
   // {
   //   name: "Binge Tracker",
@@ -16,7 +18,7 @@ export const NavOptions = [
   {
     name: "Bookmarks",
     link: "/bookmarks",
-    icon: StarIcon
+    icon: StarBorderOutlinedIcon
   },
   {
     name: "Search",
@@ -31,7 +33,8 @@ export const Colors = {
   darkGray: "#808080",
   darkerGray: "#414041",
   white: "#FFFFFF",
-  black: "#000000"
+  black: "#000000",
+  darkCyan: "#009688"
 };
 
 export const Classes = {

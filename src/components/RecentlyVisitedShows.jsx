@@ -8,14 +8,14 @@ import {Colors} from "../utils/Constants";
 export const RecentlyVisitedShows = ({shows}) => {
   return <Container>
     <StyledLink to={"/recent"}>
-      <Heading>Recently Viewed <ArrowForwardIcon fontSize={"large"}/></Heading>
+      <Heading>Recently Viewed <ArrowForwardIcon fontSize={"3rem"}/></Heading>
     </StyledLink>
     <ShowList shows={shows}/>
   </Container>
 };
 
-const Heading = styled.h4`
-  padding: 5px;
+const Heading = styled.h5`
+  padding: 5px 5px 5px 0;
 `;
 const Container = styled.div`
   clear: both;

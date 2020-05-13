@@ -3,13 +3,15 @@ import * as R from "ramda";
 import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
-import {withRouter, useHistory} from "react-router-dom";
+import {withRouter, useHistory, useLocation} from "react-router-dom";
 
 function BottomNavBar(props: Props) {
   const history = useHistory();
+  const {pathname} = useLocation();
+  console.log(pathname)
   return <BottomBar className={"d-block d-lg-none"}>
 
-    {!props.inputFocused && <BarContainer>
+    {!pathname.startsWith("/search") && <BarContainer>
       {NavOptions.map(option => {
         let selectionClassName = R.ifElse(R.equals, () => "selection", () => "")(option, props.selection);
         return <NavItem key={option.name}
@@ -59,8 +61,8 @@ const NavItem = styled.div`
   color: ${Colors.darkGray};
   
   &.selection {
-    background-color: ${Colors.darkGray};
-    color: ${Colors.white};
+    background-color: ${Colors.white};
+    color: ${Colors.black};
   }
   
   :last-of-type {

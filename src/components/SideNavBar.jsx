@@ -11,7 +11,7 @@ const SideNavBar = (props: Props) => {
   const history = useHistory();
 
   return <SideBar lg={3} className={"d-none d-lg-block"}>
-    <Logo src={logo}/>
+    <Logo onClick={() => history.push("/")} src={logo}/>
 
     {NavOptions.map(option => {
       let selectionClassName = R.ifElse(R.equals, () => "selection", () => "")(option, props.selection);
@@ -23,7 +23,7 @@ const SideNavBar = (props: Props) => {
                    return props.onNavChange(option);
                  }}>
           <NavHeader>
-            <option.icon style={{color: Colors.darkGray, margin: 5}}/>{option.name.toUpperCase()}
+            <option.icon style={{color: Colors.black, marginRight: 10}} />{option.name.toUpperCase()}
           </NavHeader>
           <NavHint>{option.hint}</NavHint>
         </NavItem>);
@@ -43,7 +43,12 @@ const SideBar = styled(Col)`
 
 const Logo = styled.img`
   max-width: 100%;
-  padding: 20px
+  padding: 20px;
+  cursor: pointer;
+  
+  &:hover {
+    filter: drop-shadow(2px 2px 2px red);
+  }
 `;
 
 const NavHeader = styled.div`

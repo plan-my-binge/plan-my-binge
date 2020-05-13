@@ -66,6 +66,7 @@ class SearchPage extends Component<{}> {
       </SearchHeader>
       <SearchContainer>
         <SearchIconStyled fontSize={"large"}/>
+
         <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""} autoFocus
                value={searchQuery}
                onFocus={() => this.props.inputFocused(true)}
@@ -127,7 +128,7 @@ const SearchContainer = styled.div`
   align-items: center;
   
   height: 50px;
-  margin-top: 50px;
+  margin-top: 66px;
 `;
 
 const Input = styled.input`
@@ -138,11 +139,12 @@ const Input = styled.input`
   
   ~ span {
     height: 2px;
-    background-color: #27ad8a;
+    background-color: red;
   }
   
   &:focus span {
     width: 100%;
+    height: 4px;
     transition: 0.5s;
   }
 `;

@@ -9,8 +9,9 @@ export const PopularShows = ({shows}) => {
   </Container>
 };
 
-const Heading = styled.h4`
-  padding: 5px;
+const Heading = styled.h5`
+  padding: 5px 5px 5px 0;
+  
 `;
 const Container = styled.div`
   clear: both;

@@ -12,14 +12,18 @@ export const ShowItem = ({detail, markShowAsVisited}) => {
   let minutesDisplay = `${runtime.minutes}m`;
 
   return <Item onClick={() => markShowAsVisited(detail.pmbId)}
-          to={{
-            pathname: "/binge/" + detail.pmbId,
-            data: detail
-          }}>
-      <Poster src={detail.portraitPoster}/>
-      <Runtime><AccessTimeIcon fontSize={"small"} style={{paddingRight: 4, marginBottom: 2}}/>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`}</Runtime>
-      <Title>{detail.primaryTitle}</Title>
-    </Item>
+               to={{
+                 pathname: "/binge/" + detail.pmbId,
+                 data: detail
+               }}>
+    <Poster src={detail.portraitPoster}/>
+    <Runtime>
+      {detail.runtime !== 0 && <AccessTimeIcon fontSize={"small"}
+                                         style={{paddingRight: 4, marginBottom: 2}}/>}
+      {detail.runtime !== 0 && `${daysDisplay}${hoursDisplay}${minutesDisplay}`}
+    </Runtime>
+    <Title>{detail.primaryTitle}</Title>
+  </Item>
 };
 
 const Poster = styled.img`

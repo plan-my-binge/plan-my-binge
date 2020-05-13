@@ -4,21 +4,27 @@ import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
 import {BookmarkMobile} from "./BookmarkMobile";
-import ImdbIcon from "../icons/ImdbIcon";
+import {BookmarkWeb} from "./BookmarkWeb";
 
 export const BingeDetailHeader = (props) => {
   const {detail, bookmark, pmbId, toggleBookmark} = props;
-  let year = detail.startYear + (detail.endYear ? `-${detail.endYear}` : "");
-  let genre = detail.genres.replace(/,/g, ", ");
+  let year = [detail.startYear, detail.endYear].filter(Boolean).join("-");
+  let rating = `IMDB ${detail.averageRating}`;
+  let genre = (detail.genres || "").replace(/,/g, ", ");
+
+  let hint = [year, rating, genre].filter(Boolean).join(" • ")
   return <Row>
     <Col>
       <HeaderContainer>
         <HeaderAndBookmark>
           <Header>{detail.primaryTitle}</Header>
           <BookmarkMobile flag={bookmark} pmbId={pmbId} toggleBookmark={toggleBookmark}/>
+          <BookmarkWeb pmbId={pmbId}
+                       flag={bookmark}
+                       toggleBookmark={toggleBookmark}/>
         </HeaderAndBookmark>
         <HintContainer>
-          <Hint>{`${year} • `} <ImdbIcon/>{` ${detail.averageRating} • ${genre}`}</Hint>
+          <Hint>{hint}</Hint>
         </HintContainer>
       </HeaderContainer>
     </Col>

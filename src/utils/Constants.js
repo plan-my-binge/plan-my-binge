@@ -59,3 +59,5 @@ export const Classes = {
 
 
 export const cssForPhoneAndTablet = `@media (max-width: 768px)`;
+
+export const isPhoneOrTablet = window.matchMedia("(max-width: 768px)").matches;

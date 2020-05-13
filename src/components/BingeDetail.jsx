@@ -10,7 +10,7 @@ import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select/Select";
-import {Colors} from "../utils/Constants";
+import {Colors, isPhoneOrTablet} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
 
 import {BookmarkWeb} from "./BookmarkWeb";
@@ -47,6 +47,12 @@ export class BingeDetail extends Component<{ detail: any }> {
 
     let numberOfDays = minutesToDays(runtimeInMinutes);
 
+    let landscapePosterNotAvailableInPhoneButPortraitAvailable =
+      isPhoneOrTablet && !detail.landscapePoster && detail.portraitPoster;
+
+    let portraitPosterNotAvailableInWebButLandscapeAvailable =
+      !isPhoneOrTablet && detail.landscapePoster && !detail.portraitPoster;
+
     return <Container>
       <BingeDetailHeader detail={detail}
                          pmbId={detail.pmbId}
@@ -55,20 +61,27 @@ export class BingeDetail extends Component<{ detail: any }> {
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>
-          <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>
-          <BookmarkWeb pmbId={detail.pmbId}
-                       flag={bookmark}
-                       toggleBookmark={this.props.toggleBookmark}/>
+          {detail.landscapePoster &&
+          <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>}
+
+          {landscapePosterNotAvailableInPhoneButPortraitAvailable &&
+          <PosterPortrait src={detail.portraitPoster}/>}
+
+          {portraitPosterNotAvailableInWebButLandscapeAvailable &&
+          <PosterLandscapeForWeb src={detail.landscapePoster}/>}
+
+          {detail.portraitPoster &&
+          <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>}
+
         </PosterContainerCol>
 
         <BingeTimeContainerCol>
           <BingeStats detail={detail}/>
-          <BingeTimeAndCalenderContainer>
+          {runtimeInMinutes !== 0 && <BingeTimeAndCalenderContainer>
             <BingeTime runtime={runtimeInMinutes} title={detail.title}/>
             {this.getDailyBingeTime()}
             <BingeCalendar days={numberOfDays} title={detail.title}/>
-          </BingeTimeAndCalenderContainer>
+          </BingeTimeAndCalenderContainer>}
         </BingeTimeContainerCol>
         <Col>
           <SeasonWiseStat detail={detail}/>
@@ -153,9 +166,16 @@ const PosterPortrait = styled.img`
 
 const PosterLandscape = styled.img`
     width: 100%;
-    width: -moz-available;          /* WebKit-based browsers will ignore this. */
-    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: -moz-available;
+    width: -webkit-fill-available;
     width: fill-available;
+    margin-right: 15px;
+    margin-left: 15px;
+`;
+
+
+const PosterLandscapeForWeb = styled.img`
+    width: 16rem;
     margin-right: 15px;
     margin-left: 15px;
 `;

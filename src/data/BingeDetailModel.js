@@ -11,8 +11,10 @@ export const BingeDetailModel = (bingeDetail) => ({
 
   genres: bingeDetail.genres,
 
-  landscapePoster: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + bingeDetail.landscapePoster,
-  portraitPoster: "https://image.tmdb.org/t/p/w342" + bingeDetail.portraitPoster,
+  landscapePoster: bingeDetail.landscapePoster ?
+    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + bingeDetail.landscapePoster : null,
+  portraitPoster: bingeDetail.portraitPoster ?
+    "https://image.tmdb.org/t/p/w342" + bingeDetail.portraitPoster : null,
 
   perEpisodeRuntime: bingeDetail.perEpisodeRuntime,
 

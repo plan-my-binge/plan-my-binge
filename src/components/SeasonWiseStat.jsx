@@ -10,16 +10,24 @@ export class SeasonWiseStat extends Component<{}> {
 
   constructor(props: P, context: any) {
     super(props, context);
-    this.state = {
-      page: 1,
-      pageSize: 5
+    this.state = this.defaultState;
+  }
+
+  defaultState = {
+    page: 1,
+    pageSize: 5
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.detail.pmbId !== this.props.detail.pmbId) {
+      this.setState(this.defaultState)
     }
   }
 
   render() {
     let {detail} = this.props;
     let {page, pageSize} = this.state;
-    let totalNumberOfPages = Math.floor(detail.seasons.length / 6) + 1;
+    let totalNumberOfPages = Math.floor(detail.seasons.length / this.state.pageSize) + 1;
 
     let leftArrowActive = (page !== 1) * 1;
     let rightArrowActive = (page < totalNumberOfPages) * 1;
@@ -44,23 +52,26 @@ export class SeasonWiseStat extends Component<{}> {
           return <StatBlock key={index}>
             <SeasonNumber>Season {(index + 1) + ((page - 1) * pageSize)}</SeasonNumber>
             <NumberOfEpisodes>{numberOfEpisodes} Episodes</NumberOfEpisodes>
-            <Runtime>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`} Runtime</Runtime>
+            {season.seasonRuntime && <Runtime>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`} Runtime</Runtime>}
           </StatBlock>
         })}
       </Container>
-      <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasons.length)} of
-        total {detail.seasons.length} seasons</PaginationHint>
-      <Pagination>
-        <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
-          <LeftArrow isactive={leftArrowActive}/>
-          Prev
-        </ButtonStyled>
 
-        <ButtonStyled disabled={!rightArrowActive} onClick={() => paginate(1)}>
-          Next
-          <RightArrow isactive={rightArrowActive}/>
-        </ButtonStyled>
-      </Pagination>
+      {detail.seasons.length > this.state.pageSize && <>
+        <PaginationHint>Showing seasons {offset + 1} - {Math.min(limit, detail.seasons.length)} of
+          total {detail.seasons.length} seasons</PaginationHint>
+        <Pagination>
+          <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
+            <LeftArrow isactive={leftArrowActive}/>
+            Prev
+          </ButtonStyled>
+
+          <ButtonStyled disabled={!rightArrowActive} onClick={() => paginate(1)}>
+            Next
+            <RightArrow isactive={rightArrowActive}/>
+          </ButtonStyled>
+        </Pagination>
+      </>}
     </>
   }
 }

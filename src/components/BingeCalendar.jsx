@@ -7,7 +7,6 @@ import Col from "react-bootstrap/Col";
 
 
 export const BingeCalendar = ({days}) => {
-  days = days || 1;
 
   let today = moment();
   let completionDate = moment().add(days, 'day');
@@ -20,6 +19,8 @@ export const BingeCalendar = ({days}) => {
 
   let totalWeeks = completionWeek.week() - currentWeek.week() + 1;
 
+  console.debug(today, completionDate, currentWeek, nextWeek, completionWeek, penultimateWeek, totalWeeks);
+
   return <Container>
     <Month>
       {toUpper(today.format("MMMM"))}
@@ -30,11 +31,13 @@ export const BingeCalendar = ({days}) => {
     {getWeekCalendar(nextWeek, completionDate)}
     {totalWeeks > 4 && <Hint> ••• {totalWeeks - 4} weeks hidden ••• </Hint>}
 
+
+
+    {totalWeeks === 3 && getWeekCalendar(completionWeek, completionDate)}
+    {totalWeeks > 3 && getWeekCalendar(penultimateWeek, completionDate)}
+    {totalWeeks >= 4 && getWeekCalendar(completionWeek, completionDate)}
     {moment().month() !== completionDate.month() &&
     <Month>{toUpper(completionDate.format('MMMM'))}</Month>}
-
-    {totalWeeks >= 3 && getWeekCalendar(penultimateWeek, completionDate)}
-    {totalWeeks >= 4 && getWeekCalendar(completionWeek, completionDate)}
   </Container>
 };
 
@@ -61,16 +64,19 @@ const getWeekCalendar = (startOfWeek, completionDate) => {
   return <Week>
     {
       range(0, 7).map(i => {
-        let date = dateOfWeek(i).date();
+        let date = dateOfWeek(i);
+        let isToday = moment().isSame(date, 'day');
+        let isCompletionDate = moment(completionDate).isSame(date, 'day');
 
-        let isToday = moment().isSame(dateOfWeek(i), 'day');
-        let isCompletionDate = moment(completionDate).isSame(dateOfWeek(i), 'day');
-
-        return isToday ?
-          <StartOrEndDate key={i} active={isActive(dateOfWeek(i))}>TODAY</StartOrEndDate> :
-          isCompletionDate ?
-            <StartOrEndDate key={i} active={isActive(dateOfWeek(i))}>END</StartOrEndDate> :
-            <Date key={i} active={isActive(dateOfWeek(i))}>{date}</Date>
+        if (isToday && isCompletionDate) {
+          return <Date key={i} active={isActive(date)}>{date.date()}</Date>
+        } else if (isToday) {
+          return <StartOrEndDate key={i} active={isActive(date)}>TODAY</StartOrEndDate>
+        } else if (isCompletionDate) {
+          return <StartOrEndDate key={i} active={isActive(date)}>END</StartOrEndDate>
+        } else {
+          return <Date key={i} active={isActive(date)}>{date.date()}</Date>
+        }
       })
     }
   </Week>

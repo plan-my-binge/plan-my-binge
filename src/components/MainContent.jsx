@@ -16,4 +16,5 @@ export function MainContent() {
 const Content = styled(Col)`
   float: right;
   margin-bottom: 100px;
+  padding: 0;
 `;

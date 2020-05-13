@@ -43,7 +43,6 @@ const StyledContainer = styled.div`
   line-height: 1.6;
   font-size: 18px;
   
-  margin-top: 15px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

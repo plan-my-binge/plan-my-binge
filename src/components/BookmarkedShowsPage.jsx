@@ -1,20 +1,17 @@
 import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
-import {Colors} from "../utils/Constants";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
 import {withRouter, useHistory} from "react-router-dom";
+import {AppHeader} from "./AppHeader";
 
 const BookmarkedShowPage = ({bookmarkedShows}) => {
 
   const history = useHistory();
 
   return <Container>
-    <Header>
-      <BackLink onClick={() => history.goBack()}>
-        <ArrowBackIcon fontSize={"large"}/> Bookmarked Shows
-      </BackLink>
-    </Header>
+    <AppHeader history={history} title={"Bookmarked Shows"}/>
+    <Header> Bookmarked Shows</Header>
     <ShowListStyled>
       <ShowList shows={bookmarkedShows}/>
     </ShowListStyled>
@@ -25,19 +22,16 @@ const BookmarkedShowPage = ({bookmarkedShows}) => {
 export const BookmarkedShowsPageWithRouter = withRouter(BookmarkedShowPage)
 
 const Container = styled.div`
-  margin: 10px;
   clear: both;
+  width: 100%;
 `;
 
-const Header = styled.div`
-  border-bottom: 1px solid ${Colors.gray};
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  background-color: ${Colors.white};
+const Header = styled.h4`
+  padding: 20px;
+  margin: 0;
+  ${cssForPhoneAndTablet} {
+    text-align: center;
+  }
 `;
 
 const BackLink = styled.a`
@@ -51,5 +45,5 @@ const BackLink = styled.a`
 `;
 
 const ShowListStyled = styled.div`
-  margin: 60px 20px 20px;
+  margin: 20px;
 `;

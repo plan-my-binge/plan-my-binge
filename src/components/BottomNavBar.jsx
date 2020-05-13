@@ -1,5 +1,4 @@
-import {Colors, NavOptions} from "../utils/Constants";
-import * as R from "ramda";
+import {Classes, Colors, NavOptions} from "../utils/Constants";
 import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
@@ -8,19 +7,21 @@ import {withRouter, useHistory, useLocation} from "react-router-dom";
 function BottomNavBar(props: Props) {
   const history = useHistory();
   const {pathname} = useLocation();
-  console.log(pathname)
-  return <BottomBar className={"d-block d-lg-none"}>
 
-    {!pathname.startsWith("/search") && <BarContainer>
+  let searchPageSelected = pathname.startsWith("/search");
+
+  return <BottomBar className={Classes.showInSmallerScreen}>
+
+    {!searchPageSelected && <BarContainer>
       {NavOptions.map(option => {
-        let selectionClassName = R.ifElse(R.equals, () => "selection", () => "")(option, props.selection);
+        let className = pathname === option.link ? "selection" : "";
         return <NavItem key={option.name}
                         onClick={() => {
                           history.push(option.link);
                           return props.onNavChange(option);
                         }}
-                        className={selectionClassName}
-        >{<option.icon fontSize={"1rem"}/>}{option.name}</NavItem>;
+                        className={className}
+        >{<option.icon fontSize={"1rem"}/>}{option.shortAlias}</NavItem>;
       })}
     </BarContainer>}
   </BottomBar>;
@@ -62,7 +63,7 @@ const NavItem = styled.div`
   
   &.selection {
     background-color: ${Colors.white};
-    color: ${Colors.black};
+    color: ${Colors.darkCyan};
   }
   
   :last-of-type {

@@ -4,11 +4,11 @@ import styled from "styled-components";
 import {withRouter} from "react-router-dom";
 import {Colors} from "../utils/Constants";
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {createSearchQuery} from "../utils/apiUtils";
 import axios from "axios";
 import {ShowListShimmer} from "./ShowListShimmer";
 import {PopularShows} from "./PopularShows";
+import {AppHeader} from "./AppHeader";
 
 class SearchPage extends Component<{}> {
 
@@ -58,12 +58,7 @@ class SearchPage extends Component<{}> {
     const {popularShows} = this.props;
 
     return <div>
-      <SearchHeader>
-        <IconContainer onClick={() => this.props.history.goBack()}>
-          <ArrowBackIcon fontSize={"large"}/>
-        </IconContainer>
-        <h4> Search TV Show</h4>
-      </SearchHeader>
+      <AppHeader history={this.props.history} title={"Search TV Shows"}/>
       <SearchContainer>
         <SearchIconStyled fontSize={"large"}/>
 
@@ -128,7 +123,7 @@ const SearchContainer = styled.div`
   align-items: center;
   
   height: 50px;
-  margin-top: 66px;
+  margin: 30px 20px 20px;
 `;
 
 const Input = styled.input`

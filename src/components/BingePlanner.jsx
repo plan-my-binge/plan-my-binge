@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {ScrollToTop} from "./ScrollToTop.jsx";
 import HomePageContainer from "../containers/HomePageContainer";
 import BingeDetailPageContainer from "../containers/BingeDetailPageContainer";
@@ -49,5 +49,5 @@ export class BingePlanner extends Component {
 
 
 const Container = styled.div`
-  padding: 5px;
+  padding: 0;
 `;

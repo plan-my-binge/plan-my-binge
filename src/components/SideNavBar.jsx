@@ -1,32 +1,36 @@
 import logo from "../images/logo.png";
-import {Colors, NavOptions} from "../utils/Constants";
-import * as R from "ramda";
-import React from "react";
+import {Classes, Colors, NavOptions} from "../utils/Constants";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
-import {withRouter, useHistory} from "react-router-dom";
+import {withRouter, useHistory, useLocation} from "react-router-dom";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 const SideNavBar = (props: Props) => {
 
   const history = useHistory();
+  const {pathname} = useLocation();
 
-  return <SideBar lg={3} className={"d-none d-lg-block"}>
+  return <SideBar lg={3} className={Classes.showInLargeScreen}>
     <Logo onClick={() => history.push("/")} src={logo}/>
 
     {NavOptions.map(option => {
-      let selectionClassName = R.ifElse(R.equals, () => "selection", () => "")(option, props.selection);
+      let className = pathname === option.link ? "selection" : "";
       return (
-        <NavItem key={option.name}
-                 className={selectionClassName}
-                 onClick={() => {
-                   history.push(option.link)
-                   return props.onNavChange(option);
-                 }}>
-          <NavHeader>
-            <option.icon style={{color: Colors.black, marginRight: 10}} />{option.name.toUpperCase()}
-          </NavHeader>
-          <NavHint>{option.hint}</NavHint>
-        </NavItem>);
+        <ButtonBaseStyled>
+          <NavItem key={option.name}
+                   className={className}
+                   onClick={() => {
+                     history.push(option.link);
+                     return props.onNavChange(option);
+                   }}>
+            <NavHeader>
+              <option.icon style={{color: Colors.black, marginRight: 10}}/>
+              {option.name.toUpperCase()}
+            </NavHeader>
+            <NavHint>{option.hint}</NavHint>
+          </NavItem>
+        </ButtonBaseStyled>);
     })}
   </SideBar>;
 };
@@ -45,9 +49,9 @@ const Logo = styled.img`
   max-width: 100%;
   padding: 20px;
   cursor: pointer;
-  
+  border-bottom: 1px solid black;
   &:hover {
-    filter: drop-shadow(2px 2px 2px red);
+    filter: drop-shadow(2px 2px 2px ${Colors.darkGray});
   }
 `;
 
@@ -67,9 +71,7 @@ const NavHint = styled.div`
 const NavItem = styled.div`
   padding: 20px;
   cursor: pointer;
-  :first-of-type {
-    border-top: solid 1px black;
-  }
+  width: 100%;
   
   &.selection {
     background-color: ${Colors.gray};
@@ -82,6 +84,11 @@ const NavItem = styled.div`
   }
 `;
 
+const ButtonBaseStyled = styled(ButtonBase)`
+  width: 100%;
+  text-align: left;
+  border: none;
+`;
 type Props = {
   onNavChange: (navOption: string) => void,
 

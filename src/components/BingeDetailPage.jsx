@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
-import {BingeDetail} from "./BingeDetail.jsx";
 import {HomePageError} from "./HomePageError.jsx";
 import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styled from 'styled-components';
 import {Colors} from "../utils/Constants";
 import {PopularShows} from "./PopularShows";
 import BingeDetailContainer from "../containers/BingeDetailContainer";
+import {AppHeader} from "./AppHeader";
 
 class BingeDetailPage extends Component<{ popularShows: any }> {
 
@@ -39,11 +38,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
     let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId);
 
     return <Container>
-      <Header>
-        <BackLink onClick={() => this.goBack()}>
-          <ArrowBackIcon fontSize={"large"}/> Back
-        </BackLink>
-      </Header>
+      <AppHeader history={this.props.history} />
       <Content>
         {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}
         {showError && <HomePageError/>}
@@ -78,7 +73,6 @@ const BackLink = styled.a`
 `;
 
 const Content = styled.div`
-  margin-top: 50px;
 `;
 
 const Container = styled.div`

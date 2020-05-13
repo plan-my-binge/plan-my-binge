@@ -1,16 +1,14 @@
-import logo from "../images/logo.png";
-import {BingeDetail} from "./BingeDetail";
 import {HomePageError} from "./HomePageError";
 import {BingeDetailShimmer} from "./BingeDetailShimmer";
 import {PopularShows} from "./PopularShows";
 import React, {Component} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import SearchIcon from '@material-ui/icons/Search';
 import {RecentlyVisitedShows} from "./RecentlyVisitedShows";
 import BingeDetailContainer from "../containers/BingeDetailContainer";
 import {isEmpty} from "ramda";
 import {BookmarkedShows} from "./BookmarkedShows";
+import {MobileHomePageHeaderWithRouter} from "./MobileHomePageHeader";
 
 export class HomePage extends Component<{}> {
 
@@ -29,17 +27,7 @@ export class HomePage extends Component<{}> {
 
     let recentlyVisitedShowsAvailable = recentlyVisitedShows.length !== 0;
     return <>
-      <Logo xs={12} src={logo} className={"d-block d-lg-none"}/>
-      <HeaderMessage>
-        <h4>Find out how long it will take to watch all episodes of any TV Show</h4>
-      </HeaderMessage>
-      <SearchContainer>
-        <SearchIcon fontSize={"large"}/>
-        <SearchLink to={"/search"}>
-          <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""}/>
-        </SearchLink>
-        <span/>
-      </SearchContainer>
+      <MobileHomePageHeaderWithRouter/>
 
       {highlightedShow && <BingeDetailContainer detail={highlightedShow}/>}
 
@@ -88,11 +76,12 @@ const HeaderMessage = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
 `;
 
 
 const Logo = styled.img`
-  max-width: 400px;
+  max-width: 300px;
   width: 100%;
   padding-right: 20px;
   padding-left: 20px;

@@ -1,20 +1,18 @@
 import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
-import {Colors} from "../utils/Constants";
+import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {withRouter, useHistory} from "react-router-dom";
+import {AppHeader} from "./AppHeader";
 
 const RecentlyVisitedShowsPage = ({recentlyVisitedShows}) => {
 
   const history = useHistory();
 
   return <Container>
-    <Header>
-      <BackLink onClick={() => history.goBack()}>
-        <ArrowBackIcon fontSize={"large"}/> Recently Visited Shows
-      </BackLink>
-    </Header>
+    <AppHeader history={history} title={"Recently Visited Shows"}/>
+    <Header>Recenly Visited Shows</Header>
     <ShowListStyled>
       <ShowList shows={recentlyVisitedShows}/>
     </ShowListStyled>
@@ -25,19 +23,15 @@ const RecentlyVisitedShowsPage = ({recentlyVisitedShows}) => {
 export const RecentlyVisitedShowsPageWithRouter = withRouter(RecentlyVisitedShowsPage)
 
 const Container = styled.div`
-  margin: 10px;
   clear: both;
 `;
 
-const Header = styled.div`
-  border-bottom: 1px solid ${Colors.gray};
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  background-color: ${Colors.white};
+const Header = styled.h4`
+  padding: 20px;
+  margin: 0;
+  ${cssForPhoneAndTablet} {
+    text-align: center;
+  }
 `;
 
 const BackLink = styled.a`
@@ -51,5 +45,5 @@ const BackLink = styled.a`
 `;
 
 const ShowListStyled = styled.div`
-  margin: 60px 20px 20px;
+  margin: 20px;
 `;

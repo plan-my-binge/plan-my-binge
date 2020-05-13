@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {ShowList} from "./ShowList.jsx";
 import {Link} from "react-router-dom";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {Colors} from "../utils/Constants";
+import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
 
 export const RecentlyVisitedShows = ({shows}) => {
   return <Container>
@@ -16,6 +16,10 @@ export const RecentlyVisitedShows = ({shows}) => {
 
 const Heading = styled.h5`
   padding: 5px 5px 5px 0;
+  margin-left: 10px;
+  ${cssForPhoneAndTablet} {
+    text-align: center;
+  }
 `;
 const Container = styled.div`
   clear: both;

@@ -11,18 +11,15 @@ export const ShowItem = ({detail, markShowAsVisited}) => {
   let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
   let minutesDisplay = `${runtime.minutes}m`;
 
-  return <Link
-    onClick={() => markShowAsVisited(detail.pmbId)}
-    to={{
-      pathname: "/binge/" + detail.pmbId,
-      data: detail
-    }}>
-    <Item>
+  return <Item onClick={() => markShowAsVisited(detail.pmbId)}
+          to={{
+            pathname: "/binge/" + detail.pmbId,
+            data: detail
+          }}>
       <Poster src={detail.portraitPoster}/>
       <Runtime><AccessTimeIcon fontSize={"small"} style={{paddingRight: 4, marginBottom: 2}}/>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`}</Runtime>
       <Title>{detail.primaryTitle}</Title>
     </Item>
-  </Link>
 };
 
 const Poster = styled.img`
@@ -31,12 +28,13 @@ const Poster = styled.img`
   border-top-right-radius: 10px;
 `;
 
-const Item = styled.div`
+const Item = styled(Link)`
   color: ${Colors.black};
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
   margin-bottom: 30px;
-  float: left;
+  float: right;
   font-size: 0.9rem;
   display: table;
 `;
@@ -45,6 +43,7 @@ const Item = styled.div`
 const Title = styled.div`
   ${Item}:hover & {
     text-decoration: underline;
+    color: ${Colors.black};
   }
   display: table-caption;
   caption-side: bottom;
@@ -56,9 +55,6 @@ const Runtime = styled.div`
   color: ${Colors.gray};
   display: table-caption;
   caption-side: bottom;
-  //border: 1px solid ${Colors.darkGray};
-  //width: fit-content;
-  //border-radius: 10px;
   background-color: ${Colors.darkCyan};
   padding-right: 5px;
   padding-left: 5px;
@@ -68,4 +64,13 @@ const Runtime = styled.div`
   text-align: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  
+  
+  ${Item}:hover & {
+    text-decoration: none !important;
+  }
 `;
+
+const LinkStyled = styled.div`
+  
+`

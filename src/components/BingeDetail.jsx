@@ -142,7 +142,7 @@ export class BingeDetail extends Component<{ detail: any }> {
 
 
 const Container = styled.div`
-  margin-top: 10px;
+  padding: 20px;
 `;
 
 const PosterPortrait = styled.img`

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import {ShowList} from "./ShowList.jsx";
+import {cssForPhoneAndTablet} from "../utils/Constants";
 
 export const PopularShows = ({shows}) => {
   return <Container>
@@ -11,6 +12,10 @@ export const PopularShows = ({shows}) => {
 
 const Heading = styled.h5`
   padding: 5px 5px 5px 0;
+  margin-left: 10px;
+  ${cssForPhoneAndTablet} {
+    text-align: center;
+  }
   
 `;
 const Container = styled.div`

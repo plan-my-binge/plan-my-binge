@@ -16,7 +16,10 @@ export const ShowItem = ({detail, markShowAsVisited}) => {
                  pathname: "/binge/" + detail.pmbId,
                  data: detail
                }}>
-    <Poster src={detail.portraitPoster}/>
+
+    {detail.portraitPoster ? <Poster src={detail.portraitPoster}/> :
+      <PosterPlaceholder>{detail.primaryTitle[0]}</PosterPlaceholder>
+    }
     <Runtime>
       {detail.runtime !== 0 && <AccessTimeIcon fontSize={"small"}
                                          style={{paddingRight: 4, marginBottom: 2}}/>}
@@ -30,6 +33,19 @@ const Poster = styled.img`
   height: 12rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+`;
+
+const PosterPlaceholder = styled.div`
+  height: 12rem;
+  width: 8rem;
+  background-color: ${Colors.darkCyan};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: ${Colors.white};
 `;
 
 const Item = styled(Link)`

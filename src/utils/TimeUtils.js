@@ -1,3 +1,5 @@
+import {BingeUnit} from "./Constants";
+
 export const numberOfDaysRequired = (totalMinutes, hoursPerDay) => {
   let minutesPerHours = 60;
   return Math.floor(totalMinutes / (minutesPerHours * hoursPerDay));
@@ -40,3 +42,20 @@ export const mode = numbers => {
 
   return modes[0];
 };
+
+export const showRuntimeToUserRuntime = function (userBingeTimeSetting, detail) {
+  if (userBingeTimeSetting.unit === BingeUnit.hours) {
+    return detail.runtime * (24 / (userBingeTimeSetting.value));
+  } else {
+    return (24 / userBingeTimeSetting.value) * 60 * detail.totalEpisodes;
+  }
+};
+
+export const seasonRuntimeToUserRuntime = function (userBingeTimeSetting, season) {
+  if (userBingeTimeSetting.unit === BingeUnit.hours) {
+    return season.seasonRuntime * (24 / (userBingeTimeSetting.value));
+  } else {
+    return (24 / userBingeTimeSetting.value) * 60 * season.numberOfEpisodes;
+  }
+};
+

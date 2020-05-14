@@ -1,12 +1,13 @@
-import {toDaysHoursAndMinutes} from "../utils/TimeUtils";
+import {showRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtils";
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-export const ShowItem = ({detail, markShowAsVisited}) => {
-  let runtime = toDaysHoursAndMinutes(detail.runtime);
+export const ShowItem = ({detail, markShowAsVisited, userBingeTime}) => {
+  let userRuntime = showRuntimeToUserRuntime(userBingeTime, detail);
+  let runtime = toDaysHoursAndMinutes(userRuntime);
   let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
   let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
   let minutesDisplay = `${runtime.minutes}m`;

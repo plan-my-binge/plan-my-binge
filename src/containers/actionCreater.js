@@ -15,6 +15,7 @@ export const setShowDetailPageError = createAction('SHOW_DETAIL_PAGE_ERROR');
 export const setShowDetailPageLoader = createAction('SHOW_DETAIL_PAGE_LOADER');
 
 export const markShowAsVisited = createAction('MARK_SHOW_AS_VISITED');
+export const setUserBingeTime = createAction('SET_USER_BINGE_TIME');
 
 export const toggleBookmark = createAction('TOGGLE_BOOKMARK');
 

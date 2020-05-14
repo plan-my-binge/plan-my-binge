@@ -3,49 +3,35 @@ import React, {Component} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {BingeDetailHeader} from "./BingeDetailHeader.jsx";
-import {BingeTime} from "./BingeTime.jsx";
 import {BingeCalendar} from "./BingeCalendar.jsx";
-import {minutesToDays} from "../utils/TimeUtils";
+import {minutesToDays, showRuntimeToUserRuntime} from "../utils/TimeUtils";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select/Select";
-import {Colors, isPhoneOrTablet} from "../utils/Constants";
+import {BingeUnit, Colors, isPhoneOrTablet} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
+import {BingeTime} from "./BingeTime";
 
-import {BookmarkWeb} from "./BookmarkWeb";
-
+const defaultDailyBingingTimeForUser = {
+  hours: 2,
+  episodes: 1
+};
 export class BingeDetail extends Component<{ detail: any }> {
 
-  constructor(props, context: any) {
-    super(props, context);
-    this.state = {
-      numberOfBingingHoursPerDay: 2,
-      dailyBingeSetting: {
-        value: 2,
-        unit: "hours"
-      },
-      possibleDailyBinging: {
-        hours: 24,
-        episodes: (24 * 60) / props.detail.perEpisodeRuntime
-      }
+  state = {
+    userBingeTimeSetting: this.props.userBingeTime,
+    possibleDailyBinging: {
+      hours: 24,
+      episodes: (24 * 60) / this.props.detail.perEpisodeRuntime
     }
-  }
-
-  defaultDailyBinging = {
-    hours: 2,
-    episodes: 1
   };
 
   render() {
     let {detail, bookmark} = this.props;
 
-    const {numberOfBingingHoursPerDay, numberOfEpisodesPerDay} = this.state;
-    let runtimeInMinutes = this.state.dailyBingeSetting.unit === "hours" ?
-      detail.runtime * (24 / (numberOfBingingHoursPerDay)) :
-      this.numberOfEpisodesPerDayToMinutes(numberOfEpisodesPerDay);
-
-    let numberOfDays = minutesToDays(runtimeInMinutes);
+    let userRuntimeInMinutes = showRuntimeToUserRuntime(this.state.userBingeTimeSetting, detail);
+    let userRuntimeInDays = minutesToDays(userRuntimeInMinutes);
 
     let landscapePosterNotAvailableInPhoneButPortraitAvailable =
       isPhoneOrTablet && !detail.landscapePoster && detail.portraitPoster;
@@ -77,41 +63,36 @@ export class BingeDetail extends Component<{ detail: any }> {
 
         <BingeTimeContainerCol>
           <BingeStats detail={detail}/>
-          {runtimeInMinutes !== 0 && <BingeTimeAndCalenderContainer>
-            <BingeTime runtime={runtimeInMinutes} title={detail.title}/>
+          {userRuntimeInMinutes !== 0 && <BingeTimeAndCalenderContainer>
+            <BingeTime runtime={userRuntimeInMinutes} title={detail.title}/>
             {this.getDailyBingeTime()}
-            <BingeCalendar days={numberOfDays} title={detail.title}/>
+            <BingeCalendar days={userRuntimeInDays} title={detail.title}/>
           </BingeTimeAndCalenderContainer>}
         </BingeTimeContainerCol>
         <Col>
-          <SeasonWiseStat detail={detail}/>
+          <SeasonWiseStat detail={detail} userBingeTime={this.state.userBingeTimeSetting}/>
         </Col>
       </BingeDetailContentRow>
     </Container>
   }
 
-  numberOfEpisodesPerDayToMinutes(numberOfEpisodesPerDay) {
-    return (24 / numberOfEpisodesPerDay) * 60 * this.props.detail.totalEpisodes;
-  }
-
-  getDailyBingeTime() {
-    let maxLimit = this.state.dailyBingeSetting.unit === "episodes" ?
+  getDailyBingeTime = () => {
+    let maxLimit = this.state.userBingeTimeSetting.unit === BingeUnit.episodes ?
       this.state.possibleDailyBinging.episodes : this.state.possibleDailyBinging.hours;
 
     return <DailyBingTime>
       <TimeSliderHint>
 
-
         <InputStepper
           min={1}
           max={maxLimit}
-          value={this.state.dailyBingeSetting.value}
-          onChange={this.onDailyBingingSettingValueChanged()}
+          value={this.state.userBingeTimeSetting.value}
+          onChange={this.onDailyBingingSettingValueChanged}
         />
 
         <SelectStyled
-          onChange={this.onDailyBingingSettingUnitChanged()}
-          value={this.state.dailyBingeSetting.unit}>
+          onChange={this.onDailyBingingSettingUnitChanged}
+          value={this.state.userBingeTimeSetting.unit}>
           <MenuItem value={"hours"}> hours </MenuItem>
           <MenuItem value={"episodes"}> episodes </MenuItem>
         </SelectStyled>
@@ -119,40 +100,25 @@ export class BingeDetail extends Component<{ detail: any }> {
         a day
       </TimeSliderHint>
     </DailyBingTime>;
-  }
+  };
 
-  onDailyBingingSettingUnitChanged() {
-    return (event) => {
-      let unit = event.target.value;
-      if (unit === "episodes") {
-        this.setState({
-          dailyBingeSetting: {unit: unit, value: this.defaultDailyBinging.episodes},
-          numberOfEpisodesPerDay: this.defaultDailyBinging.episodes,
-          numberOfBingingHoursPerDay: null
-
-        })
-      } else {
-        this.setState({
-          dailyBingeSetting: {unit: unit, value: this.defaultDailyBinging.hours},
-          numberOfBingingHoursPerDay: this.defaultDailyBinging.hours,
-          numberOfEpisodesPerDay: null
-        })
+  onDailyBingingSettingUnitChanged = (event) => {
+    let unit = event.target.value;
+    this.setState({
+      userBingeTimeSetting: {
+        unit: unit,
+        value: unit === BingeUnit.episodes ? defaultDailyBingingTimeForUser.episodes :
+          defaultDailyBingingTimeForUser.hours
       }
-    };
-  }
+    }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
 
-  onDailyBingingSettingValueChanged() {
-    return (value) => this.setState(
-      {
-        dailyBingeSetting: {...this.state.dailyBingeSetting, value: value},
-        numberOfBingingHoursPerDay:
-          this.state.dailyBingeSetting.unit === "hours" ? value : null,
-        numberOfEpisodesPerDay:
-          this.state.dailyBingeSetting.unit === "episodes" ? value : null
-      });
-  }
+  };
+
+  onDailyBingingSettingValueChanged = (value) =>
+    this.setState({
+      userBingeTimeSetting: {...this.state.userBingeTimeSetting, value: value}
+    }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
 }
-
 
 const Container = styled.div`
   padding: 20px;

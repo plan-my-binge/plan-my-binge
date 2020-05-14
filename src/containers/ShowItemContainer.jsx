@@ -4,6 +4,7 @@ import {ShowItem} from "../components/ShowItem";
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    userBingeTime: state.app.userBingeTime
   }
 };
 

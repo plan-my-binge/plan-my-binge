@@ -1,17 +1,19 @@
 import {connect} from 'react-redux'
-import {toggleBookmark} from "./actionCreater";
+import {setUserBingeTime, toggleBookmark} from "./actionCreater";
 import {BingeDetail} from "../components/BingeDetail";
 import {getBookmarkStatus} from "./selectors";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    bookmark: getBookmarkStatus(ownProps.detail.pmbId)(state)
+    bookmark: getBookmarkStatus(ownProps.detail.pmbId)(state),
+    userBingeTime: state.app.userBingeTime
   }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    toggleBookmark: (id) => dispatch(toggleBookmark(id))
+    toggleBookmark: (id) => dispatch(toggleBookmark(id)),
+    setUserBingeTime: ({value, unit}) => dispatch(setUserBingeTime({value, unit}))
   }
 };
 

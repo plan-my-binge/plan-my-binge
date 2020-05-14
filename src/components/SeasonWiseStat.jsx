@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import styled from 'styled-components';
-import {toDaysHoursAndMinutes} from "../utils/TimeUtils";
+import {seasonRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtils";
 import {Colors} from "../utils/Constants";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -40,11 +40,13 @@ export class SeasonWiseStat extends Component<{}> {
 
     let offset = (page - 1) * pageSize;
     let limit = page * pageSize;
+
     return <>
       <Container>
         {detail.seasons.slice(offset, limit).map((season, index) => {
+          let userRuntime = seasonRuntimeToUserRuntime(this.props.userBingeTime, season);
           let numberOfEpisodes = season.numberOfEpisodes;
-          let runtime = toDaysHoursAndMinutes(season.seasonRuntime);
+          let runtime = toDaysHoursAndMinutes(userRuntime);
           let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
           let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
           let minutesDisplay = `${runtime.minutes}m`;

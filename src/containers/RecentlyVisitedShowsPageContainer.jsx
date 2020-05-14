@@ -1,10 +1,11 @@
 import {connect} from 'react-redux'
-import {getAllRecentlyVisitedShowsFromState} from "./selectors";
+import {getAllRecentlyVisitedShowsFromState, getPopularShowsFromState} from "./selectors";
 import {RecentlyVisitedShowsPageWithRouter} from "../components/RecentlyVisitedShowsPage";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    recentlyVisitedShows: getAllRecentlyVisitedShowsFromState(state)
+    recentlyVisitedShows: getAllRecentlyVisitedShowsFromState(state),
+    popularShows: getPopularShowsFromState(state)
   }
 };
 

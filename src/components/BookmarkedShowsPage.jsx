@@ -2,19 +2,22 @@ import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
 import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
-import {withRouter, useHistory} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
 import {AppHeader} from "./AppHeader";
+import {BookmarkPlaceholderPageWithRouter} from "./BookmarkPlaceholderPage";
 
-const BookmarkedShowPage = ({bookmarkedShows}) => {
+const BookmarkedShowPage = ({bookmarkedShows, popularShows}) => {
 
   const history = useHistory();
 
   return <Container>
     <AppHeader history={history} title={"Bookmarked Shows"}/>
-    <Header> Bookmarked Shows</Header>
-    <ShowListStyled>
-      <ShowList shows={bookmarkedShows}/>
-    </ShowListStyled>
+    {bookmarkedShows.length !== 0 ? <>
+      <Header> Bookmarked Shows</Header>
+      <ShowListStyled>
+        <ShowList shows={bookmarkedShows}/>
+      </ShowListStyled>
+    </> : <BookmarkPlaceholderPageWithRouter popularShows={popularShows}/>}
 
   </Container>
 };

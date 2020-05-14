@@ -2,20 +2,23 @@ import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
 import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {withRouter, useHistory} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
 import {AppHeader} from "./AppHeader";
+import {RecentlyVisitedPlaceholderPageWithRouter} from "./RecentlyVisitedPlaceholderPage";
 
-const RecentlyVisitedShowsPage = ({recentlyVisitedShows}) => {
+const RecentlyVisitedShowsPage = ({recentlyVisitedShows, popularShows}) => {
 
   const history = useHistory();
 
   return <Container>
     <AppHeader history={history} title={"Recently Visited Shows"}/>
-    <Header>Recenly Visited Shows</Header>
-    <ShowListStyled>
-      <ShowList shows={recentlyVisitedShows}/>
-    </ShowListStyled>
+
+    {recentlyVisitedShows.length !== 0 ? <>
+      <Header>Recenly Visited Shows</Header>
+      <ShowListStyled>
+        <ShowList shows={recentlyVisitedShows}/>
+      </ShowListStyled>
+    </> : <RecentlyVisitedPlaceholderPageWithRouter popularShows={popularShows}/>}
 
   </Container>
 };

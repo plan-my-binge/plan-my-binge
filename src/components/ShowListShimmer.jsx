@@ -8,7 +8,11 @@ export const ShowListShimmer = () => {
   return <ShimmerContainer>
     <Wrapper>
       <Row>
-      {range(0, 8).map(i => <Card key={i}/>)}
+        {range(0, 8).map(i => <div key={i}>
+            <Card/>
+            <Title/>
+          </div>
+        )}
       </Row>
     </Wrapper>
   </ShimmerContainer>
@@ -37,7 +41,16 @@ const Card = styled.div`
   ${animated};
   height: 12rem;
   width: 8rem;
-  margin: 15px;
+  margin: 15px 15px 10px;
+  border-radius: 10px;
+`;
+
+const Title = styled.div`
+  ${animated};
+  height: 1rem;
+  width: 8rem;
+  margin: 0 15px 15px;
+  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`

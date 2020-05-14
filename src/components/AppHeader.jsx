@@ -27,7 +27,7 @@ const Header = styled.div`
   top: 0;
   right: 0;
   left: auto;
-  height: 50px;
+  height: 60px;
   z-index: 999;
   background-color: ${Colors.gray};
   display:flex;

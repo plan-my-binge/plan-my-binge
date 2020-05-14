@@ -22,9 +22,9 @@ export const ShowItem = ({detail, markShowAsVisited, userBingeTime}) => {
       <PosterPlaceholder>{detail.primaryTitle[0]}</PosterPlaceholder>
     }
     <Runtime>
-      {detail.runtime !== 0 && <AccessTimeIcon fontSize={"small"}
+      {<AccessTimeIcon fontSize={"small"}
                                          style={{paddingRight: 4, marginBottom: 2}}/>}
-      {detail.runtime !== 0 && `${daysDisplay}${hoursDisplay}${minutesDisplay}`}
+      {detail.runtime !== 0 ? `${daysDisplay}${hoursDisplay}${minutesDisplay}` : " -"}
     </Runtime>
     <Title>{detail.primaryTitle}</Title>
   </Item>
@@ -85,7 +85,6 @@ const Runtime = styled.div`
   text-align: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  
   
   ${Item}:hover & {
     text-decoration: none !important;

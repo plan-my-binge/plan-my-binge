@@ -1,10 +1,12 @@
 import {connect} from 'react-redux'
-import {getAllBookmarkedShows} from "./selectors";
+import {getAllBookmarkedShows, getPopularShowsFromState} from "./selectors";
 import {BookmarkedShowsPageWithRouter} from "../components/BookmarkedShowsPage";
+import {getPopularShows} from "./actionCreater";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    bookmarkedShows: getAllBookmarkedShows(state)
+    bookmarkedShows: getAllBookmarkedShows(state),
+    popularShows: getPopularShowsFromState(state)
   }
 };
 

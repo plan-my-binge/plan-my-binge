@@ -6,7 +6,7 @@ import {getBookmarkStatus} from "./selectors";
 const mapStateToProps = (state, ownProps) => {
   return {
     bookmark: getBookmarkStatus(ownProps.detail.pmbId)(state),
-    userBingeTime: state.app.userBingeTime
+    userBingeTime: state.user.userBingeTime
   }
 };
 

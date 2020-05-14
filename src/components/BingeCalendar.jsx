@@ -1,25 +1,32 @@
 import React from "react";
 import {range, toUpper} from "ramda";
 import styled from 'styled-components';
-import moment from "moment";
+import dayjs from 'dayjs';
 import {Colors} from "../utils/Constants";
 import Col from "react-bootstrap/Col";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+
+dayjs.extend(isSameOrBefore)
+dayjs.extend(isSameOrAfter)
+dayjs.extend(weekOfYear)
 
 
 export const BingeCalendar = ({days}) => {
 
-  let today = moment();
-  let completionDate = moment().add(days, 'day');
+  let today = dayjs();
+  let completionDate = dayjs().add(days, 'day');
 
-  let currentWeek = moment().startOf('week');
-  let nextWeek = moment().add(1, 'week').startOf('week');
+  let currentWeek = dayjs().startOf('week');
+  let nextWeek = dayjs().add(1, 'week').startOf('week');
 
-  let completionWeek = moment().add(days, 'day').startOf('week');
-  let penultimateWeek = moment(completionWeek).add(-1, 'week');
+  let completionWeek = dayjs().add(days, 'day').startOf('week');
+  console.debug(today, completionDate, currentWeek, nextWeek, completionWeek, penultimateWeek, totalWeeks);
+  let penultimateWeek = dayjs(completionWeek).add(-1, 'week');
 
   let totalWeeks = completionWeek.week() - currentWeek.week() + 1;
 
-  console.debug(today, completionDate, currentWeek, nextWeek, completionWeek, penultimateWeek, totalWeeks);
 
   return <Container>
     <Month>
@@ -36,7 +43,7 @@ export const BingeCalendar = ({days}) => {
     {totalWeeks === 3 && getWeekCalendar(completionWeek, completionDate)}
     {totalWeeks > 3 && getWeekCalendar(penultimateWeek, completionDate)}
     {totalWeeks >= 4 && getWeekCalendar(completionWeek, completionDate)}
-    {moment().month() !== completionDate.month() &&
+    {dayjs().month() !== completionDate.month() &&
     <Month>{toUpper(completionDate.format('MMMM'))}</Month>}
   </Container>
 };
@@ -56,17 +63,17 @@ const daysOfWeek = () => {
 
 const getWeekCalendar = (startOfWeek, completionDate) => {
 
-  const dateOfWeek = n => (moment(startOfWeek).add(n, 'day'));
+  const dateOfWeek = n => (dayjs(startOfWeek).add(n, 'day'));
 
-  const isActive = date => date.isSameOrAfter(moment(), 'day') &&
+  const isActive = date => date.isSameOrAfter(dayjs(), 'day') &&
     date.isSameOrBefore(completionDate, 'day');
 
   return <Week>
     {
       range(0, 7).map(i => {
         let date = dateOfWeek(i);
-        let isToday = moment().isSame(date, 'day');
-        let isCompletionDate = moment(completionDate).isSame(date, 'day');
+        let isToday = dayjs().isSame(date, 'day');
+        let isCompletionDate = dayjs(completionDate).isSame(date, 'day');
 
         if (isToday && isCompletionDate) {
           return <Date key={i} active={isActive(date)}>{date.date()}</Date>

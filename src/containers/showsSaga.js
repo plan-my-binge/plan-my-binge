@@ -12,6 +12,7 @@ import {Api} from "../service/api";
 
 const fetchShow = function*(action) {
   try {
+    yield put(setShowDetailPageError(false))
     yield put(setShowDetailPageLoader(true));
     const response = yield call(Api.getShow, action.payload);
     yield put(storeShow(BingeDetailModel(response.data[0]._source)));
@@ -24,13 +25,14 @@ const fetchShow = function*(action) {
 
 const fetchPopularShow = function*(action) {
   try {
+    yield put(setShowHomePageError(false));
     yield put(setShowHomePageLoader(true));
     const response = yield call(Api.getPopularShow, action.payload);
     let shows = response.data.map(show => BingeDetailModel(show._source));
     yield put(storePopularShows(shows));
 
   } catch (e) {
-    yield put(setShowHomePageError());
+    yield put(setShowHomePageError(true));
   }
   yield put(setShowHomePageLoader(false));
 };

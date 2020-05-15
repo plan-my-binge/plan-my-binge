@@ -1,7 +1,7 @@
-import SearchIcon from '@material-ui/icons/Search';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
-import {HistoryOutlined} from "@material-ui/icons";
+import {SearchIcon} from "../icons/SearchIcon";
+import {HomeIcon} from "../icons/HomeIcon";
+import {StarBorderedIcon} from "../icons/StarBorderedIcon";
+import {HistoryIcon} from "../icons/HistoryIcon";
 
 export const NavOptions = [
   {
@@ -9,7 +9,7 @@ export const NavOptions = [
     shortAlias: "Home",
     hint: "Find out how long it takes to watch all episodes of any TV Show",
     link: "/",
-    icon: HomeOutlinedIcon
+    icon: HomeIcon
   },
   // {
   //   name: "Binge Tracker",
@@ -20,13 +20,13 @@ export const NavOptions = [
     name: "Bookmarks",
     shortAlias: "Bookmarks",
     link: "/bookmarks",
-    icon: StarBorderOutlinedIcon
+    icon: StarBorderedIcon
   },
   {
     name: "Recently Visited",
     shortAlias: "Recent",
     link: "/recent",
-    icon: HistoryOutlined
+    icon: HistoryIcon
   },
   {
     name: "Search",

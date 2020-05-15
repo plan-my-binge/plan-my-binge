@@ -1,11 +1,10 @@
 import React from "react";
-import SearchIcon from '@material-ui/icons/Search';
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
-import HistoryIcon from '@material-ui/icons/History';
-import ButtonBase from "@material-ui/core/ButtonBase";
-import {withRouter, useHistory} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
 import {PopularShows} from "./PopularShows";
+import {SearchIcon} from "../icons/SearchIcon";
+import {HistoryIcon} from "../icons/HistoryIcon";
 
 export const RecentlyVisitedPlaceholderPage = ({popularShows}) => {
   let history = useHistory();
@@ -15,12 +14,12 @@ export const RecentlyVisitedPlaceholderPage = ({popularShows}) => {
     <StartBookmarking>
       Your recently visited TV shows will appear here
     </StartBookmarking>
-    <ButtonBase onClick={() => history.push("/search")}>
+    <a onClick={() => history.push("/search")}>
       <Button>
       <SearchIcon/>
       Search TV shows
       </Button>
-    </ButtonBase>
+    </a>
     {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
   </Container>
 };

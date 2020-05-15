@@ -6,9 +6,9 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {RecentlyVisitedShows} from "./RecentlyVisitedShows";
 import BingeDetailContainer from "../containers/BingeDetailContainer";
-import {isEmpty} from "ramda";
 import {BookmarkedShows} from "./BookmarkedShows";
 import {MobileHomePageHeaderWithRouter} from "./MobileHomePageHeader";
+import isEmpty from "ramda/src/isEmpty";
 
 export class HomePage extends Component<{}> {
 

@@ -1,22 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
+import {StarFilledIcon} from "../icons/StarFilledIcon";
+import {StarBorderedIcon} from "../icons/StarBorderedIcon";
 
 export const BookmarkWeb = ({flag, pmbId, className, toggleBookmark}) => {
   return <Container onClick={() => toggleBookmark(pmbId)}
                     className={"d-none d-md-flex"}>
-    {flag ? <StarIconStyled/> : <StarBorderIconStyled/>}
+    {flag ? <StarFilledIcon/> : <StarBorderIconStyled/>}
     {<BookmarkLabel>{flag ? "Remove bookmark" : "Add Bookmark"}</BookmarkLabel>}
   </Container>
 };
 
-const StarBorderIconStyled = styled(StarBorderIcon)`
-  margin: auto 5px;
-`;
-
-const StarIconStyled = styled(StarIcon)`
+const StarBorderIconStyled = styled(StarBorderedIcon)`
   margin: auto 5px;
 `;
 

@@ -4,7 +4,6 @@ import {seasonRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUt
 import {Colors} from "../utils/Constants";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/all";
 
 export class SeasonWiseStat extends Component<{}> {
 
@@ -64,13 +63,11 @@ export class SeasonWiseStat extends Component<{}> {
           total {detail.seasons.length} seasons</PaginationHint>
         <Pagination>
           <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
-            <LeftArrow isactive={leftArrowActive}/>
             Prev
           </ButtonStyled>
 
           <ButtonStyled disabled={!rightArrowActive} onClick={() => paginate(1)}>
             Next
-            <RightArrow isactive={rightArrowActive}/>
           </ButtonStyled>
         </Pagination>
       </>}
@@ -106,21 +103,21 @@ const Runtime = styled.div`
   float: right;
 `;
 
-const LeftArrow = styled(MdKeyboardArrowLeft)`
-  margin: auto;
-  width: 1.7rem;
-  font-size: 1.7rem;
-  cursor: ${({isactive}) => isactive ? "pointer" : "not-allowed"};
-  color: ${({isactive}) => isactive ? Colors.black : Colors.darkGray};
-`;
+// const LeftArrow = styled(ArrowBackIosIcon)`
+//   margin: auto;
+//   width: 1.7rem;
+//   font-size: 1.7rem;
+//   cursor: ${({isactive}) => isactive ? "pointer" : "not-allowed"};
+//   color: ${({isactive}) => isactive ? Colors.black : Colors.darkGray};
+// `;
 
-const RightArrow = styled(MdKeyboardArrowRight)`
-  margin: auto;
-  width: 1.7rem;
-  font-size: 1.7rem;
-  cursor: ${({isactive}) => isactive ? "pointer" : "not-allowed"};
-  color: ${({isactive}) => isactive ? Colors.black : Colors.darkGray};
-`;
+// const RightArrow = styled(ChevronRightIcon)`
+//   margin: auto;
+//   width: 1.7rem;
+//   font-size: 1.7rem;
+//   cursor: ${({isactive}) => isactive ? "pointer" : "not-allowed"};
+//   color: ${({isactive}) => isactive ? Colors.black : Colors.darkGray};
+// `;
 
 const Pagination = styled(Row)`
   width: fit-content;

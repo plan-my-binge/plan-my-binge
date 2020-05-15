@@ -1,10 +1,9 @@
-import logo from "../images/logo.png";
 import {Classes, Colors, NavOptions} from "../utils/Constants";
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
-import {withRouter, useHistory, useLocation} from "react-router-dom";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import {useHistory, useLocation, withRouter} from "react-router-dom";
+import AppLogo from "../icons/Logo";
 
 const SideNavBar = (props: Props) => {
 
@@ -12,12 +11,14 @@ const SideNavBar = (props: Props) => {
   const {pathname} = useLocation();
 
   return <SideBar lg={3} className={Classes.showInLargeScreen}>
-    <Logo onClick={() => history.push("/")} src={logo}/>
-
+    {/*<Logo  src={logo}/>*/}
+    <div style={{borderBottom: "1px solid " + Colors.darkGray, padding: 10}} onClick={() => history.push("/")}>
+      <AppLogo/>
+    </div>
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (
-        <ButtonBaseStyled>
+        <NavItemContainer>
           <NavItem key={option.name}
                    className={className}
                    onClick={() => {
@@ -30,7 +31,7 @@ const SideNavBar = (props: Props) => {
             </NavHeader>
             <NavHint>{option.hint}</NavHint>
           </NavItem>
-        </ButtonBaseStyled>);
+        </NavItemContainer>);
     })}
   </SideBar>;
 };
@@ -84,7 +85,8 @@ const NavItem = styled.div`
   }
 `;
 
-const ButtonBaseStyled = styled(ButtonBase)`
+const NavItemContainer = styled.div`
+  cursor: pointer !important;
   width: 100%;
   text-align: left;
   border: none;

@@ -1,8 +1,8 @@
 import '../style/shimmer.less'
 import React from "react";
 import styled, {keyframes, css} from 'styled-components';
-import {range} from "ramda";
 import Row from "react-bootstrap/Row";
+import range from "ramda/src/range";
 
 export const ShowListShimmer = () => {
   return <ShimmerContainer>

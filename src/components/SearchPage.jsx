@@ -3,12 +3,12 @@ import {SearchResults} from "./SearchResults.jsx";
 import styled from "styled-components";
 import {withRouter} from "react-router-dom";
 import {Colors} from "../utils/Constants";
-import SearchIcon from '@material-ui/icons/Search';
 import {createSearchQuery} from "../utils/apiUtils";
 import axios from "axios";
 import {ShowListShimmer} from "./ShowListShimmer";
 import {PopularShows} from "./PopularShows";
 import {AppHeader} from "./AppHeader";
+import {SearchIcon} from "../icons/SearchIcon";
 
 class SearchPage extends Component<{}> {
 

@@ -1,5 +1,4 @@
 import React from "react";
-import {range, toUpper} from "ramda";
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import {Colors} from "../utils/Constants";
@@ -7,6 +6,8 @@ import Col from "react-bootstrap/Col";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import toUpper from "ramda/src/toUpper";
+import range from "ramda/src/range";
 
 dayjs.extend(isSameOrBefore)
 dayjs.extend(isSameOrAfter)

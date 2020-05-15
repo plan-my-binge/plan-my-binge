@@ -1,4 +1,4 @@
-import {REHYDRATE} from 'redux-persist/constants'
+import {REHYDRATE} from 'redux-persist'
 import {handleActions} from "redux-actions";
 import {inputFocused} from "../containers/actionCreater";
 

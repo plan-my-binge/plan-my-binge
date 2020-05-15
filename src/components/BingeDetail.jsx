@@ -7,8 +7,6 @@ import {BingeCalendar} from "./BingeCalendar.jsx";
 import {minutesToDays, showRuntimeToUserRuntime} from "../utils/TimeUtils";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select/Select";
 import {BingeUnit, Colors, isPhoneOrTablet} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
@@ -90,12 +88,12 @@ export class BingeDetail extends Component<{ detail: any }> {
           onChange={this.onDailyBingingSettingValueChanged}
         />
 
-        <SelectStyled
+        <select
           onChange={this.onDailyBingingSettingUnitChanged}
           value={this.state.userBingeTimeSetting.unit}>
-          <MenuItem value={"hours"}> hours </MenuItem>
-          <MenuItem value={"episodes"}> episodes </MenuItem>
-        </SelectStyled>
+          <option value={"hours"}> hours </option>
+          <option value={"episodes"}> episodes </option>
+        </select>
 
         a day
       </TimeSliderHint>
@@ -167,11 +165,11 @@ const BingeTimeAndCalenderContainer = styled.div`
   padding: 5px;
 `;
 
-const SelectStyled = styled(Select)`
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 10px;
-`;
+// const SelectStyled = styled(Select)`
+//   margin-right: 5px;
+//   margin-left: 5px;
+//   margin-bottom: 10px;
+// `;
 
 const TimeSliderHint = styled.div`
   margin: auto;

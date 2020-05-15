@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import {AccessTimeIcon} from "../icons/AccessTimeIcon";
 
 export const ShowItem = ({detail, markShowAsVisited, userBingeTime}) => {
   let userRuntime = showRuntimeToUserRuntime(userBingeTime, detail);

@@ -1,6 +1,9 @@
 import {handleActions} from "redux-actions";
 import {markShowAsVisited, storePopularShows, storeShow, storeShows, toggleBookmark} from "../containers/actionCreater";
-import {eqBy, prop, reverse, unionWith, uniq} from "ramda";
+import unionWith from "ramda/src/unionWith";
+import eqBy from "ramda/src/eqBy";
+import reverse from "ramda/src/reverse";
+import uniq from "ramda/src/uniq";
 
 const INITIAL_STATE = {popularShowIds: [], allShows: [], visited: [], bookmarkedShowIds: []};
 

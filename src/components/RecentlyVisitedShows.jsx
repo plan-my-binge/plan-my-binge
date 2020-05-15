@@ -2,8 +2,8 @@ import React from "react";
 import styled from 'styled-components';
 import {ShowList} from "./ShowList.jsx";
 import {Link} from "react-router-dom";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
+import {ArrowForwardIcon} from "../icons/ArrowForward";
 
 export const RecentlyVisitedShows = ({shows}) => {
   return <Container>

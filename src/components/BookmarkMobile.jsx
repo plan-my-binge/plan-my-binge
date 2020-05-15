@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
+import {StarBorderedIcon} from "../icons/StarBorderedIcon";
+import {StarFilledIcon} from "../icons/StarFilledIcon";
 
 export const BookmarkMobile = ({flag, pmbId, toggleBookmark}) => {
   return <Container onClick={() => toggleBookmark(pmbId)}
@@ -11,11 +11,11 @@ export const BookmarkMobile = ({flag, pmbId, toggleBookmark}) => {
   </Container>
 };
 
-const StarBorderIconStyled = styled(StarBorderIcon)`
+const StarBorderIconStyled = styled(StarBorderedIcon)`
   margin: auto 5px;
 `;
 
-const StarIconStyled = styled(StarIcon)`
+const StarIconStyled = styled(StarFilledIcon)`
   margin: auto 5px;
 `;
 

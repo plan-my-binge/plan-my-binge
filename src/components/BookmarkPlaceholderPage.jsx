@@ -1,26 +1,25 @@
 import React from "react";
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import SearchIcon from '@material-ui/icons/Search';
 import styled from "styled-components";
 import {Colors} from "../utils/Constants";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import {withRouter, useHistory} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
 import {PopularShows} from "./PopularShows";
+import {SearchIcon} from "../icons/SearchIcon";
+import {StarBorderedIcon} from "../icons/StarBorderedIcon";
 
 export const BookmarkPlaceholderPage = ({popularShows}) => {
   let history = useHistory();
   return <Container>
-    <StarBorderIcon style={{color: Colors.darkGray, width: "10rem", height: "10rem"}}/>
+    <StarBorderedIcon style={{color: Colors.darkGray, width: "10rem", height: "10rem"}}/>
     <NoBookmark>No bookmarks yet!</NoBookmark>
     <StartBookmarking>
       Tap the star on your favorite show to add it to your library
     </StartBookmarking>
-    <ButtonBase onClick={() => history.push("/search")}>
+    <a onClick={() => history.push("/search")}>
       <Button>
         <SearchIcon/>
         Search TV shows
       </Button>
-    </ButtonBase>
+    </a>
     {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
 
   </Container>

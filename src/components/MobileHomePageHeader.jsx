@@ -1,14 +1,18 @@
 import React from "react";
-import logo from "../images/logo.png";
-import SearchIcon from '@material-ui/icons/Search';
 import styled from "styled-components";
 import {Link, withRouter} from "react-router-dom";
 import {Classes, Colors} from "../utils/Constants";
+import AppLogo from "../icons/Logo";
+import {SearchIcon} from "../icons/SearchIcon";
 
 const MobileHomePageHeader = () => {
   return <Container>
     <HeaderMobile className={Classes.showFlexInSmallerScreen}>
-      <Logo src={logo}/>
+      {/*<Logo src={logo}/>*/}
+
+      <div style={{ padding: 10, width: "20rem"}} onClick={() => history.push("/")}>
+        <AppLogo/>
+      </div>
       <HeaderMessage >
         <h5>Find out how long it will take to watch all episodes of any TV Show</h5>
       </HeaderMessage>
@@ -41,6 +45,8 @@ const HeaderMobile = styled.div`
   padding: 10px;
   color: ${Colors.black};
   flex-direction: column;
+  display: flex;
+  align-items: center;
 `;
 
 const HeaderWeb = styled.div`

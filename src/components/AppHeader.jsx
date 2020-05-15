@@ -1,20 +1,19 @@
 import React from "react";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styled from "styled-components";
 import {Classes, Colors} from "../utils/Constants";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import logo from "../images/logo.png";
+import AppLogo from "../icons/Logo";
+import {ArrowBackIcon} from "../icons/ArrowBackIcon";
 
 export const AppHeader = ({history, title}) => {
   return <Header>
-    <ButtonBaseStyled>
 
       <BackLink onClick={() => history.goBack()}>
-        <ArrowBackIcon fontSize={"large"}/><span className={Classes.showOnlyInWeb}>Back</span>
+        <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
       </BackLink>
-    </ButtonBaseStyled>
-    <LogoContainer className={Classes.showOnlyInMobile}>
-      <Logo onClick={() => history.push("/")} src={logo}/>
+    <LogoContainer className={Classes.showFlexInSmallerScreen}>
+      <div style={{ width: "8rem"}} onClick={() => history.push("/")}>
+        <AppLogo/>
+      </div>
     </LogoContainer>
   </Header>
 };
@@ -35,11 +34,6 @@ const Header = styled.div`
   align-items:center;;
 `;
 
-const ButtonBaseStyled = styled(ButtonBase)`
-  position: absolute;
-  left: 10px;
-  margin-left: 10px;
-`;
 
 const BackLink = styled.a`
   display: flex;
@@ -61,12 +55,7 @@ const LogoContainer = styled.div`
   text-align:center;
   margin: auto;
   width: 100%;
-  
+  justify-content: center;
+  align-items: center;
 `;
 
-const Logo = styled.img`
-  width: 7rem;
-  flex-grow:1;      
-  text-align:center;
-  margin: auto auto auto auto;
-`;

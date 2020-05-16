@@ -32,6 +32,7 @@ const fetchPopularShow = function*(action) {
     yield put(storePopularShows(shows));
 
   } catch (e) {
+    console.log(e)
     yield put(setShowHomePageError(true));
   }
   yield put(setShowHomePageLoader(false));

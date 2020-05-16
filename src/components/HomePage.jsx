@@ -26,7 +26,7 @@ export class HomePage extends Component<{}> {
           (!isEmpty(popularShows) ? popularShows[0] : null));
 
     let recentlyVisitedShowsAvailable = recentlyVisitedShows.length !== 0;
-    return <>
+    return <Container>
       <MobileHomePageHeaderWithRouter/>
 
       {highlightedShow && <BingeDetailContainer detail={highlightedShow}/>}
@@ -38,10 +38,13 @@ export class HomePage extends Component<{}> {
       {!isEmpty(bookmarkedShows) && <BookmarkedShows shows={bookmarkedShows}/>}
       {recentlyVisitedShowsAvailable && <RecentlyVisitedShows shows={recentlyVisitedShows}/>}
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
-    </>
+    </Container>
   }
 }
 
+const Container = styled.div`
+  margin-bottom: 50px;
+`;
 
 const SearchContainer = styled.div`
   display: flex;

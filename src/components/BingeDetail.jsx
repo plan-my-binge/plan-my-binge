@@ -7,6 +7,8 @@ import {BingeCalendar} from "./BingeCalendar.jsx";
 import {minutesToDays, showRuntimeToUserRuntime} from "../utils/TimeUtils";
 import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
+import Option from 'muicss/lib/react/option';
+import Select from 'muicss/lib/react/select';
 import {BingeUnit, Colors, isPhoneOrTablet} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
@@ -15,6 +17,7 @@ const defaultDailyBingingTimeForUser = {
   hours: 2,
   episodes: 1
 };
+
 export class BingeDetail extends Component<{ detail: any }> {
 
   state = {
@@ -88,12 +91,12 @@ export class BingeDetail extends Component<{ detail: any }> {
           onChange={this.onDailyBingingSettingValueChanged}
         />
 
-        <select
+        <SelectStyled
           onChange={this.onDailyBingingSettingUnitChanged}
-          value={this.state.userBingeTimeSetting.unit}>
-          <option value={"hours"}> hours </option>
-          <option value={"episodes"}> episodes </option>
-        </select>
+          defaultValue={this.state.userBingeTimeSetting.unit}>
+          <Option value={"hours"} label={"hours"}/>
+          <Option value={"episodes"} label={"episodes"}/>
+        </SelectStyled>
 
         a day
       </TimeSliderHint>
@@ -174,6 +177,9 @@ const BingeTimeAndCalenderContainer = styled.div`
 const TimeSliderHint = styled.div`
   margin: auto;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DailyBingTime = styled.div`
@@ -181,3 +187,8 @@ const DailyBingTime = styled.div`
   text-align: center;
 `;
 
+const SelectStyled = styled(Select)`
+    margin-right: 10px;
+    padding-top: 10px;
+    position: relative;
+`;

@@ -4,6 +4,7 @@ import unionWith from "ramda/src/unionWith";
 import eqBy from "ramda/src/eqBy";
 import reverse from "ramda/src/reverse";
 import uniq from "ramda/src/uniq";
+import prop from "ramda/src/prop";
 
 const INITIAL_STATE = {popularShowIds: [], allShows: [], visited: [], bookmarkedShowIds: []};
 

@@ -57,7 +57,7 @@ class SearchPage extends Component<{}> {
     const {showLoader, searchResults, searchQuery} = this.state;
     const {popularShows} = this.props;
 
-    return <div>
+    return <Container>
       <AppHeader history={this.props.history} title={"Search TV Shows"}/>
       <SearchContainer>
         <SearchIconStyled fontSize={"large"}/>
@@ -81,7 +81,7 @@ class SearchPage extends Component<{}> {
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
 
 
-    </div>
+    </Container>
   }
 
 }
@@ -150,4 +150,8 @@ const NoResultsFound = styled.div`
   justify-content: center;
   align-items: center;
   color: ${Colors.darkGray};
+`;
+
+const Container = styled.div`
+  margin-bottom: 50px;
 `;

@@ -4,6 +4,8 @@ import {seasonRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUt
 import {Colors} from "../utils/Constants";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import {PrevIcon} from "../icons/PrevIcon";
+import {NextIcon} from "../icons/NextIcon";
 
 export class SeasonWiseStat extends Component<{}> {
 
@@ -63,11 +65,11 @@ export class SeasonWiseStat extends Component<{}> {
           total {detail.seasons.length} seasons</PaginationHint>
         <Pagination>
           <ButtonStyled onClick={() => paginate(-1)} disabled={!leftArrowActive}>
-            Prev
+            <PrevIcon/>Prev
           </ButtonStyled>
 
           <ButtonStyled disabled={!rightArrowActive} onClick={() => paginate(1)}>
-            Next
+            Next<NextIcon/>
           </ButtonStyled>
         </Pagination>
       </>}

@@ -27,6 +27,7 @@ export const RecentlyVisitedShowsPageWithRouter = withRouter(RecentlyVisitedShow
 
 const Container = styled.div`
   clear: both;
+  margin-bottom: 50px;
 `;
 
 const Header = styled.h4`

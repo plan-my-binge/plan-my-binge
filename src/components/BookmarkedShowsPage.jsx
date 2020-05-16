@@ -27,6 +27,7 @@ export const BookmarkedShowsPageWithRouter = withRouter(BookmarkedShowPage)
 const Container = styled.div`
   clear: both;
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 const Header = styled.h4`

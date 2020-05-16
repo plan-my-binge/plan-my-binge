@@ -11,10 +11,9 @@ const SideNavBar = (props: Props) => {
   const {pathname} = useLocation();
 
   return <SideBar lg={3} className={Classes.showInLargeScreen}>
-    {/*<Logo  src={logo}/>*/}
-    <div style={{borderBottom: "1px solid " + Colors.darkGray, padding: 10}} onClick={() => history.push("/")}>
+    <AppLogoContainer onClick={() => history.push("/")}>
       <AppLogo/>
-    </div>
+    </AppLogoContainer>
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (
@@ -95,3 +94,9 @@ type Props = {
   onNavChange: (navOption: string) => void,
 
 };
+
+const AppLogoContainer = styled.div`
+  border-bottom: 1px solid ${Colors.darkGray};
+  padding: 10px;
+  cursor: pointer;
+`;

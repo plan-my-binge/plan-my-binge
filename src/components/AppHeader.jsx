@@ -11,9 +11,9 @@ export const AppHeader = ({history, title}) => {
         <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
       </BackLink>
     <LogoContainer className={Classes.showFlexInSmallerScreen}>
-      <div style={{ width: "8rem"}} onClick={() => history.push("/")}>
+      <AppLogoContainer onClick={() => history.push("/")}>
         <AppLogo/>
-      </div>
+      </AppLogoContainer>
     </LogoContainer>
   </Header>
 };
@@ -57,5 +57,9 @@ const LogoContainer = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+`;
+
+const AppLogoContainer = styled.div`
+  width: 8rem; 
 `;
 

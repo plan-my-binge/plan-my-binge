@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import {Link, withRouter} from "react-router-dom";
+import {Link, withRouter, useHistory} from "react-router-dom";
 import {Classes, Colors} from "../utils/Constants";
 import AppLogo from "../icons/Logo";
 import {SearchIcon} from "../icons/SearchIcon";
 
 const MobileHomePageHeader = () => {
+  const history = useHistory();
+
   return <Container>
     <HeaderMobile className={Classes.showFlexInSmallerScreen}>
-      {/*<Logo src={logo}/>*/}
-
-      <div style={{ padding: 10, width: "20rem"}} onClick={() => history.push("/")}>
+      <AppLogoContainer  onClick={() => history.push("/")}>
         <AppLogo/>
-      </div>
+      </AppLogoContainer>
       <HeaderMessage >
         <h5>Find out how long it will take to watch all episodes of any TV Show</h5>
       </HeaderMessage>
@@ -108,3 +108,9 @@ const Input = styled.input`
   }
 `;
 
+
+const AppLogoContainer = styled.div`
+  padding: 10px;
+  width: 20rem;
+  cursor: pointer;
+`;

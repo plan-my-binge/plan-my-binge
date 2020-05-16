@@ -61,9 +61,9 @@ module.exports = {
       title: 'Plan your binge!',
       showErrors: true
     }),new CompressionPlugin(),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      statsFilename: "prod.json"
-    })
+    // new BundleAnalyzerPlugin({
+    //   generateStatsFile: true,
+    //   statsFilename: "prod.json"
+    // })
   ]
 };

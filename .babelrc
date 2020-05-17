@@ -5,6 +5,7 @@
     "@babel/preset-flow"
   ],
   "plugins": [
+    ["transform-remove-console"],
     [
       "babel-plugin-styled-components",
       {

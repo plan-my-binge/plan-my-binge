@@ -5,8 +5,16 @@ import AppLogo from "../icons/Logo";
 import {ArrowBackIcon} from "../icons/ArrowBackIcon";
 import ReactGA from "react-ga";
 import {ga} from "../utils/apiUtils";
+import {SearchIcon} from "../icons/SearchIcon";
+import {Link, withRouter, useLocation} from "react-router-dom";
 
-export const AppHeader = ({history, title}) => {
+const AppHeaderComponent = ({history, title}) => {
+  const location = useLocation();
+  let onClick = () => {
+    ReactGA.event(ga(TrackingCategory.AppHeaderSearchButton,
+      'Clicked app header search button', ""));
+  };
+
   return <Header>
 
       <BackLink onClick={() => {
@@ -21,9 +29,14 @@ export const AppHeader = ({history, title}) => {
         <AppLogo/>
       </AppLogoContainer>
     </LogoContainer>
+    {!location.pathname.startsWith("/search") &&
+    <SearchLink to={"/search"} onClick={onClick}>
+      <SearchIcon style={{marginRight: 10}} fontSize={"large"}/></SearchLink>}
+
   </Header>
 };
 
+export const AppHeader = withRouter(AppHeaderComponent);
 const Header = styled.div`
   border-bottom: 1px solid ${Colors.darkGray};
   padding-top: 10px;
@@ -43,7 +56,6 @@ const Header = styled.div`
 
 const BackLink = styled.a`
   display: flex;
-  position: absolute;
   left: 10px;
   color: ${Colors.black};
   font-size: 1.5rem;
@@ -69,3 +81,11 @@ const AppLogoContainer = styled.div`
   width: 8rem; 
 `;
 
+
+const SearchLink = styled(Link)`
+  color: ${Colors.black};
+  
+  &:hover {
+     color: ${Colors.black};
+  }
+`;

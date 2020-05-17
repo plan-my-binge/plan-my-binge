@@ -38,7 +38,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
     let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId);
 
     return <Container>
-      <AppHeader history={this.props.history} />
+      <AppHeader history={this.props.history}/>
       <Content>
         {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}
         {showError && <HomePageError/>}

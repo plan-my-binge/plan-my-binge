@@ -17,6 +17,12 @@ export const NavOptions = [
   //   hint: "Calculate how much time you have spent watching TV Shows in your life",
   // },
   {
+    name: "Search",
+    shortAlias: "Search",
+    link: "/search",
+    icon: SearchIcon
+  },
+  {
     name: "Bookmarks",
     shortAlias: "Bookmarks",
     link: "/bookmarks",
@@ -28,12 +34,7 @@ export const NavOptions = [
     link: "/recent",
     icon: HistoryIcon
   },
-  {
-    name: "Search",
-    shortAlias: "Search",
-    link: "/search",
-    icon: SearchIcon
-  }];
+  ];
 
 
 export const Colors = {
@@ -88,7 +89,8 @@ export const TrackingCategory = {
   ClickShowItem: "ClickShowItem",
   SuccessfulSearch: "SuccessfulSearch",
   SearchWithNoResults: "SearchWithNoResults", SearchFailed: "SearchFailed",
-  SearchUsefulness: "SearchUsefulness"
+  SearchUsefulness: "SearchUsefulness",
+  AppHeaderSearchButton: "AppHeaderSearchButton"
 
 
 };

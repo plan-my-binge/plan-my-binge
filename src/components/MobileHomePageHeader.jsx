@@ -1,16 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import {Link, withRouter, useHistory} from "react-router-dom";
-import {Classes, Colors} from "../utils/Constants";
+import {Classes, Colors, TrackingCategory} from "../utils/Constants";
 import AppLogo from "../icons/Logo";
 import {SearchIcon} from "../icons/SearchIcon";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 const MobileHomePageHeader = () => {
   const history = useHistory();
 
+  const onInputClick = () => {
+    ReactGA.event(ga(TrackingCategory.SearchInputClick,
+      'Clicked home page search input', "HomePageSearchInput"));
+  };
+
+  let onLogoClick = (history) => {
+    ReactGA.event(ga(TrackingCategory.AppLogoClick, 'Clicked mobile app logo header', "MobileAppLogoHeader"));
+    return history.push("/");
+  };
+
   return <Container>
     <HeaderMobile className={Classes.showFlexInSmallerScreen}>
-      <AppLogoContainer  onClick={() => history.push("/")}>
+      <AppLogoContainer  onClick={() => onLogoClick(history)}>
         <AppLogo/>
       </AppLogoContainer>
       <HeaderMessage >
@@ -27,7 +39,7 @@ const MobileHomePageHeader = () => {
 
     <SearchContainer>
       <SearchIcon fontSize={"large"}/>
-      <SearchLink to={"/search"}>
+      <SearchLink to={"/search"} onClick={() => onInputClick()}>
         <Input type={"text"} placeholder={"Search TV Show Eg. \"The Office\""}/>
       </SearchLink>
       <span/>

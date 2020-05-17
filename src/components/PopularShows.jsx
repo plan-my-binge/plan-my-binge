@@ -1,12 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
 import {ShowList} from "./ShowList.jsx";
-import {cssForPhoneAndTablet} from "../utils/Constants";
+import {cssForPhoneAndTablet, Referrer} from "../utils/Constants";
 
 export const PopularShows = ({shows}) => {
   return <Container>
     <Heading>Check runtime of Popular Shows</Heading>
-    <ShowList shows={shows}/>
+    <ShowList shows={shows} referrer={Referrer.PopularSection}/>
   </Container>
 };
 

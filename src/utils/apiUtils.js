@@ -51,3 +51,5 @@ export const createSearchQuery = () => {
     }
   };
 };
+
+export const ga = (category, action, label) => ({category, action, label});

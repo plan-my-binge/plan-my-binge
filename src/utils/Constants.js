@@ -66,3 +66,41 @@ export const BingeUnit = {
   hours: "hours",
   episodes: "episodes"
 };
+
+export const TrackingCategory = {
+  AppLogoClick: "AppLogoClick",
+  BottomNavBarItemClick: "BottomNavBarItemClick",
+  SideNavBarItemClick: "SideNavBarItemClick", SearchInputClick: "SearchInputClick",
+
+  AddToBookmarkWeb: "AddToBookmarkWeb",
+  RemoveFromBookmarkWeb: "RemoveFromBookmarkWeb",
+  RemoveFromBookmarkMobile: "RemoveFromBookmarkMobile",
+  AddToBookmarkMobile: "AddToBookmarkMobile",
+
+  DailyBingeTimeChange: "DailyBingeTimeChange",
+  DailyBingeTimeUnitChange: "DailyBingeTimeUnitChange",
+
+  PaginateSeasonWiseStat: "PaginateSeasonWiseStat",
+
+  HomePageError: "HomePageError",
+  ClickSectionHeader: "ClickSectionHeader",
+  ClickShowItem: "ClickShowItem",
+  SuccessfulSearch: "SuccessfulSearch",
+  SearchWithNoResults: "SearchWithNoResults", SearchFailed: "SearchFailed",
+  SearchUsefulness: "SearchUsefulness"
+
+
+};
+
+export const TrackingLabel = {
+
+}
+
+export const Referrer = {
+  BookmarkSection : "BookmarkSection",
+  RecentSection : "RecentSection",
+  PopularSection : "PopularSection",
+  BookmarkPage : "BookmarkPage",
+  RecentPage : "RecentPage",
+  SearchResult : "SearchResult",
+};

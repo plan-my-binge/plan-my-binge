@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import {SearchResults} from "./SearchResults.jsx";
 import styled from "styled-components";
 import {withRouter} from "react-router-dom";
-import {Colors} from "../utils/Constants";
-import {createSearchQuery} from "../utils/apiUtils";
+import {Colors, TrackingCategory} from "../utils/Constants";
+import {createSearchQuery, ga} from "../utils/apiUtils";
 import axios from "axios";
 import {ShowListShimmer} from "./ShowListShimmer";
 import {PopularShows} from "./PopularShows";
 import {AppHeader} from "./AppHeader";
 import {SearchIcon} from "../icons/SearchIcon";
+import ReactGA from "react-ga";
 
 class SearchPage extends Component<{}> {
 
@@ -17,6 +18,7 @@ class SearchPage extends Component<{}> {
     showLoader: false,
     searchResults: [],
     searchFailed: false,
+    searchResultClicked: false
   };
 
   componentDidMount() {
@@ -32,10 +34,15 @@ class SearchPage extends Component<{}> {
     }
   }
 
+  componentWillUnmount() {
+    ReactGA.event(ga(TrackingCategory.SearchUsefulness,
+      'Search Usefulness', this.state.searchResultClicked.toString()));
+  }
+
   searchShow = createSearchQuery();
 
   handleInputChange = (value) => {
-    this.setState({searchQuery: value, showLoader: true});
+    this.setState({searchQuery: value, showLoader: true, searchResultClicked: false});
     this.props.history.replace({
       pathname: '/search',
       search: '?q=' + value
@@ -43,13 +50,22 @@ class SearchPage extends Component<{}> {
 
     this.searchShow(value)
       .then(response => {
-        console.log("response", response)
         this.props.storeShows(response);
+
+        if (response.length === 0)
+          ReactGA.event(ga(TrackingCategory.SearchWithNoResults,
+          'Empty search results', value));
+        else
+          ReactGA.event(ga(TrackingCategory.SuccessfulSearch,
+          'Successful search', value));
+
         return this.setState({searchResults: response, showLoader: false});
       })
       .catch(errorResponse => {
         let isCancel = axios.isCancel(errorResponse.error);
         if (!isCancel) {
+          ReactGA.event(ga(TrackingCategory.SearchFailed,
+            'Search failed', value));
           this.setState({searchFailed: true, showLoader: false})
         }
       })
@@ -79,7 +95,10 @@ class SearchPage extends Component<{}> {
       searchResults.length === 0 &&
       <NoResultsFound>No results found :(</NoResultsFound>}
 
-      <SearchResults searchResults={searchResults}/>
+      <SearchResults searchResults={searchResults}
+                     query={searchQuery}
+                     onItemClick={() => this.setState({searchResultClicked: true})}
+      />
       {popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
 
 

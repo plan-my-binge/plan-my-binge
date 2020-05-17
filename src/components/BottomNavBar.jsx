@@ -1,25 +1,30 @@
-import {Classes, Colors, NavOptions} from "../utils/Constants";
+import {Classes, Colors, NavOptions, TrackingCategory} from "../utils/Constants";
 import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
 import {withRouter, useHistory, useLocation} from "react-router-dom";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 function BottomNavBar(props: Props) {
   const history = useHistory();
   const {pathname} = useLocation();
 
   let searchPageSelected = pathname.startsWith("/search");
+  let onMenuItemClick = (option) => {
+    ReactGA.event(ga(TrackingCategory.BottomNavBarItemClick, 'Clicked bottom nav menu item', option.name));
+    history.push(option.link);
+    return props.onNavChange(option);
+  };
 
   return <BottomBar className={Classes.showInSmallerScreen}>
 
     {!searchPageSelected && <BarContainer>
       {NavOptions.map(option => {
         let className = pathname === option.link ? "selection" : "";
+
         return <NavItem key={option.name}
-                        onClick={() => {
-                          history.push(option.link);
-                          return props.onNavChange(option);
-                        }}
+                        onClick={() => onMenuItemClick(option)}
                         className={className}
         >{<option.icon fontSize={"1rem"}/>}{option.shortAlias}</NavItem>;
       })}

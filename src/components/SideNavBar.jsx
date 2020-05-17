@@ -1,29 +1,38 @@
-import {Classes, Colors, NavOptions} from "../utils/Constants";
+import {Classes, Colors, NavOptions, TrackingCategory} from "../utils/Constants";
 import React from "react";
 import styled from "styled-components";
 import {Col} from "react-bootstrap";
 import {useHistory, useLocation, withRouter} from "react-router-dom";
 import AppLogo from "../icons/Logo";
+import ReactGA from 'react-ga';
+import {ga} from "../utils/apiUtils";
 
 const SideNavBar = (props: Props) => {
 
   const history = useHistory();
   const {pathname} = useLocation();
 
+  let onLogoClick = () => {
+    ReactGA.event(ga(TrackingCategory.AppLogoClick, 'Clicked app logo', 'SideBarAppLogo'));
+    return history.push("/");
+  };
+
+  const navItemOnClick = option => {
+    ReactGA.event(ga(TrackingCategory.SideNavBarItemClick, 'Clicked sidebar menu item', option.name));
+    history.push(option.link);
+    return props.onNavChange(option);
+  };
+
   return <SideBar lg={3} className={Classes.showInLargeScreen}>
-    <AppLogoContainer onClick={() => history.push("/")}>
+    <AppLogoContainer onClick={onLogoClick}>
       <AppLogo/>
     </AppLogoContainer>
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (
-        <NavItemContainer>
-          <NavItem key={option.name}
-                   className={className}
-                   onClick={() => {
-                     history.push(option.link);
-                     return props.onNavChange(option);
-                   }}>
+        <NavItemContainer key={option.name}>
+          <NavItem className={className}
+                   onClick={() => navItemOnClick(option)}>
             <NavHeader>
               <option.icon style={{color: Colors.black, marginRight: 10}}/>
               {option.name.toUpperCase()}

@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import styled from 'styled-components';
 import {seasonRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtils";
-import {Colors} from "../utils/Constants";
+import {Colors, TrackingCategory} from "../utils/Constants";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {PrevIcon} from "../icons/PrevIcon";
 import {NextIcon} from "../icons/NextIcon";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 export class SeasonWiseStat extends Component<{}> {
 
@@ -34,9 +36,14 @@ export class SeasonWiseStat extends Component<{}> {
     let rightArrowActive = (page < totalNumberOfPages) * 1;
 
     let paginate = (paginateBy) => {
+
       let isPaginationDisabled = paginateBy === -1 ? !leftArrowActive : !rightArrowActive;
       if (isPaginationDisabled) return;
-      this.setState({page: page + paginateBy})
+      let newPage = page + paginateBy;
+      this.setState({page: newPage})
+
+      ReactGA.event(ga(TrackingCategory.PaginateSeasonWiseStat,
+        'Paginate season wise stats', newPage));
     };
 
     let offset = (page - 1) * pageSize;

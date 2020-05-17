@@ -1,7 +1,7 @@
 import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
-import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
+import {Colors, cssForPhoneAndTablet, Referrer} from "../utils/Constants";
 import {useHistory, withRouter} from "react-router-dom";
 import {AppHeader} from "./AppHeader";
 import {BookmarkPlaceholderPageWithRouter} from "./BookmarkPlaceholderPage";
@@ -15,7 +15,7 @@ const BookmarkedShowPage = ({bookmarkedShows, popularShows}) => {
     {bookmarkedShows.length !== 0 ? <>
       <Header> Bookmarked Shows</Header>
       <ShowListStyled>
-        <ShowList shows={bookmarkedShows}/>
+        <ShowList shows={bookmarkedShows} referrer={Referrer.BookmarkPage}/>
       </ShowListStyled>
     </> : <BookmarkPlaceholderPageWithRouter popularShows={popularShows}/>}
 

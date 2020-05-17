@@ -2,12 +2,16 @@ import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
 import {BingeDetailModel} from "../data/BingeDetailModel";
-import {cssForPhoneAndTablet} from "../utils/Constants";
+import {cssForPhoneAndTablet, Referrer} from "../utils/Constants";
 
-export const SearchResults = ({searchResults}) => {
+export const SearchResults = ({searchResults, query, onItemClick}) => {
   return <Container>
     {searchResults.length !== 0 && <Heading>Search results</Heading>}
-    <ShowList shows={searchResults.map(show => BingeDetailModel(show._source))}/>
+    <ShowList shows={searchResults.map(show => BingeDetailModel(show._source))}
+              referrer={Referrer.SearchResult}
+              searchQueryReferrer={query}
+              onItemClick={onItemClick}
+    />
 
   </Container>
 };

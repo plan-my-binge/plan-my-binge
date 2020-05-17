@@ -2,17 +2,27 @@ import {showRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtil
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-import {Colors} from "../utils/Constants";
+import {Colors, Referrer, TrackingCategory} from "../utils/Constants";
 import {AccessTimeIcon} from "../icons/AccessTimeIcon";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
-export const ShowItem = ({detail, markShowAsVisited, userBingeTime}) => {
+export const ShowItem = ({detail, markShowAsVisited, userBingeTime, referrer, searchQueryReferrer, onItemClick}) => {
   let userRuntime = showRuntimeToUserRuntime(userBingeTime, detail);
   let runtime = toDaysHoursAndMinutes(userRuntime);
   let daysDisplay = `${runtime.days ? runtime.days + "d " : ""}`;
   let hoursDisplay = `${runtime.hours ? runtime.hours + "h " : ""}`;
   let minutesDisplay = `${runtime.minutes}m`;
 
-  return <Item onClick={() => markShowAsVisited(detail.pmbId)}
+
+  let onClick = () => {
+
+    ReactGA.ga('send', 'event', TrackingCategory.ClickShowItem,
+      "Clicked Show Item", detail.primaryTitle, {referrer, searchQueryReferrer});
+    markShowAsVisited(detail.pmbId);
+    onItemClick && onItemClick(detail.pmbId)
+  };
+  return <Item onClick={onClick}
                to={{
                  pathname: "/binge/" + detail.pmbId,
                  data: detail
@@ -23,7 +33,7 @@ export const ShowItem = ({detail, markShowAsVisited, userBingeTime}) => {
     }
     <Runtime>
       {<AccessTimeIcon fontSize={"small"}
-                                         style={{paddingRight: 4, marginBottom: 2}}/>}
+                       style={{paddingRight: 4, marginBottom: 2}}/>}
       {detail.runtime !== 0 ? `${daysDisplay}${hoursDisplay}${minutesDisplay}` : " -"}
     </Runtime>
     <Title>{detail.primaryTitle}</Title>

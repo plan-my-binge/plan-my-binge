@@ -5,6 +5,9 @@ import {MainContent} from "./MainContent.jsx";
 import {NavOptions} from "../utils/Constants";
 import {connect} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import {setSessionId, setUserId} from "../containers/actionCreater";
+import {generateUUID} from "../utils/jsUtils";
+import ReactGA from "react-ga";
 
 export class App extends Component {
   constructor(props) {
@@ -12,6 +15,14 @@ export class App extends Component {
     this.state = {
       menuSelection: NavOptions[0]
     }
+  }
+
+  componentDidMount() {
+    let userId = this.props.userId || generateUUID();
+    let sessionId = generateUUID();
+    this.props.setUserId(userId);
+    this.props.setSessionId(sessionId);
+    ReactGA.set({userId, sessionId});
   }
 
   render() {
@@ -29,11 +40,17 @@ export class App extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    ready: state.app.ready
+    ready: state.app.ready,
+    userId: state.user.userId,
+    sessionId: state.user.sessionId,
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({});
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  setUserId: (id) => dispatch(setUserId(id)),
+  setSessionId: (id) => dispatch(setSessionId(id)),
+});
+
 export const AppContainer = connect(mapStateToProps,
   mapDispatchToProps
 )(App);

@@ -9,9 +9,11 @@ import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
-import {BingeUnit, Colors, isPhoneOrTablet} from "../utils/Constants";
+import {BingeUnit, Colors, isPhoneOrTablet, TrackingCategory} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 const defaultDailyBingingTimeForUser = {
   hours: 2,
@@ -105,6 +107,8 @@ export class BingeDetail extends Component<{ detail: any }> {
 
   onDailyBingingSettingUnitChanged = (event) => {
     let unit = event.target.value;
+    ReactGA.event(ga(TrackingCategory.DailyBingeTimeUnitChange,
+      'Changed daily binge time unit with dropdown', unit));
     this.setState({
       userBingeTimeSetting: {
         unit: unit,
@@ -115,10 +119,12 @@ export class BingeDetail extends Component<{ detail: any }> {
 
   };
 
-  onDailyBingingSettingValueChanged = (value) =>
-    this.setState({
+  onDailyBingingSettingValueChanged = (value) => {
+    ReactGA.event(ga(TrackingCategory.DailyBingeTimeChange, 'Changed daily binge time with input stepper', value));
+    return this.setState({
       userBingeTimeSetting: {...this.state.userBingeTimeSetting, value: value}
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
+  };
 }
 
 const Container = styled.div`

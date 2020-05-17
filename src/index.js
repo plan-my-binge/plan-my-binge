@@ -40,8 +40,7 @@ sagaMiddleware.run(showSaga);
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-
-    <PlanMyBinge/>
+      <PlanMyBinge/>
     </PersistGate>
 
   </Provider>,

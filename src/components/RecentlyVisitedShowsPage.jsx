@@ -1,7 +1,7 @@
 import React from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
-import {Colors, cssForPhoneAndTablet} from "../utils/Constants";
+import {Colors, cssForPhoneAndTablet, Referrer} from "../utils/Constants";
 import {useHistory, withRouter} from "react-router-dom";
 import {AppHeader} from "./AppHeader";
 import {RecentlyVisitedPlaceholderPageWithRouter} from "./RecentlyVisitedPlaceholderPage";
@@ -16,7 +16,7 @@ const RecentlyVisitedShowsPage = ({recentlyVisitedShows, popularShows}) => {
     {recentlyVisitedShows.length !== 0 ? <>
       <Header>Recenly Visited Shows</Header>
       <ShowListStyled>
-        <ShowList shows={recentlyVisitedShows}/>
+        <ShowList shows={recentlyVisitedShows} referrer={Referrer.RecentPage}/>
       </ShowListStyled>
     </> : <RecentlyVisitedPlaceholderPageWithRouter popularShows={popularShows}/>}
 

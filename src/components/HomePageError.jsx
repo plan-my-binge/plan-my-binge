@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import {Colors} from "../utils/Constants";
+import {Colors, TrackingCategory} from "../utils/Constants";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 export const HomePageError = () => {
+  useEffect(() => {
+    ReactGA.event(ga(TrackingCategory.HomePageError,
+      'Error loading content in home page'));
+  });
   return <Error>
     <ErrorTitle> Error loading content :'(
     </ErrorTitle>

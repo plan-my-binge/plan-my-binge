@@ -21,3 +21,6 @@ export const toggleBookmark = createAction('TOGGLE_BOOKMARK');
 
 export const inputFocused = createAction('INPUT_FOCUSED');
 
+export const setUserId = createAction('SET_USER_ID');
+export const setSessionId = createAction('SET_SESSION_ID');
+

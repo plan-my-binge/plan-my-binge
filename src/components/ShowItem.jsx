@@ -18,7 +18,7 @@ export const ShowItem = ({detail, markShowAsVisited, userBingeTime, referrer, se
   let onClick = () => {
 
     ReactGA.ga('send', 'event', TrackingCategory.ClickShowItem,
-      "Clicked Show Item", detail.primaryTitle, {referrer, searchQueryReferrer});
+      "Clicked Show Item", detail.primaryTitle, {dimension3: referrer, dimension4: searchQueryReferrer});
     markShowAsVisited(detail.pmbId);
     onItemClick && onItemClick(detail.pmbId)
   };

@@ -8,8 +8,19 @@ import SearchPageContainer from "../containers/SearchPageContainer";
 import RecentlyVisitedShowsPageContainer from "../containers/RecentlyVisitedShowsPageContainer";
 import BookmarkedShowsPageContainer from "../containers/BookmarkedShowsPageContainer";
 import {withTracker} from "./withTracker";
+import {connect} from "react-redux";
+import {setSessionId, setUserId} from "../containers/actionCreater";
+import {generateUUID} from "../utils/jsUtils";
+import ReactGA from "react-ga";
 
 export class BingePlanner extends Component {
+  componentDidMount() {
+    let userId = this.props.userId || generateUUID();
+    let sessionId = generateUUID();
+    this.props.setUserId(userId);
+    this.props.setSessionId(sessionId);
+    ReactGA.set({userId, dimension5: userId,  dimension2: sessionId});
+  }
 
   render() {
     return (
@@ -48,7 +59,23 @@ export class BingePlanner extends Component {
   }
 }
 
-export const BingePlannerWithRouter = withRouter(withTracker(BingePlanner));
+const mapStateToProps = (state, ownProps) => {
+  return {
+    userId: state.user.userId,
+    sessionId: state.user.sessionId,
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  setUserId: (id) => dispatch(setUserId(id)),
+  setSessionId: (id) => dispatch(setSessionId(id)),
+});
+
+export const BingePlannerWithRouter = connect(mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withTracker(BingePlanner)));
+
+
 const Container = styled.div`
   padding: 0;
 `;

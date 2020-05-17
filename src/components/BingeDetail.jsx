@@ -14,6 +14,7 @@ import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
 import ReactGA from "react-ga";
 import {ga} from "../utils/apiUtils";
+import {withRouter} from "react-router-dom";
 
 const defaultDailyBingingTimeForUser = {
   hours: 2,
@@ -29,6 +30,12 @@ export class BingeDetail extends Component<{ detail: any }> {
       episodes: (24 * 60) / this.props.detail.perEpisodeRuntime
     }
   };
+
+  static getDerivedStateFromProps(props) {
+    if (props.location.pathname.startsWith("/binge") && Boolean(document) ){
+      document.title = props.detail.primaryTitle + " - Plan my Binge : Binge Clock";
+    }
+  }
 
   render() {
     let {detail, bookmark} = this.props;
@@ -126,6 +133,8 @@ export class BingeDetail extends Component<{ detail: any }> {
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
   };
 }
+
+export const BingeDetailWithRouter = withRouter(BingeDetail);
 
 const Container = styled.div`
   padding: 20px;

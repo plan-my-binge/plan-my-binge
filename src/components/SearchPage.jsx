@@ -22,6 +22,9 @@ class SearchPage extends Component<{}> {
   };
 
   componentDidMount() {
+    if (Boolean(document)) {
+      document.title = "Search Shows - Plan my binge!"
+    }
     if (this.props.location.search) {
       let searchQuery = this.props.location.search.replace(/^\?q=/, "");
       searchQuery = decodeURIComponent(searchQuery);

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {setUserBingeTime, toggleBookmark} from "./actionCreater";
-import {BingeDetail} from "../components/BingeDetail";
+import {BingeDetailWithRouter} from "../components/BingeDetail";
 import {getBookmarkStatus} from "./selectors";
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const BingeDetailContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BingeDetail);
+)(BingeDetailWithRouter);
 
 export default BingeDetailContainer

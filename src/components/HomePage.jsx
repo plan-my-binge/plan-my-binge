@@ -13,6 +13,9 @@ import isEmpty from "ramda/src/isEmpty";
 export class HomePage extends Component<{}> {
 
   componentDidMount(): void {
+    if (Boolean(document)) {
+      document.title = "Plan my binge! - Binge clock: Find how long does it take to watch any TV show"
+    }
     if (this.props.popularShows.length === 0)
       this.props.getPopularShows()
   }

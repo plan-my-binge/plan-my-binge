@@ -9,7 +9,9 @@ import {BookmarkPlaceholderPageWithRouter} from "./BookmarkPlaceholderPage";
 const BookmarkedShowPage = ({bookmarkedShows, popularShows}) => {
 
   const history = useHistory();
-
+  if (Boolean(document)) {
+    document.title = "Bookmarked Shows - Plan my binge!"
+  }
   return <Container>
     <AppHeader history={history} title={"Bookmarked Shows"}/>
     {bookmarkedShows.length !== 0 ? <>

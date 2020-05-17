@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {ShowList} from "./ShowList.jsx";
 import styled from "styled-components";
 import {Colors, cssForPhoneAndTablet, Referrer} from "../utils/Constants";
@@ -9,6 +9,12 @@ import {RecentlyVisitedPlaceholderPageWithRouter} from "./RecentlyVisitedPlaceho
 const RecentlyVisitedShowsPage = ({recentlyVisitedShows, popularShows}) => {
 
   const history = useHistory();
+
+  useEffect(() => {
+    if (Boolean(document)) {
+      document.title = "Recently visited shows - Plan my binge!"
+    }
+  }, []);
 
   return <Container>
     <AppHeader history={history} title={"Recently Visited Shows"}/>

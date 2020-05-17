@@ -43,13 +43,15 @@ class SearchPage extends Component<{}> {
 
     this.searchShow(value)
       .then(response => {
+        console.log("response", response)
         this.props.storeShows(response);
         return this.setState({searchResults: response, showLoader: false});
       })
-      .catch(error => {
-        let isCancel = axios.isCancel(error);
-        if (isCancel) this.setState({showLoader: true});
-        else this.setState({searchFailed: true, showLoader: false})
+      .catch(errorResponse => {
+        let isCancel = axios.isCancel(errorResponse.error);
+        if (!isCancel) {
+          this.setState({searchFailed: true, showLoader: false})
+        }
       })
   };
 

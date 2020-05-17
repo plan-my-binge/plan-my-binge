@@ -27,18 +27,14 @@ export const createSearchQuery = () => {
   return async query => {
     
     if (cancelToken) {
-      console.log("Aborting previous request");
       cancelToken.cancel();
     }
 
-    console.log("Creating new request for query -> " + query)
     cancelToken = axios.CancelToken.source();
     try {
       if (cache[query]) {
-        console.log("Serving " + query + " from memory!");
         return cache[query];
       }
-      console.log("Requesting " + query);
       const res = await searchShow(query, { cancelToken: cancelToken.token });
 
       const result = res.data;
@@ -48,12 +44,10 @@ export const createSearchQuery = () => {
     } catch (error) {
       if (axios.isCancel(error)) {
         // Handle if request was cancelled
-        console.log('Request canceled', error.message);
       } else {
         // Handle usual errors
-        console.log('Something went wrong: ', error.message);
+        throw {error}
       }
-      throw error
     }
   };
 };

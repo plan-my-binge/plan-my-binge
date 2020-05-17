@@ -102,6 +102,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${Colors.gray};
+  flex-shrink: 0;
 `;
 
 const Week = styled(Col)`
@@ -109,6 +110,7 @@ const Week = styled(Col)`
     flex-direction: row;
     width: fit-content;
     margin: auto;
+        flex: 0 1 auto;
 `;
 
 const StartOrEndDate = styled.div`
@@ -127,6 +129,7 @@ const StartOrEndDate = styled.div`
 const Date = styled.div`
   border: 1px solid black;
   width: 2.5rem;
+  height: 1.8rem;
   margin: 5px;
   font-size: 1rem;
   vertical-align: middle;
@@ -139,6 +142,7 @@ const Date = styled.div`
 const Day = styled.div`
   border: 1px solid black;
   width: 2.5rem;
+  height: 1.8rem;
   margin: 5px;
   font-size: 1rem;
   vertical-align: middle;

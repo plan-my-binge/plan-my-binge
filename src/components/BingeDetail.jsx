@@ -108,7 +108,7 @@ export class BingeDetail extends Component<{ detail: any }> {
   onDailyBingingSettingUnitChanged = (event) => {
     let unit = event.target.value;
     ReactGA.event(ga(TrackingCategory.DailyBingeTimeUnitChange,
-      'Changed daily binge time unit with dropdown', unit));
+      'Changed daily binge time unit with dropdown', unit.toString()));
     this.setState({
       userBingeTimeSetting: {
         unit: unit,
@@ -120,7 +120,7 @@ export class BingeDetail extends Component<{ detail: any }> {
   };
 
   onDailyBingingSettingValueChanged = (value) => {
-    ReactGA.event(ga(TrackingCategory.DailyBingeTimeChange, 'Changed daily binge time with input stepper', value));
+    ReactGA.event(ga(TrackingCategory.DailyBingeTimeChange, 'Changed daily binge time with input stepper', value.toString()));
     return this.setState({
       userBingeTimeSetting: {...this.state.userBingeTimeSetting, value: value}
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));

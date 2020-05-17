@@ -50,6 +50,8 @@ class SearchPage extends Component<{}> {
 
     this.searchShow(value)
       .then(response => {
+        if (!response)
+          throw {emptyResponse: true}
         this.props.storeShows(response);
 
         if (response.length === 0)
@@ -63,7 +65,7 @@ class SearchPage extends Component<{}> {
       })
       .catch(errorResponse => {
         let isCancel = axios.isCancel(errorResponse.error);
-        if (!isCancel) {
+        if (!isCancel && !(errorResponse.emptyResponse)) {
           ReactGA.event(ga(TrackingCategory.SearchFailed,
             'Search failed', value));
           this.setState({searchFailed: true, showLoader: false})

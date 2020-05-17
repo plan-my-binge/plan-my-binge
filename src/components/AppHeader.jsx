@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import {Classes, Colors} from "../utils/Constants";
+import {Classes, Colors, TrackingCategory} from "../utils/Constants";
 import AppLogo from "../icons/Logo";
 import {ArrowBackIcon} from "../icons/ArrowBackIcon";
+import ReactGA from "react-ga";
+import {ga} from "../utils/apiUtils";
 
 export const AppHeader = ({history, title}) => {
   return <Header>
 
-      <BackLink onClick={() => history.goBack()}>
+      <BackLink onClick={() => {
+        ReactGA.event(ga(TrackingCategory.BackButtonClick,
+          'Clicked back button', ""));
+        return history.goBack();
+      }}>
         <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
       </BackLink>
     <LogoContainer className={Classes.showFlexInSmallerScreen}>

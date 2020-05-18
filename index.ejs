@@ -24,13 +24,38 @@
         font-size: 5rem;
         color: #777777;
       }
+      @keyframes dot-keyframes {
+        0% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.4;
+        }
+      }
+      .loading-dots--dot {
+        display: inline;
+        animation: dot-keyframes 1.5s infinite ease-in-out;
+      }
+      .loading-dots--dot:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .loading-dots--dot:nth-child(3) {
+        animation-delay: 1s;
+      }
+
     </style>
   </head>
   <body>
     <div id="app">
 
       <div class="loader">
-        crunching some numbers..
+        crunching some numbers
+        <span class="loading-dots--dot">.</span>
+        <span class="loading-dots--dot">.</span>
+        <span class="loading-dots--dot">.</span>
       </div>
 
     </div>

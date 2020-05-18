@@ -2,7 +2,7 @@ import {handleActions} from "redux-actions";
 import {setSessionId, setUserBingeTime, setUserId} from "../containers/actionCreater";
 import {BingeUnit} from "../utils/Constants";
 
-const INITIAL_STATE = {userBingeTime: { value: 1, unit: BingeUnit.episodes, userId: null, sessionId: null}};
+const INITIAL_STATE = {userBingeTime: { value: 1, unit: BingeUnit.episodes}, userId: null, sessionId: null};
 
 const user = handleActions(
   {

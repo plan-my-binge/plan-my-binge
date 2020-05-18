@@ -23,11 +23,9 @@ export const BingeCalendar = ({days}) => {
   let nextWeek = dayjs().add(1, 'week').startOf('week');
 
   let completionWeek = dayjs().add(days, 'day').startOf('week');
-  console.debug(today, completionDate, currentWeek, nextWeek, completionWeek, penultimateWeek, totalWeeks);
   let penultimateWeek = dayjs(completionWeek).add(-1, 'week');
 
-  let totalWeeks = Math.abs(completionWeek.diff(currentWeek, 'week'));
-
+  let totalWeeks = Math.abs(completionWeek.diff(currentWeek, 'week')) + 1;
 
   return <Container>
     <Month>

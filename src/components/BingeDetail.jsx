@@ -21,19 +21,44 @@ const defaultDailyBingingTimeForUser = {
   episodes: 1
 };
 
+const maxPossibleNumberOfEpisodesADay = (detail) => {
+  let maxPossible = Math.floor((24 * 60) / detail.perEpisodeRuntime);
+  return Math.min(detail.totalEpisodes, maxPossible);
+};
+
 export class BingeDetail extends Component<{ detail: any }> {
 
   state = {
     userBingeTimeSetting: this.props.userBingeTime,
     possibleDailyBinging: {
       hours: 24,
-      episodes: (24 * 60) / this.props.detail.perEpisodeRuntime
+      episodes: maxPossibleNumberOfEpisodesADay(this.props.detail)
     }
   };
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props, state) {
     if (props.location.pathname.startsWith("/binge") && Boolean(document) ){
       document.title = props.detail.primaryTitle + " - Plan my Binge : Binge Clock";
+    }
+    let maxPossibleEpisodesADay = maxPossibleNumberOfEpisodesADay(props.detail);
+    let possibleDailyBinging = {
+      hours: 24,
+      episodes: maxPossibleEpisodesADay
+    };
+
+    if (state.userBingeTimeSetting.unit === BingeUnit.episodes &&
+      state.userBingeTimeSetting.value > maxPossibleEpisodesADay) {
+      return {
+        userBingeTimeSetting: {
+          unit: BingeUnit.episodes,
+          value: maxPossibleEpisodesADay
+        }, possibleDailyBinging
+      }
+    }
+
+    return {
+      userBingeTimeSetting: state.userBingeTimeSetting,
+      possibleDailyBinging
     }
   }
 
@@ -101,7 +126,7 @@ export class BingeDetail extends Component<{ detail: any }> {
         />
 
         <SelectStyled
-          onChange={this.onDailyBingingSettingUnitChanged}
+          onChange={(e) => this.onDailyBingingSettingUnitChanged(e, maxLimit)}
           defaultValue={this.state.userBingeTimeSetting.unit}>
           <Option value={"hours"} label={"hours"}/>
           <Option value={"episodes"} label={"episodes"}/>
@@ -112,14 +137,17 @@ export class BingeDetail extends Component<{ detail: any }> {
     </DailyBingTime>;
   };
 
-  onDailyBingingSettingUnitChanged = (event) => {
+  onDailyBingingSettingUnitChanged = (event, maxLimit) => {
     let unit = event.target.value;
     ReactGA.event(ga(TrackingCategory.DailyBingeTimeUnitChange,
       'Changed daily binge time unit with dropdown', unit.toString()));
     this.setState({
       userBingeTimeSetting: {
         unit: unit,
-        value: unit === BingeUnit.episodes ? defaultDailyBingingTimeForUser.episodes :
+        value: Math.min(this.state.userBingeTimeSetting.value,
+          unit === BingeUnit.episodes ? this.state.possibleDailyBinging.episodes :
+            this.state.possibleDailyBinging.hours),
+        value2: unit === BingeUnit.episodes ? defaultDailyBingingTimeForUser.episodes :
           defaultDailyBingingTimeForUser.hours
       }
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
@@ -182,12 +210,6 @@ const BingeTimeContainerCol = styled(Col)`
 const BingeTimeAndCalenderContainer = styled.div`
   padding: 5px;
 `;
-
-// const SelectStyled = styled(Select)`
-//   margin-right: 5px;
-//   margin-left: 5px;
-//   margin-bottom: 10px;
-// `;
 
 const TimeSliderHint = styled.div`
   margin: auto;

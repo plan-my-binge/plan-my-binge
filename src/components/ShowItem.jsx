@@ -2,10 +2,9 @@ import {showRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtil
 import {Link} from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-import {Colors, Referrer, TrackingCategory} from "../utils/Constants";
+import {Colors, TrackingCategory} from "../utils/Constants";
 import {AccessTimeIcon} from "../icons/AccessTimeIcon";
 import ReactGA from "react-ga";
-import {ga} from "../utils/apiUtils";
 
 export const ShowItem = ({detail, markShowAsVisited, userBingeTime, referrer, searchQueryReferrer, onItemClick}) => {
   let userRuntime = showRuntimeToUserRuntime(userBingeTime, detail);

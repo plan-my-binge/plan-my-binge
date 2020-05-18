@@ -57,7 +57,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.ejs',
       title: 'Plan your binge!',
-      showErrors: true
+      showErrors: true,
+      minify: {
+        collapseWhitespace: true
+      }
     }),
     new CopyPlugin({
       patterns: [

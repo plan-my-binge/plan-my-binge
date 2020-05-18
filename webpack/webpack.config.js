@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 var webpack = require('webpack');
 var path = require('path');
@@ -61,9 +62,14 @@ module.exports = {
       title: 'Plan your binge!',
       showErrors: true
     }),new CompressionPlugin(),
-    // new BundleAnalyzerPlugin({
-    //   generateStatsFile: true,
-    //   statsFilename: "prod.json"
-    // })
+    new CopyPlugin({
+      patterns: [
+        { from: parentDir +  './src/style/bootstrap.purge.css', to: parentDir + './dist' },
+      ],
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      statsFilename: "prod.json"
+    })
   ]
 };

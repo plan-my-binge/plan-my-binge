@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 var webpack = require('webpack');
 var path = require('path');
@@ -57,6 +58,11 @@ module.exports = {
       template: 'index.ejs',
       title: 'Plan your binge!',
       showErrors: true
-    })
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: parentDir +  './src/style/bootstrap.purge.css', to: parentDir + './dist' },
+      ],
+    }),
   ]
 };

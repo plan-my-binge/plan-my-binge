@@ -18,7 +18,7 @@ export class SeasonWiseStat extends Component<{}> {
 
   defaultState = {
     page: 1,
-    pageSize: 5
+    pageSize: 10
   };
 
   componentDidUpdate(prevProps) {

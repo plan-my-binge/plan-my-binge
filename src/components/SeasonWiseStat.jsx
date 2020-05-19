@@ -62,7 +62,7 @@ export class SeasonWiseStat extends Component<{}> {
           return <StatBlock key={index}>
             <SeasonNumber>Season {(index + 1) + ((page - 1) * pageSize)}</SeasonNumber>
             <NumberOfEpisodes>{numberOfEpisodes} Episodes</NumberOfEpisodes>
-            {season.seasonRuntime && <Runtime>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`} Runtime</Runtime>}
+            {season.seasonRuntime && <Runtime>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`}</Runtime>}
           </StatBlock>
         })}
       </Container>

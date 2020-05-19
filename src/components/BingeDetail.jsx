@@ -15,6 +15,7 @@ import {BingeTime} from "./BingeTime";
 import ReactGA from "react-ga";
 import {ga} from "../utils/apiUtils";
 import {withRouter} from "react-router-dom";
+import MetaTags from "react-meta-tags";
 
 const defaultDailyBingingTimeForUser = {
   hours: 2,
@@ -26,6 +27,11 @@ const maxPossibleNumberOfEpisodesADay = (detail) => {
   return Math.min(detail.totalEpisodes, maxPossible);
 };
 
+const defaultTitle = "Plan my binge! - Binge clock: Find how long does it take to watch any TV show";
+
+const showPageTitle = (showName) =>
+  `${showName}  | Plan my binge | Find how long does it take to watch ${showName}`;
+
 export class BingeDetail extends Component<{ detail: any }> {
 
   state = {
@@ -33,12 +39,14 @@ export class BingeDetail extends Component<{ detail: any }> {
     possibleDailyBinging: {
       hours: 24,
       episodes: maxPossibleNumberOfEpisodesADay(this.props.detail)
-    }
+    },
+    pageTitle: ""
   };
 
   static getDerivedStateFromProps(props, state) {
+    let pageTitle = defaultTitle;
     if (props.location.pathname.startsWith("/binge") && Boolean(document) ){
-      document.title = props.detail.primaryTitle + " - Plan my Binge : Binge Clock";
+      pageTitle = showPageTitle(props.detail.primaryTitle)
     }
     let maxPossibleEpisodesADay = maxPossibleNumberOfEpisodesADay(props.detail);
     let possibleDailyBinging = {
@@ -49,6 +57,7 @@ export class BingeDetail extends Component<{ detail: any }> {
     if (state.userBingeTimeSetting.unit === BingeUnit.episodes &&
       state.userBingeTimeSetting.value > maxPossibleEpisodesADay) {
       return {
+        pageTitle,
         userBingeTimeSetting: {
           unit: BingeUnit.episodes,
           value: maxPossibleEpisodesADay
@@ -57,6 +66,7 @@ export class BingeDetail extends Component<{ detail: any }> {
     }
 
     return {
+      pageTitle,
       userBingeTimeSetting: state.userBingeTimeSetting,
       possibleDailyBinging
     }
@@ -75,6 +85,10 @@ export class BingeDetail extends Component<{ detail: any }> {
       !isPhoneOrTablet && detail.landscapePoster && !detail.portraitPoster;
 
     return <Container>
+      <MetaTags>
+        <title>{this.state.pageTitle}</title>
+        <meta property="og:title" content={this.state.pageTitle}/>
+      </MetaTags>
       <BingeDetailHeader detail={detail}
                          pmbId={detail.pmbId}
                          bookmark={bookmark}

@@ -5,14 +5,18 @@ import {Colors, cssForPhoneAndTablet, Referrer} from "../utils/Constants";
 import {useHistory, withRouter} from "react-router-dom";
 import {AppHeader} from "./AppHeader";
 import {BookmarkPlaceholderPageWithRouter} from "./BookmarkPlaceholderPage";
+import MetaTags from 'react-meta-tags';
 
 const BookmarkedShowPage = ({bookmarkedShows, popularShows}) => {
 
   const history = useHistory();
-  if (Boolean(document)) {
-    document.title = "Bookmarked Shows - Plan my binge!"
-  }
+
   return <Container>
+    <MetaTags>
+      <title>"Bookmarks | Plan my binge | Find how long does it take to watch any TV show"</title>
+    </MetaTags>
+
+
     <AppHeader history={history} title={"Bookmarked Shows"}/>
     {bookmarkedShows.length !== 0 ? <>
       <Header> Bookmarked Shows</Header>

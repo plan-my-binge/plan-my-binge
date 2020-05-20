@@ -88,6 +88,7 @@ export class BingeDetail extends Component<{ detail: any }> {
       <MetaTags>
         <title>{this.state.pageTitle}</title>
         <meta property="og:title" content={this.state.pageTitle}/>
+        <meta property="og:image" content={detail.landscapePoster || detail.portraitPoster}/>
       </MetaTags>
       <BingeDetailHeader detail={detail}
                          pmbId={detail.pmbId}

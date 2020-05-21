@@ -9,7 +9,7 @@ import {SeasonWiseStat} from "./SeasonWiseStat.jsx";
 import {BingeStats} from "./BingeStats.jsx";
 import Option from 'muicss/lib/react/option';
 import Select from 'muicss/lib/react/select';
-import {BingeUnit, Colors, isPhoneOrTablet, TrackingCategory} from "../utils/Constants";
+import {BingeUnit, Classes, Colors, isPhoneOrTablet, TrackingCategory} from "../utils/Constants";
 import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
 import ReactGA from "react-ga";
@@ -100,16 +100,16 @@ export class BingeDetail extends Component<{ detail: any }> {
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
           {detail.landscapePoster &&
-          <PosterLandscape src={detail.landscapePoster} className={"d-block d-md-none"}/>}
+          <PosterLandscape src={detail.landscapePoster} className={Classes.showOnlyInMobile}/>}
 
           {landscapePosterNotAvailableInPhoneButPortraitAvailable &&
-          <PosterPortrait src={detail.portraitPoster}/>}
+          <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInMobile}/>}
 
           {portraitPosterNotAvailableInWebButLandscapeAvailable &&
-          <PosterLandscapeForWeb src={detail.landscapePoster}/>}
+          <PosterLandscapeForWeb src={detail.landscapePoster} className={Classes.showOnlyInWeb}/>}
 
           {detail.portraitPoster &&
-          <PosterPortrait src={detail.portraitPoster} className={"d-none d-md-block"}/>}
+          <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInWeb}/>}
 
         </PosterContainerCol>
 

@@ -18,7 +18,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
 
   componentDidMount() {
     if (!this.props.location.data) {
-      this.props.getShow(this.props.match.params.pmbId);
+      this.props.getShow(this.props.match.params.pmbId.split('-')[0]);
     }
 
     if (this.props.popularShows.length === 0) {
@@ -35,7 +35,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
   render() {
 
     let {popularShows, showError, showLoader, shows, match, location} = this.props;
-    let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId);
+    let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId.split('-')[0]);
 
     return <Container>
       <AppHeader history={this.props.history}/>

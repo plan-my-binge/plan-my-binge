@@ -53,3 +53,5 @@ export const createSearchQuery = () => {
 };
 
 export const ga = (category, action, label) => ({category, action, label});
+
+export const getShowUri = (pmbId, primaryTitle) => pmbId + "-" + primaryTitle.replace(/\s/g, "-");

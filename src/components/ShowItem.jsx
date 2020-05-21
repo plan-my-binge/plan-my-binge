@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {Colors, TrackingCategory} from "../utils/Constants";
 import {AccessTimeIcon} from "../icons/AccessTimeIcon";
 import ReactGA from "react-ga";
+import {getShowUri} from "../utils/apiUtils";
 
 export const ShowItem = ({detail, markShowAsVisited, userBingeTime, referrer, searchQueryReferrer, onItemClick}) => {
   let userRuntime = showRuntimeToUserRuntime(userBingeTime, detail);
@@ -23,7 +24,7 @@ export const ShowItem = ({detail, markShowAsVisited, userBingeTime, referrer, se
   };
   return <Item onClick={onClick}
                to={{
-                 pathname: "/binge/" + detail.pmbId,
+                 pathname: "/binge/" + getShowUri(detail.pmbId, detail.primaryTitle),
                  data: detail
                }}>
 

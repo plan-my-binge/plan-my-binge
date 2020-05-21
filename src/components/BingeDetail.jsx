@@ -13,7 +13,7 @@ import {BingeUnit, Colors, isPhoneOrTablet, TrackingCategory} from "../utils/Con
 import {InputStepper} from "./InputStepper.jsx";
 import {BingeTime} from "./BingeTime";
 import ReactGA from "react-ga";
-import {ga} from "../utils/apiUtils";
+import {ga, getShowUri} from "../utils/apiUtils";
 import {withRouter} from "react-router-dom";
 import MetaTags from "react-meta-tags";
 
@@ -89,6 +89,8 @@ export class BingeDetail extends Component<{ detail: any }> {
         <title>{this.state.pageTitle}</title>
         <meta property="og:title" content={this.state.pageTitle}/>
         <meta property="og:image" content={detail.landscapePoster || detail.portraitPoster}/>
+        <meta property="og:url"
+              content={"https://planmybinge.com/binge/" + getShowUri(detail.pmbId, detail.primaryTitle)}/>
       </MetaTags>
       <BingeDetailHeader detail={detail}
                          pmbId={detail.pmbId}

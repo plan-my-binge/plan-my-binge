@@ -50,7 +50,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 20px;
+  margin: 10px;
   margin-top: 40px;
   text-align: center;
 `;

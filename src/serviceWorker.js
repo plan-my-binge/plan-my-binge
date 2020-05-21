@@ -10,7 +10,10 @@ self.addEventListener('fetch', function(event) {
 var CACHE_FILES = [
   '/',
   'shows/popular',
-  'https://fonts.googleapis.com/css?family=Open+Sans:400&display=swap'
+  'https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap',
+  'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&display=swap',
+  '/bootstrap.mui.css',
+  '/bundle.js'
 ];
 
 self.addEventListener('activate', function(event){

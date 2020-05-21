@@ -67,7 +67,7 @@ module.exports = {
     }),new CompressionPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: parentDir +  './src/style/bootstrap.purge.css', to: parentDir + './dist' },
+        { from: parentDir +  './src/style/bootstrap.mui.css', to: parentDir + './dist' },
       ],
     }),
     new BundleAnalyzerPlugin({

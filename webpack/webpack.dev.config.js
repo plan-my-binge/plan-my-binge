@@ -64,7 +64,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: parentDir +  './src/style/bootstrap.purge.css', to: parentDir + './dist' },
+        { from: parentDir +  './src/style/bootstrap.mui.css', to: parentDir + './dist' }
       ],
     }),
   ]

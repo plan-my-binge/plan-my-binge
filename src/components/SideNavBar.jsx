@@ -30,7 +30,7 @@ const SideNavBar = (props: Props) => {
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (
-        <NavItemContainer key={option.name}>
+        <NavItemContainer key={option.name} data-nosnippet>
           <NavItem className={className}
                    onClick={() => navItemOnClick(option)}>
             <NavHeader>

@@ -17,13 +17,13 @@ const AppHeaderComponent = ({history, title}) => {
 
   return <Header>
 
-      <BackLink onClick={() => {
-        ReactGA.event(ga(TrackingCategory.BackButtonClick,
-          'Clicked back button', ""));
-        return history.goBack();
-      }}>
-        <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
-      </BackLink>
+    <BackLink onClick={() => {
+      ReactGA.event(ga(TrackingCategory.BackButtonClick,
+        'Clicked back button', ""));
+      return history.goBack();
+    }}>
+      <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
+    </BackLink>
     <LogoContainer className={Classes.showFlexInSmallerScreen}>
       <AppLogoContainer onClick={() => history.push("/")}>
         <AppLogo/>

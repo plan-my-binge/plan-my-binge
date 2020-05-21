@@ -19,7 +19,7 @@ function BottomNavBar(props: Props) {
 
   return <BottomBar className={Classes.showInSmallerScreen}>
 
-    {!searchPageSelected && <BarContainer>
+    {!searchPageSelected && <BarContainer data-nosnippet>
       {NavOptions.map(option => {
         let className = pathname === option.link ? "selection" : "";
 

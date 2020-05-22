@@ -14,17 +14,19 @@ export class App extends Component {
     }
   }
 
-
-
   render() {
     return <StyledContainer>
-      {this.props.ready &&
-      <BrowserRouter>
-        <NavigationMenus onNavChange={(menuSelection) => this.setState({menuSelection})}
-                         selection={this.state.menuSelection}/>
-        <MainContent/>
-      </BrowserRouter>}
+      {process.env.SSR && this.menus()}
+      {this.props.ready && !process.env.SSR && <BrowserRouter>{this.menus()} </BrowserRouter>}
     </StyledContainer>;
+  }
+
+  menus() {
+    return <>
+      <NavigationMenus onNavChange={(menuSelection) => this.setState({menuSelection})}
+                       selection={this.state.menuSelection}/>
+      <MainContent/>
+    </>;
   }
 }
 
@@ -35,8 +37,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-});
+const mapDispatchToProps = (dispatch, ownProps) => ({});
 
 export const AppContainer = connect(mapStateToProps,
   mapDispatchToProps

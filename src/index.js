@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PlanMyBinge from "./components/PlanMyBinge.jsx";
-import './style/app.less'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistReducer, persistStore } from 'redux-persist'
 
@@ -12,6 +11,7 @@ import createSagaMiddleware from 'redux-saga'
 import showSaga from "./containers/showsSaga";
 import storage from 'redux-persist/lib/storage'
 import { register } from 'register-service-worker'
+if (!process.env.SSR) require('./style/app.less');
 
 const persistConfig = {
   key: 'root',

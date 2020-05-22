@@ -1,5 +1,5 @@
-import '../style/shimmer.less'
 import React from "react";
+if (!process.env.SSR) require('../style/shimmer.less');
 import styled, {keyframes, css} from 'styled-components';
 import Row from "react-bootstrap/Row";
 import range from "ramda/src/range";

@@ -64,15 +64,19 @@ module.exports = {
       minify: {
         collapseWhitespace: true
       }
-    }),new CompressionPlugin(),
+    }), new CompressionPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: parentDir +  './src/style/bootstrap.mui.css', to: parentDir + './dist' },
+        {from: parentDir + './src/style/bootstrap.mui.css', to: parentDir + './dist'},
       ],
     }),
     new BundleAnalyzerPlugin({
       generateStatsFile: true,
       statsFilename: "prod.json"
+    }),
+    new webpack.DefinePlugin({
+      ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com/api"),
+      ['process.env.SSR']: false
     })
   ]
 };

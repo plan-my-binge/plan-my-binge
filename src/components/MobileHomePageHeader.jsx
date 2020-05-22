@@ -21,15 +21,14 @@ const MobileHomePageHeader = () => {
   };
 
   return <Container>
-    <HeaderMobile className={Classes.showFlexInSmallerScreen}>
+    {!process.env.SSR && <HeaderMobile className={Classes.showFlexInSmallerScreen}>
       <AppLogoContainer  onClick={() => onLogoClick(history)}>
         <AppLogo/>
       </AppLogoContainer>
       <HeaderMessage >
         <h5>Find out how long it will take to watch all episodes of any TV Show</h5>
       </HeaderMessage>
-
-    </HeaderMobile>
+    </HeaderMobile>}
 
     <HeaderWeb className={Classes.showFlexInLargeScreen}>
       <HeaderMessage >

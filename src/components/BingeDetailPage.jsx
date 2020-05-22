@@ -21,7 +21,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
       this.props.getShow(this.props.match.params.pmbId.split('-')[0]);
     }
 
-    if (this.props.popularShows.length === 0) {
+    if (this.props.popularShows.length === 0 && !process.env.SSR) {
       this.props.getPopularShows();
     }
   }
@@ -38,12 +38,13 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
     let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId.split('-')[0]);
 
     return <Container>
+      {process.env.SSR && <h2>Find out how long does it take to watch every episodes of {bingeDetail.primaryTitle}, when you watch n hours a day</h2>}
       <AppHeader history={this.props.history}/>
       <Content>
         {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}
         {showError && <HomePageError/>}
         {showLoader && <BingeDetailShimmer/>}
-        {bingeDetail && popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
+        {bingeDetail && popularShows.length !== 0 && !process.env.SSR && <PopularShows shows={popularShows}/>}
       </Content>
     </Container>
   }

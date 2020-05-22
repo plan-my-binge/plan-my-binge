@@ -15,24 +15,30 @@ const AppHeaderComponent = ({history, title}) => {
       'Clicked app header search button', ""));
   };
 
-  return <Header>
+  let onBackButtonClick = () => {
+    ReactGA.event(ga(TrackingCategory.BackButtonClick,
+      'Clicked back button', ""));
+    return history.goBack();
+  };
 
-    <BackLink onClick={() => {
-      ReactGA.event(ga(TrackingCategory.BackButtonClick,
-        'Clicked back button', ""));
-      return history.goBack();
-    }}>
-      <ArrowBackIcon fontSize={"large"}/><span className={Classes.showFlexInLargeScreen}>Back</span>
+  return <Header>
+    <BackLink
+      data-nosnippet
+      onClick={onBackButtonClick}>
+      <ArrowBackIcon fontSize={"large"}/>
+      <span className={Classes.showFlexInLargeScreen}>Back</span>
     </BackLink>
+
+    {!process.env.SSR &&
     <LogoContainer className={Classes.showFlexInSmallerScreen}>
       <AppLogoContainer onClick={() => history.push("/")}>
         <AppLogo/>
       </AppLogoContainer>
-    </LogoContainer>
+    </LogoContainer>}
+
     {!location.pathname.startsWith("/search") &&
     <SearchLink to={"/search"} onClick={onClick}>
       <SearchIcon style={{marginRight: 10}} fontSize={"large"}/></SearchLink>}
-
   </Header>
 };
 
@@ -62,7 +68,7 @@ const BackLink = styled.a`
   
   
   &:hover {
-    color: ${Colors.gray};
+    color: ${Colors.darkGray};
     text-decoration: none;
     border-radius: 10px;
   }

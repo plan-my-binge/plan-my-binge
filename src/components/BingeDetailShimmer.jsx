@@ -1,10 +1,12 @@
-import '../style/shimmer.less'
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import styled from 'styled-components';
+if (!process.env.SSR) require('../style/shimmer.less');
 
 export const BingeDetailShimmer = () => {
-  return <div className="shimmercard br">
+  return <ContainerStyled>
+  <div className="shimmercard br">
     <div className="wrapper">
       <div className={"d-none d-md-block"}>
         <div className="title animate"/>
@@ -31,4 +33,9 @@ export const BingeDetailShimmer = () => {
       </Row>
     </div>
   </div>
+  </ContainerStyled>
 };
+
+const ContainerStyled = styled.div`
+  
+`;

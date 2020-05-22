@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 var webpack = require('webpack');
@@ -7,7 +9,8 @@ var path = require('path');
 var parentDir = path.join(__dirname, '../');
 
 module.exports = {
-  mode: "development",
+  mode: "production",
+  devtool: 'source-map',
   entry: [
     path.join(parentDir, './src/index.js')
   ],
@@ -61,15 +64,19 @@ module.exports = {
       minify: {
         collapseWhitespace: true
       }
-    }),
+    }), new CompressionPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: parentDir +  './src/style/bootstrap.mui.css', to: parentDir + './dist' }
+        {from: parentDir + './src/style/bootstrap.mui.css', to: parentDir + './dist'},
       ],
     }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      statsFilename: "prod.json"
+    }),
     new webpack.DefinePlugin({
-      ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com/api"),
-      ['process.env.SSR']: false
+      ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com"),
+      ['process.env.SSR']: true
     })
   ]
 };

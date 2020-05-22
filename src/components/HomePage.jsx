@@ -30,11 +30,11 @@ export class HomePage extends Component<{}> {
 
     let recentlyVisitedShowsAvailable = recentlyVisitedShows.length !== 0;
     return <Container>
-      <MobileHomePageHeaderWithRouter/>
+      <MobileHomePageHeaderWithRouter detail={highlightedShow}/>
 
       {highlightedShow && <BingeDetailContainer detail={highlightedShow}/>}
 
-      {/*if recently view is empty fetch and show popular shows*/}
+      {/*if recently viewed is empty fetch and show popular shows*/}
       {!highlightedShow && showError && <HomePageError/>}
       {!highlightedShow && showLoader && <BingeDetailShimmer/>}
 

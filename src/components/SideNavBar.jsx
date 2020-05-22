@@ -24,9 +24,9 @@ const SideNavBar = (props: Props) => {
   };
 
   return <SideBar lg={3} className={Classes.showInLargeScreen}>
-    <AppLogoContainer onClick={onLogoClick}>
+    {!process.env.SSR && <AppLogoContainer onClick={onLogoClick}>
       <AppLogo/>
-    </AppLogoContainer>
+    </AppLogoContainer>}
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (

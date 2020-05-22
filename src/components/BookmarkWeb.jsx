@@ -5,7 +5,8 @@ import {StarFilledIcon} from "../icons/StarFilledIcon";
 import {StarBorderedIcon} from "../icons/StarBorderedIcon";
 
 export const BookmarkWeb = ({flag, pmbId, className, toggleBookmark}) => {
-  return <Container onClick={() => toggleBookmark(pmbId)}
+  return <Container data-nosnippet
+                    onClick={() => toggleBookmark(pmbId)}
                     className={"d-none d-md-flex"}>
     {flag ? <StarFilledIcon/> : <StarBorderIconStyled/>}
     {<BookmarkLabel>{flag ? "Remove bookmark" : "Add Bookmark"}</BookmarkLabel>}

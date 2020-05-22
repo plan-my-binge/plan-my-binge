@@ -45,9 +45,9 @@ export class BingeDetail extends Component<{ detail: any }> {
 
   static getDerivedStateFromProps(props, state) {
     let pageTitle = defaultTitle;
-    if (props.location.pathname.startsWith("/binge") && Boolean(document) ){
-      pageTitle = showPageTitle(props.detail.primaryTitle)
-    }
+    // if (props.location.pathname.startsWith("/binge") &&  && Boolean(document) ){
+    //   pageTitle = showPageTitle(props.detail.primaryTitle)
+    // }
     let maxPossibleEpisodesADay = maxPossibleNumberOfEpisodesADay(props.detail);
     let possibleDailyBinging = {
       hours: 24,
@@ -79,10 +79,10 @@ export class BingeDetail extends Component<{ detail: any }> {
     let userRuntimeInDays = minutesToDays(userRuntimeInMinutes);
 
     let landscapePosterNotAvailableInPhoneButPortraitAvailable =
-      isPhoneOrTablet && !detail.landscapePoster && detail.portraitPoster;
+      isPhoneOrTablet() && !detail.landscapePoster && detail.portraitPoster;
 
     let portraitPosterNotAvailableInWebButLandscapeAvailable =
-      !isPhoneOrTablet && detail.landscapePoster && !detail.portraitPoster;
+      !isPhoneOrTablet() && detail.landscapePoster && !detail.portraitPoster;
 
     return <Container>
       <MetaTags>

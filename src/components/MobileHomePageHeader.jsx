@@ -23,11 +23,11 @@ const MobileHomePageHeader = () => {
   return <Container>
     <HeaderMobile className={Classes.showFlexInSmallerScreen}>
       <AppLogoContainer  onClick={() => onLogoClick(history)}>
-        <AppLogo/>
+        {/*<AppLogo/>*/}
       </AppLogoContainer>
-      <HeaderMessage >
-        <h5>Find out how long it will take to watch all episodes of any TV Show</h5>
-      </HeaderMessage>
+      {/*<HeaderMessage >*/}
+      {/*  <h5>Find out how long it will take to watch all episodes of any TV Show</h5>*/}
+      {/*</HeaderMessage>*/}
 
     </HeaderMobile>
 

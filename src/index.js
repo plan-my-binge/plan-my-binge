@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PlanMyBinge from "./components/PlanMyBinge.jsx";
-import './style/app.less'
+// import './style/app.less'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistReducer, persistStore } from 'redux-persist'
 

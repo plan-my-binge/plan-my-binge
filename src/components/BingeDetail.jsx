@@ -45,7 +45,7 @@ export class BingeDetail extends Component<{ detail: any }> {
 
   static getDerivedStateFromProps(props, state) {
     let pageTitle = defaultTitle;
-    if (props.location.pathname.startsWith("/binge") && Boolean(document) ){
+    if (props.location.pathname.startsWith("/binge") && true ){
       pageTitle = showPageTitle(props.detail.primaryTitle)
     }
     let maxPossibleEpisodesADay = maxPossibleNumberOfEpisodesADay(props.detail);
@@ -99,14 +99,14 @@ export class BingeDetail extends Component<{ detail: any }> {
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          {detail.landscapePoster &&
-          <PosterLandscape src={detail.landscapePoster} className={Classes.showOnlyInMobile}/>}
+          {/*{detail.landscapePoster &&*/}
+          {/*<PosterLandscape src={detail.landscapePoster} className={Classes.showOnlyInMobile}/>}*/}
 
           {landscapePosterNotAvailableInPhoneButPortraitAvailable &&
           <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInMobile}/>}
 
-          {portraitPosterNotAvailableInWebButLandscapeAvailable &&
-          <PosterLandscapeForWeb src={detail.landscapePoster} className={Classes.showOnlyInWeb}/>}
+          {/*{portraitPosterNotAvailableInWebButLandscapeAvailable &&*/}
+          {/*<PosterLandscapeForWeb src={detail.landscapePoster} className={Classes.showOnlyInWeb}/>}*/}
 
           {detail.portraitPoster &&
           <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInWeb}/>}

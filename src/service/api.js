@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const host = "planmybinge.com/api";
+const host = "127.0.0.1:5000";
 
 export const searchShow = (query, cancellationToken) =>
-  axios.get(`https://${host}/shows?q=${query}`, cancellationToken);
+  axios.get(`http://${host}/shows?q=${query}`, cancellationToken);
 
 export const Api = {
-  getShow : (showId) => axios.get(`https://${host}/shows/${showId}`),
-  getPopularShow : () => axios.get(`https://${host}/shows/popular`)
+  getShow : (showId) => axios.get(`http://${host}/shows/${showId}`),
+  getPopularShow : () => axios.get(`http://${host}/shows/popular`)
 };
 
 export const Url = {
-  getPopularShows : `https://${host}/shows/popular`,
+  getPopularShows : `http://${host}/shows/popular`,
 };

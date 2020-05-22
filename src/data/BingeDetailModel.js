@@ -1,34 +1,36 @@
 import {mode} from "../utils/TimeUtils";
 
-export const BingeDetailModel = (bingeDetail) => ({
+export const BingeDetailModel = (bingeDetail) => {
+  return ({
 
-  pmbId: bingeDetail.pmb_id,
+    pmbId: bingeDetail.pmb_id,
 
-  averageRating: bingeDetail.averageRating,
+    averageRating: bingeDetail.averageRating,
 
-  startYear: bingeDetail.startYear,
-  endYear: bingeDetail.endYear,
+    startYear: bingeDetail.startYear,
+    endYear: bingeDetail.endYear,
 
-  genres: bingeDetail.genres,
+    genres: bingeDetail.genres,
 
-  landscapePoster: bingeDetail.landscapePoster ?
-    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + bingeDetail.landscapePoster : null,
-  portraitPoster: bingeDetail.portraitPoster ?
-    "https://image.tmdb.org/t/p/w342" + bingeDetail.portraitPoster : null,
+    landscapePoster: bingeDetail.landscapePoster ?
+      "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + bingeDetail.landscapePoster : null,
+    portraitPoster: bingeDetail.portraitPoster ?
+      "https://image.tmdb.org/t/p/w342" + bingeDetail.portraitPoster : null,
 
-  perEpisodeRuntime: bingeDetail.perEpisodeRuntime,
+    perEpisodeRuntime: bingeDetail.perEpisodeRuntime,
 
-  primaryTitle: bingeDetail.primaryTitle,
+    primaryTitle: bingeDetail.primaryTitle,
 
-  totalEpisodes: Math.ceil(bingeDetail.seasons.reduce((accumulator, season) => {
-    return season.numberOfEpisodes + accumulator
-  }, 0)),
+    totalEpisodes: Math.ceil(bingeDetail.seasons.reduce((accumulator, season) => {
+      return season.numberOfEpisodes + accumulator
+    }, 0)),
 
-  episodesPerSeason: mode(bingeDetail.seasons.map(x => x.numberOfEpisodes)),
+    episodesPerSeason: mode(bingeDetail.seasons.map(x => x.numberOfEpisodes)),
 
-  runtime: bingeDetail.seasons.reduce((accumulator, season) => {
-    return season.seasonRuntime + accumulator
-  }, 0),
+    runtime: bingeDetail.seasons.reduce((accumulator, season) => {
+      return season.seasonRuntime + accumulator
+    }, 0),
 
-  seasons: bingeDetail.seasons,
-});
+    seasons: bingeDetail.seasons,
+  });
+};

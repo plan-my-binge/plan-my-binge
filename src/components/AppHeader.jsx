@@ -17,7 +17,9 @@ const AppHeaderComponent = ({history, title}) => {
 
   return <Header>
 
-    <BackLink onClick={() => {
+    <BackLink
+      data-nosnippet
+      onClick={() => {
       ReactGA.event(ga(TrackingCategory.BackButtonClick,
         'Clicked back button', ""));
       return history.goBack();
@@ -26,13 +28,12 @@ const AppHeaderComponent = ({history, title}) => {
     </BackLink>
     <LogoContainer className={Classes.showFlexInSmallerScreen}>
       <AppLogoContainer onClick={() => history.push("/")}>
-        <AppLogo/>
+        {/*<AppLogo/>*/}
       </AppLogoContainer>
     </LogoContainer>
     {!location.pathname.startsWith("/search") &&
     <SearchLink to={"/search"} onClick={onClick}>
       <SearchIcon style={{marginRight: 10}} fontSize={"large"}/></SearchLink>}
-
   </Header>
 };
 

@@ -5,7 +5,7 @@ import {MainContent} from "./MainContent.jsx";
 import {NavOptions} from "../utils/Constants";
 import {connect} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
-
+import { StaticRouter } from 'react-router-dom'
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -18,12 +18,12 @@ export class App extends Component {
 
   render() {
     return <StyledContainer>
-      {this.props.ready &&
-      <BrowserRouter>
+      {
+      <>
         <NavigationMenus onNavChange={(menuSelection) => this.setState({menuSelection})}
                          selection={this.state.menuSelection}/>
         <MainContent/>
-      </BrowserRouter>}
+      </>}
     </StyledContainer>;
   }
 }

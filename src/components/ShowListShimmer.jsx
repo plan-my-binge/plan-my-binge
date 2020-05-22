@@ -1,4 +1,4 @@
-import '../style/shimmer.less'
+// import '../style/shimmer.less'
 import React from "react";
 import styled, {keyframes, css} from 'styled-components';
 import Row from "react-bootstrap/Row";

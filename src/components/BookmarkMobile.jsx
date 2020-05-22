@@ -5,7 +5,8 @@ import {StarBorderedIcon} from "../icons/StarBorderedIcon";
 import {StarFilledIcon} from "../icons/StarFilledIcon";
 
 export const BookmarkMobile = ({flag, pmbId, toggleBookmark}) => {
-  return <Container onClick={() => toggleBookmark(pmbId)}
+  return <Container data-nosnippet
+                    onClick={() => toggleBookmark(pmbId)}
                     className={"d-flex d-md-none"}>
     {flag ? <StarIconStyled/> : <StarBorderIconStyled/>}
   </Container>

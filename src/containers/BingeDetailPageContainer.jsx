@@ -1,11 +1,12 @@
 import {connect} from 'react-redux'
 import {BingDetailPageWithRouter} from "../components/BingeDetailPage";
-import {getPopularShowsFromState} from "./selectors";
+import {getPopularShowsFromState, getRecentlyVisitedShowsFromState} from "./selectors";
 import {getPopularShows, getShow} from "./actionCreater";
 
 const mapStateToProps = (state, ownProps) => {
   return {
     popularShows: getPopularShowsFromState(state),
+    recentShows: getRecentlyVisitedShowsFromState(state),
     shows: state.shows.allShows,
     showLoader: state.showDetailPage.showLoader,
     showError: state.showDetailPage.showError

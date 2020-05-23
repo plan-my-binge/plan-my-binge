@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 
 var webpack = require('webpack');
 var path = require('path');
@@ -67,6 +68,7 @@ module.exports = {
         { from: parentDir +  './src/style/bootstrap.mui.css', to: parentDir + './dist' }
       ],
     }),
+    new DynamicCdnWebpackPlugin(),
     new webpack.DefinePlugin({
       ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com/api"),
       ['process.env.SSR']: false

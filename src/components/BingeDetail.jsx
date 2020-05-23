@@ -99,13 +99,13 @@ export class BingeDetail extends Component<{ detail: any }> {
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
-          {detail.landscapePoster &&
+          {detail.landscapePoster && !process.env.SSR &&
           <PosterLandscape src={detail.landscapePoster} className={Classes.showOnlyInMobile}/>}
 
-          {landscapePosterNotAvailableInPhoneButPortraitAvailable &&
+          {landscapePosterNotAvailableInPhoneButPortraitAvailable && !process.env.SSR &&
           <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInMobile}/>}
 
-          {portraitPosterNotAvailableInWebButLandscapeAvailable &&
+          {portraitPosterNotAvailableInWebButLandscapeAvailable && !process.env.SSR &&
           <PosterLandscapeForWeb src={detail.landscapePoster} className={Classes.showOnlyInWeb}/>}
 
           {detail.portraitPoster &&

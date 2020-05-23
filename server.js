@@ -76,7 +76,7 @@ app.get('/*', async (req, res) => {
   let store;
 
   if (req.originalUrl.includes("/binge")) {
-    let pmbId = new RegExp(/\/binge\/([0-9]*)[-|\/].*/).exec(req.originalUrl)[1];
+    let pmbId = new RegExp(/\/binge\/([0-9]*)[-|\/]?.*/).exec(req.originalUrl)[1];
     let redisKey = "prerendered::/binge/" + pmbId;
     redisClient.get(redisKey, async (err, reply) => {
       if (!Boolean(reply)) {

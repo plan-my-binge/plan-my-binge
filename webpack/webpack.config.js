@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 
 var webpack = require('webpack');
 var path = require('path');
@@ -74,6 +75,7 @@ module.exports = {
       generateStatsFile: true,
       statsFilename: "prod.json"
     }),
+    new DynamicCdnWebpackPlugin(),
     new webpack.DefinePlugin({
       ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com/api"),
       ['process.env.SSR']: false

@@ -63,6 +63,7 @@ const Header = styled.div`
 const BackLink = styled.a`
   display: flex;
   left: 10px;
+  margin-left: 10px;
   color: ${Colors.black};
   font-size: 1.5rem;
   
@@ -90,6 +91,7 @@ const AppLogoContainer = styled.div`
 
 const SearchLink = styled(Link)`
   color: ${Colors.black};
+  margin-right: 20px;
   
   &:hover {
      color: ${Colors.black};

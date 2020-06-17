@@ -62,6 +62,7 @@ export class SeasonWiseStat extends Component<{}> {
           return <StatBlock key={index}>
             <SeasonNumber>Season {(index + 1) + ((page - 1) * pageSize)}</SeasonNumber>
             <NumberOfEpisodes>{numberOfEpisodes} Episodes</NumberOfEpisodes>
+            <Year>{season.seasonStartYear}</Year>
             {season.seasonRuntime && <Runtime>{`${daysDisplay}${hoursDisplay}${minutesDisplay}`}</Runtime>}
           </StatBlock>
         })}
@@ -100,11 +101,19 @@ const StatBlock = styled(Col)`
 
 const SeasonNumber = styled.div`
   font-weight: 600;
+  float: left;
+`;
+
+const Year = styled.div`
+  font-size: 0.9rem;
+  color: ${Colors.darkGray};
+  float: left;
+  clear: both;
 `;
 
 const NumberOfEpisodes = styled.div`
   font-size: 0.9rem;
-  float: left;
+  float: right;
 `;
 
 const Runtime = styled.div`

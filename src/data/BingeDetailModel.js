@@ -20,6 +20,8 @@ export const BingeDetailModel = (bingeDetail) => ({
 
   primaryTitle: bingeDetail.primaryTitle,
 
+  seriesid: bingeDetail.seriesid,
+
   totalEpisodes: Math.ceil(bingeDetail.seasons.reduce((accumulator, season) => {
     return season.numberOfEpisodes + accumulator
   }, 0)),

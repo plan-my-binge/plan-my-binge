@@ -111,6 +111,9 @@ export class BingeDetail extends Component<{ detail: any }> {
           {detail.portraitPoster &&
           <PosterPortrait src={detail.portraitPoster} className={Classes.showOnlyInWeb}/>}
 
+          <div className={Classes.showOnlyInWeb}>
+            {this.getTagContainer(detail)}
+          </div>
         </PosterContainerCol>
 
         <BingeTimeContainerCol>
@@ -124,8 +127,21 @@ export class BingeDetail extends Component<{ detail: any }> {
         <Col>
           <SeasonWiseStat detail={detail} userBingeTime={this.state.userBingeTimeSetting}/>
         </Col>
+
       </BingeDetailContentRow>
+      <div className={Classes.showOnlyInMobile}>
+        {this.getTagContainer(detail)}
+      </div>
     </Container>
+  }
+
+  getTagContainer(detail) {
+    return <TagContainer>
+      Open in:
+      <Tag href={"https://www.google.com/search?q=" + detail.primaryTitle} target={"_blank"}> Search</Tag>
+      {detail.seriesid &&
+      <Tag href={"https://www.imdb.com/title/" + detail.seriesid} target={"_blank"}> IMDB</Tag>}
+    </TagContainer>;
   }
 
   getDailyBingeTime = () => {
@@ -245,4 +261,24 @@ const SelectStyled = styled(Select)`
     margin-right: 10px;
     padding-top: 10px;
     position: relative;
+`;
+
+const TagContainer = styled.div`
+  margin-top: 20px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center; 
+  color: ${Colors.darkGray};
+   font-size: 0.8rem;
+`;
+
+const Tag = styled.a`
+    cursor: pointer;
+    padding: 4px;
+    margin: 5px;
+    border: 1px black ${Colors.gray};
+    overflow: hidden;
+    line-height: 0.7;
+    background-color: ${Colors.gray};
+      color: ${Colors.darkGray};
 `;

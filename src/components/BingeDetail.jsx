@@ -138,9 +138,20 @@ export class BingeDetail extends Component<{ detail: any }> {
   getTagContainer(detail) {
     return <TagContainer>
       Open in:
-      <Tag href={"https://www.google.com/search?q=" + detail.primaryTitle} target={"_blank"}> Search</Tag>
+      <Tag href={"https://www.google.com/search?q=" + detail.primaryTitle}
+           target={"_blank"}
+           onClick={() => {
+             ReactGA.event(ga(TrackingCategory.OpenIn,
+               'Open series in ', 'Search'));
+           }}>
+        Search</Tag>
       {detail.seriesid &&
-      <Tag href={"https://www.imdb.com/title/" + detail.seriesid} target={"_blank"}> IMDB</Tag>}
+      <Tag href={"https://www.imdb.com/title/" + detail.seriesid}
+           target={"_blank"}
+           onClick={() => {
+             ReactGA.event(ga(TrackingCategory.OpenIn,
+               'Open series in ', 'IMDB'));
+           }}> IMDB</Tag>}
     </TagContainer>;
   }
 

@@ -89,6 +89,8 @@ export const TrackingCategory = {
 
   PaginateSeasonWiseStat: "PaginateSeasonWiseStat",
 
+  OpenIn: "OpenIn",
+
   HomePageError: "HomePageError",
   ClickSectionHeader: "ClickSectionHeader",
   ClickShowItem: "ClickShowItem",

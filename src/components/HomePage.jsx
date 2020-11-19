@@ -9,6 +9,7 @@ import BingeDetailContainer from "../containers/BingeDetailContainer";
 import {BookmarkedShows} from "./BookmarkedShows";
 import {MobileHomePageHeaderWithRouter} from "./MobileHomePageHeader";
 import isEmpty from "ramda/src/isEmpty";
+import {Feedback} from "./Feedback";
 
 export class HomePage extends Component<{}> {
 
@@ -34,6 +35,7 @@ export class HomePage extends Component<{}> {
 
       {highlightedShow && <BingeDetailContainer detail={highlightedShow}/>}
 
+      <Feedback/>
       {/*if recently viewed is empty fetch and show popular shows*/}
       {!highlightedShow && showError && <HomePageError/>}
       {!highlightedShow && showLoader && <BingeDetailShimmer/>}

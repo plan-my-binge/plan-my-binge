@@ -41,6 +41,18 @@ const SideNavBar = (props: Props) => {
           </NavItem>
         </NavItemContainer>);
     })}
+
+
+    <PlayStoreBadge
+        target={"_blank"}
+        href='https://play.google.com/store/apps/details?id=com.planmybinge&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+
+      <img alt='Get it on Google Play'
+           src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+           width={"100%"}
+           height={"auto"}
+      />
+    </PlayStoreBadge>
   </SideBar>;
 };
 
@@ -108,4 +120,9 @@ const AppLogoContainer = styled.div`
   border-bottom: 1px solid ${Colors.darkGray};
   padding: 10px;
   cursor: pointer;
+`;
+
+const PlayStoreBadge = styled.a`
+  position: absolute;
+  bottom: 0;
 `;

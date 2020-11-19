@@ -40,7 +40,8 @@ export class BingeDetail extends Component<{ detail: any }> {
       hours: 24,
       episodes: maxPossibleNumberOfEpisodesADay(this.props.detail)
     },
-    pageTitle: ""
+    pageTitle: "",
+    setBingeUnitTimeout: null
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -144,7 +145,7 @@ export class BingeDetail extends Component<{ detail: any }> {
              ReactGA.event(ga(TrackingCategory.OpenIn,
                'Open series in ', 'Search'));
            }}>
-        Search</Tag>
+        Google Search</Tag>
       {detail.seriesid &&
       <Tag href={"https://www.imdb.com/title/" + detail.seriesid}
            target={"_blank"}
@@ -182,24 +183,41 @@ export class BingeDetail extends Component<{ detail: any }> {
   };
 
   onDailyBingingSettingUnitChanged = (event, maxLimit) => {
+
+
     let unit = event.target.value;
-    ReactGA.event(ga(TrackingCategory.DailyBingeTimeUnitChange,
-      'Changed daily binge time unit with dropdown', unit.toString()));
+    let value = Math.min(this.state.userBingeTimeSetting.value,
+        unit === BingeUnit.episodes ? this.state.possibleDailyBinging.episodes :
+            this.state.possibleDailyBinging.hours);
     this.setState({
       userBingeTimeSetting: {
         unit: unit,
-        value: Math.min(this.state.userBingeTimeSetting.value,
-          unit === BingeUnit.episodes ? this.state.possibleDailyBinging.episodes :
-            this.state.possibleDailyBinging.hours),
-        value2: unit === BingeUnit.episodes ? defaultDailyBingingTimeForUser.episodes :
-          defaultDailyBingingTimeForUser.hours
+        value: value,
       }
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));
 
+    this.sendDailyBingeTimeChangeGAevent(value.toString(), unit);
+
   };
 
+  sendDailyBingeTimeChangeGAevent(value, unit) {
+    if (this.state.setBingeUnitTimeout != null) {
+      clearTimeout(this.state.setBingeUnitTimeout);
+    }
+
+    let setBingeUnitTimeout = setTimeout(() => {
+      ReactGA.event(
+          ga(TrackingCategory.DailyBingeTimeChange, 'Changed daily binge time',
+              `${value} ${unit}`));
+    }, 5000);
+
+    this.setState({setBingeUnitTimeout});
+  }
+
   onDailyBingingSettingValueChanged = (value) => {
-    ReactGA.event(ga(TrackingCategory.DailyBingeTimeChange, 'Changed daily binge time with input stepper', value.toString()));
+
+    this.sendDailyBingeTimeChangeGAevent(value.toString(), this.state.userBingeTimeSetting.unit);
+
     return this.setState({
       userBingeTimeSetting: {...this.state.userBingeTimeSetting, value: value}
     }, () => this.props.setUserBingeTime(this.state.userBingeTimeSetting));

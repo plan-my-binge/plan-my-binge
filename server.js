@@ -177,7 +177,7 @@ function renderBingeDetailsPage(html, preLoadedState, style, detail) {
     <!doctype html>
     <html>
       <head>
-        <title>${detail.primaryTitle} | Plan by Binge! | How long does it take to watch every episodse of ${detail.primaryTitle}?</title>
+        <title>Plan by Binge! | ${detail.primaryTitle} : How long does it take to watch every episodse of ${detail.primaryTitle}?</title>
         
         <meta name="description"
           content="Find out how long it takes to watch every episode in a TV series. Customize the runtime by setting number of hours you spend every day, Search for your TV show. Add TV shows to bookmark.">

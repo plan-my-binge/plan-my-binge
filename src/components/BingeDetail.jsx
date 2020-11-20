@@ -85,6 +85,10 @@ export class BingeDetail extends Component<{ detail: any }> {
     let portraitPosterNotAvailableInWebButLandscapeAvailable =
       !isPhoneOrTablet() && detail.landscapePoster && !detail.portraitPoster;
 
+    console.log(navigator.platform)
+    let isIOS = /iPad|iPhone|iPod/.test(navigator.platform)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
     return <Container>
       <MetaTags>
         <title>{this.state.pageTitle}</title>
@@ -130,22 +134,45 @@ export class BingeDetail extends Component<{ detail: any }> {
         </Col>
 
       </BingeDetailContentRow>
-      <div className={Classes.showOnlyInMobile}>
+      <div className={Classes.showInSmallerScreen}>
         {this.getTagContainer(detail)}
+        <a
+            style={{display: "flex", justifyContent: "center", alignItems: "center"}}
+            target={"_blank"}
+            href='https://play.google.com/store/apps/details?id=com.planmybinge&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+
+          <img alt='Get it on Google Play'
+               src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+               style={{margin: "auto"}}
+               width={"220"}
+               height={"auto"}
+          />
+        </a>
+
+        <IosBanner>Coming soon for iOS</IosBanner>
+        {isIOS && <PWABanner>
+          <div>Install as Web-App</div>
+          <img src={"https://planmybinge.com/ios_pwa_crop.jpg"} width={"100%"}/>
+
+        </PWABanner>}
+
+
+
+
       </div>
     </Container>
   }
 
   getTagContainer(detail) {
     return <TagContainer>
-      Open in:
+      Open {detail.primaryTitle} in:
       <Tag href={"https://www.google.com/search?q=" + detail.primaryTitle}
            target={"_blank"}
            onClick={() => {
              ReactGA.event(ga(TrackingCategory.OpenIn,
                'Open series in ', 'Search'));
            }}>
-        Google Search</Tag>
+        Google</Tag>
       {detail.seriesid &&
       <Tag href={"https://www.imdb.com/title/" + detail.seriesid}
            target={"_blank"}
@@ -297,17 +324,40 @@ const TagContainer = styled.div`
   display: flex !important;
   align-items: center;
   justify-content: center; 
-  color: ${Colors.darkGray};
+  color: ${Colors.black};
    font-size: 0.8rem;
 `;
 
 const Tag = styled.a`
     cursor: pointer;
-    padding: 4px;
+    padding: 6px;
     margin: 5px;
-    border: 1px black ${Colors.gray};
+    border: 1px black ${Colors.darkerGray};
     overflow: hidden;
     line-height: 0.7;
-    background-color: ${Colors.gray};
-      color: ${Colors.darkGray};
+    background-color: ${Colors.darkerGray};
+      color: ${Colors.white};
+`;
+
+const IosBanner = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: ${Colors.gray};
+  padding: 10px;
+  font-weight: bold;
+    `;
+
+const PWABanner = styled.div`
+
+  margin-top: 5px;
+  text-align: center;
+  background-color: ${Colors.gray};
+  color: ${Colors.darkerGray};
+  padding: 10px;
+  
+  div {
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+  }
 `;

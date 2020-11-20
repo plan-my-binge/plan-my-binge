@@ -7,6 +7,17 @@ import AppLogo from "../icons/Logo";
 import ReactGA from 'react-ga';
 import {ga} from "../utils/apiUtils";
 
+export const getPlayStoreBadge = () => <PlayStoreBadge
+    target={"_blank"}
+    href='https://play.google.com/store/apps/details?id=com.planmybinge&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+
+  <img alt='Get it on Google Play'
+       src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+       width={"100%"}
+       height={"auto"}
+  />
+</PlayStoreBadge>;
+
 const SideNavBar = (props: Props) => {
 
   const history = useHistory();
@@ -30,29 +41,20 @@ const SideNavBar = (props: Props) => {
     {NavOptions.map(option => {
       let className = pathname === option.link ? "selection" : "";
       return (
-        <NavItemContainer key={option.name} data-nosnippet>
-          <NavItem className={className}
-                   onClick={() => navItemOnClick(option)}>
-            <NavHeader>
-              <option.icon style={{color: Colors.black, marginRight: 10}}/>
-              {option.name.toUpperCase()}
-            </NavHeader>
-            <NavHint>{option.hint}</NavHint>
-          </NavItem>
-        </NavItemContainer>);
+          <NavItemContainer key={option.name} data-nosnippet>
+            <NavItem className={className}
+                     onClick={() => navItemOnClick(option)}>
+              <NavHeader>
+                <option.icon style={{color: Colors.black, marginRight: 10}}/>
+                {option.name.toUpperCase()}
+              </NavHeader>
+              <NavHint>{option.hint}</NavHint>
+            </NavItem>
+          </NavItemContainer>);
     })}
 
 
-    <PlayStoreBadge
-        target={"_blank"}
-        href='https://play.google.com/store/apps/details?id=com.planmybinge&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-
-      <img alt='Get it on Google Play'
-           src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
-           width={"100%"}
-           height={"auto"}
-      />
-    </PlayStoreBadge>
+    {getPlayStoreBadge()}
   </SideBar>;
 };
 

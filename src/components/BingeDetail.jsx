@@ -139,6 +139,7 @@ export class BingeDetail extends Component<{ detail: any }> {
         <a
             style={{display: "flex", justifyContent: "center", alignItems: "center"}}
             target={"_blank"}
+            onClick={() => ReactGA.event(ga(TrackingCategory.PlayBadgeClick, 'Clicked Play store badge', 'PlayBadgeClick'))}
             href='https://play.google.com/store/apps/details?id=com.planmybinge&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
 
           <img alt='Get it on Google Play'

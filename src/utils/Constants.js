@@ -76,6 +76,7 @@ export const BingeUnit = {
 export const TrackingCategory = {
   BackButtonClick: "BackButtonClick",
   AppLogoClick: "AppLogoClick",
+  PlayBadgeClick: "PlayBadgeClick",
   BottomNavBarItemClick: "BottomNavBarItemClick",
   SideNavBarItemClick: "SideNavBarItemClick", SearchInputClick: "SearchInputClick",
 

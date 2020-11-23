@@ -3,10 +3,11 @@ import {withRouter} from "react-router-dom";
 import {HomePageError} from "./HomePageError.jsx";
 import {BingeDetailShimmer} from "./BingeDetailShimmer.jsx";
 import styled from 'styled-components';
-import {Colors} from "../utils/Constants";
+import {BingeUnit, Colors} from "../utils/Constants";
 import {PopularShows} from "./PopularShows";
 import BingeDetailContainer from "../containers/BingeDetailContainer";
 import {AppHeader} from "./AppHeader";
+import {showRuntimeToUserRuntime, toDaysHoursAndMinutes} from "../utils/TimeUtils";
 
 class BingeDetailPage extends Component<{ popularShows: any }> {
 
@@ -37,8 +38,14 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
     let {popularShows, showError, showLoader, shows, match, location} = this.props;
     let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId.split('-')[0]);
 
+    let userRuntimeInMinutes = showRuntimeToUserRuntime({unit: BingeUnit.episodes, value: 2}, bingeDetail);
+    let bingeTime = toDaysHoursAndMinutes(userRuntimeInMinutes);
+    let showHours = bingeTime.hours !== null /*&& bingeTime.hours !== 0*/;
+    let showDays = bingeTime.days !== null && bingeTime.days !== 0;
+
+    let summary = `It will take ${showDays ? bingeTime.days + " days, " : ""} ${showHours ? bingeTime.hours + " hours, " : ""} ${bingeTime.minutes} minutes to watch all episodes of ${bingeDetail.primaryTitle}, when you watch 2 episodes per day. Set no. of episodes/hours you watch per day and get customised binge time.`
     return <Container>
-      {process.env.SSR && <h2>Find out how long does it take to watch every episodes of {bingeDetail.primaryTitle}, when you watch n hours a day</h2>}
+      {process.env.SSR && <h2>{summary}</h2>}
       <AppHeader history={this.props.history}/>
       <Content>
         {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}

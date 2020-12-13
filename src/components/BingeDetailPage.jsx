@@ -38,6 +38,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
     let {popularShows, showError, showLoader, shows, match, location} = this.props;
     let bingeDetail = location.data || shows.find(x => x.pmbId == match.params.pmbId.split('-')[0]);
 
+    if (!bingeDetail) return <BingeDetailShimmer/>
     let userRuntimeInMinutes = showRuntimeToUserRuntime({unit: BingeUnit.episodes, value: 2}, bingeDetail);
     let bingeTime = toDaysHoursAndMinutes(userRuntimeInMinutes);
     let showHours = bingeTime.hours !== null /*&& bingeTime.hours !== 0*/;

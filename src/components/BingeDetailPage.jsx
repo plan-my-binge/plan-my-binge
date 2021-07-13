@@ -52,7 +52,7 @@ class BingeDetailPage extends Component<{ popularShows: any }> {
         {bingeDetail && <BingeDetailContainer detail={bingeDetail}/>}
         {showError && <HomePageError/>}
         {showLoader && <BingeDetailShimmer/>}
-        {bingeDetail && popularShows.length !== 0 && !process.env.SSR && <PopularShows shows={popularShows}/>}
+        {bingeDetail && popularShows.length !== 0 && <PopularShows shows={popularShows}/>}
       </Content>
     </Container>
   }

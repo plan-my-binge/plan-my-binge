@@ -85,9 +85,8 @@ export class BingeDetail extends Component<{ detail: any }> {
     let portraitPosterNotAvailableInWebButLandscapeAvailable =
       !isPhoneOrTablet() && detail.landscapePoster && !detail.portraitPoster;
 
-    console.log(navigator.platform)
-    let isIOS = /iPad|iPhone|iPod/.test(navigator.platform)
-        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    // console.log(navigator.platform)
+    let isIOS = false
 
     return <Container>
       <MetaTags>
@@ -104,6 +103,7 @@ export class BingeDetail extends Component<{ detail: any }> {
 
       <BingeDetailContentRow>
         <PosterContainerCol className={"col-sm-auto"}>
+          {process.env.SSR && this.props.ssr && <div>{this.props.ssr.fakeDescription}</div>}
           {detail.landscapePoster && !process.env.SSR &&
           <PosterLandscape src={detail.landscapePoster} className={Classes.showOnlyInMobile}/>}
 
@@ -149,6 +149,8 @@ export class BingeDetail extends Component<{ detail: any }> {
                height={"auto"}
           />
         </a>
+
+        <script data-cfasync="false" type="text/javascript" src="https://www.greatdexchange.com/a/display.php?r=3996923"/>
 
         <IosBanner>Coming soon for iOS</IosBanner>
         {isIOS && <PWABanner>

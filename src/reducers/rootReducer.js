@@ -4,13 +4,15 @@ import homeReducer from "./homeReducer";
 import showsReducer from "./showsReducer";
 import showDetailsPageReducer from "./showDetailsPageReducer";
 import userReducer from "./userReducer";
+import ssrReducer from "./ssrReducer";
 
 const reducer = combineReducers({
   ...appReducer,
   ...homeReducer,
   ...showsReducer,
   ...showDetailsPageReducer,
-  ...userReducer
+  ...userReducer,
+  ...ssrReducer
 });
 
 export default reducer;

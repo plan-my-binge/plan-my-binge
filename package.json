@@ -136,7 +136,7 @@
     "prod-ssr": "webpack -p --config ./webpack/webpack.config.js",
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js --port 8081 --host 0.0.0.0  --content-base dist/",
     "test": "jest",
-    "server": "webpack --config ./webpack/webpack.server.js --mode=production && babel-node ./server.js",
+    "server": "webpack --config ./webpack/webpack.server.config.js --mode=production && babel-node ./dist/server.js",
     "build-server": " webpack --config ./webpack/webpack.server.config.js",
     "dev-server": "npm-run-all --parallel build-server server"
   },

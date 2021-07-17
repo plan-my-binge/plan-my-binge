@@ -38,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com"),
+      ['process.env.API_HOST']: JSON.stringify("http://localhost:80"),
       ['process.env.SSR']: true
     })
   ]

@@ -71,13 +71,9 @@ module.exports = {
         {from: parentDir + './src/style/bootstrap.mui.css', to: parentDir + './dist'},
       ],
     }),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      statsFilename: "prod.json"
-    }),
     new DynamicCdnWebpackPlugin(),
     new webpack.DefinePlugin({
-      ['process.env.API_HOST']: JSON.stringify("https://planmybinge.com/api"),
+      ['process.env.API_HOST']: JSON.stringify("http://localhost:80/api"),
       ['process.env.SSR']: false
     })
   ]
